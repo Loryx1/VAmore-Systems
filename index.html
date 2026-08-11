@@ -1,371 +1,98 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js"></script>
-</head>
-<body>
-<x-dc>
-<helmet>
+<title>VAmore Systems — FiveM scripts that talk to each other</title>
+<link rel="icon" href="assets/vamore-favicon-32.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Martian+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  body { margin: 0; background: #eef1f5; }
-  a { color: #1450c8; text-decoration: none; }
-  a:hover { color: #0a6f68; }
-  :focus-visible { outline: 2px solid #1450c8; outline-offset: 3px; border-radius: 999px; }
-  ::selection { background: #cddffb; }
-  @keyframes vamIn { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
-  @keyframes vamSoft { from { opacity: 0; } to { opacity: 1; } }
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { animation-duration: 1ms !important; animation-iteration-count: 1 !important; animation-timeline: auto !important; transition-duration: 1ms !important; }
-  }
-</style>
-</helmet>
-<div style="font-family: 'Instrument Sans', Helvetica, sans-serif; color: #121820; background: radial-gradient(130% 80% at 78% -10%, #ffffff 0%, #f4f6fa 44%, #e9edf3 100%); background-attachment: fixed; overflow-x: hidden;">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-  <header style="position: fixed; top: 0; left: 0; right: 0; z-index: 90; background: {{ navBg }}; border-bottom: 1px solid {{ navBorder }}; backdrop-filter: blur(20px); transition: background 240ms ease, border-color 240ms ease;">
-    <div style="max-width: 1300px; margin: 0 auto; padding: 0 clamp(18px, 4vw, 40px); height: 68px; display: flex; align-items: center; gap: clamp(16px, 3vw, 44px);">
-      <a href="#top" style="display: flex; align-items: center; gap: 10px; color: #121820;">
-        <svg width="26" height="26" viewBox="0 0 128 128" fill="none" aria-hidden="true">
-          <defs><linearGradient id="vamMark" gradientUnits="userSpaceOnUse" x1="14" y1="104" x2="110" y2="20"><stop offset="0%" stop-color="#1450c8"></stop><stop offset="55%" stop-color="#1b8fc4"></stop><stop offset="100%" stop-color="#25c9b0"></stop></linearGradient></defs>
-          <path d="M14 24 L27 54" stroke="url(#vamMark)" stroke-width="15"></path>
-          <path d="M30.5 62 L46 98 L78 24 L110 98" stroke="url(#vamMark)" stroke-width="15" stroke-linejoin="miter"></path>
-          <path d="M50 74 H107" stroke="url(#vamMark)" stroke-width="15"></path>
+<header class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="#top" class="nav-logo">
+      <svg width="26" height="26" viewBox="0 0 128 128" fill="none" aria-hidden="true">
+        <defs><linearGradient id="vamMark" gradientUnits="userSpaceOnUse" x1="14" y1="104" x2="110" y2="20"><stop offset="0%" stop-color="#1450c8"></stop><stop offset="55%" stop-color="#1b8fc4"></stop><stop offset="100%" stop-color="#25c9b0"></stop></linearGradient></defs>
+        <path d="M14 24 L27 54" stroke="url(#vamMark)" stroke-width="15"></path>
+        <path d="M30.5 62 L46 98 L78 24 L110 98" stroke="url(#vamMark)" stroke-width="15" stroke-linejoin="miter"></path>
+        <path d="M50 74 H107" stroke="url(#vamMark)" stroke-width="15"></path>
+      </svg>
+      <span>VAmore Systems</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#suite">The suite</a>
+      <a href="#demo">Demo</a>
+      <a href="#compare">Compare</a>
+      <a href="#support">Support</a>
+    </nav>
+    <div class="nav-actions">
+      <a href="#" class="pill" data-placeholder="true">discord</a>
+      <a href="#pricing" class="pill pill-solid">get the suite</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <!-- Task 2: hero section -->
+  <!-- Task 3: demo section -->
+  <!-- Task 4: suite section -->
+  <!-- Task 5: compare + support sections -->
+  <!-- Task 6: pricing section -->
+</main>
+
+<footer class="footer section-light">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <div class="nav-logo">
+        <svg width="24" height="24" viewBox="0 0 128 128" fill="none" aria-hidden="true">
+          <defs><linearGradient id="vamMarkF" gradientUnits="userSpaceOnUse" x1="14" y1="104" x2="110" y2="20"><stop offset="0%" stop-color="#1450c8"></stop><stop offset="100%" stop-color="#25c9b0"></stop></linearGradient></defs>
+          <path d="M14 24 L27 54" stroke="url(#vamMarkF)" stroke-width="15"></path>
+          <path d="M30.5 62 L46 98 L78 24 L110 98" stroke="url(#vamMarkF)" stroke-width="15" stroke-linejoin="miter"></path>
+          <path d="M50 74 H107" stroke="url(#vamMarkF)" stroke-width="15"></path>
         </svg>
-        <span style="font-size: 16.5px; font-weight: 600; letter-spacing: -0.03em;">VAmore Systems</span>
-      </a>
-      <nav style="display: flex; align-items: center; gap: clamp(12px, 2vw, 26px); font-size: 14.5px; flex-wrap: wrap;">
-        <a href="#suite" style="color: #474f5a;" style-hover="color: #121820;">The suite</a>
-        <a href="#demo" style="color: #474f5a;" style-hover="color: #121820;">Demo</a>
-        <a href="#compare" style="color: #474f5a;" style-hover="color: #121820;">Compare</a>
-        <a href="#support" style="color: #474f5a;" style-hover="color: #121820;">Support</a>
-      </nav>
-      <div style="margin-left: auto; display: flex; align-items: center; gap: 9px;">
-        <a href="#" style="font-family: 'Martian Mono', monospace; font-size: 10.5px; color: #454d58; border: 1px solid rgba(18,24,32,0.16); padding: 9px 15px; border-radius: 999px;" style-hover="color: #121820; border-color: rgba(18,24,32,0.36);">discord</a>
-        <a href="#pricing" style="font-family: 'Martian Mono', monospace; font-size: 10.5px; color: #ffffff; background: #121820; padding: 10px 17px; border-radius: 999px; white-space: nowrap;" style-hover="background: #1450c8;">get the suite</a>
+        <span>VAmore Systems</span>
+      </div>
+      <p>The whole server layer from one place, maintained by the people who run a server on it.</p>
+      <div class="footer-socials">
+        <a href="#" class="pill" data-placeholder="true">discord</a>
+        <a href="#" class="pill" data-placeholder="true">youtube</a>
       </div>
     </div>
-  </header>
-
-  <main id="top">
-    <section style="padding: clamp(122px, 17vh, 190px) clamp(18px, 4vw, 40px) clamp(60px, 9vw, 110px);">
-      <div style="max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: clamp(36px, 5vw, 76px); align-items: center;">
-        <div style="display: flex; flex-direction: column; gap: 26px; max-width: 620px;">
-          <div style="display: flex; align-items: center; gap: 7px; flex-wrap: wrap;">
-            <span style="font-family: 'Martian Mono', monospace; font-size: 10px; padding: 7px 12px; border-radius: 999px; background: #121820; color: #ffffff;">esx</span>
-            <span style="font-family: 'Martian Mono', monospace; font-size: 10px; padding: 7px 12px; border-radius: 999px; background: #121820; color: #ffffff;">qbcore</span>
-            <span style="font-family: 'Martian Mono', monospace; font-size: 10px; padding: 7px 12px; border-radius: 999px; background: #121820; color: #ffffff;">qbox</span>
-            <span style="font-family: 'Martian Mono', monospace; font-size: 10px; padding: 7px 12px; border-radius: 999px; border: 1px solid rgba(18,24,32,0.18); color: #474f5a;">one config line</span>
-          </div>
-          <h1 style="margin: 0; font-size: clamp(42px, 6.6vw, 88px); line-height: 0.98; font-weight: 600; letter-spacing: -0.05em; text-wrap: balance;">Ten systems that were written to talk to each other.</h1>
-          <p style="margin: 0; font-size: clamp(16.5px, 1.9vw, 20px); line-height: 1.6; color: #434b56; max-width: 50ch;">Most servers stitch a phone from one vendor onto an inventory from another and spend the season fixing the seam. VAmore ships the whole layer — one item table, one notification stack, one support thread.</p>
-          <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
-            <a href="#pricing" style="font-size: 15.5px; font-weight: 500; color: #ffffff; background: #121820; padding: 15px 28px; border-radius: 999px;" style-hover="background: #1450c8;">Get the full suite — €199</a>
-            <a href="#suite" style="font-size: 15.5px; font-weight: 500; color: #121820; border: 1px solid rgba(18,24,32,0.2); padding: 15px 28px; border-radius: 999px;" style-hover="border-color: #121820;">See what's inside</a>
-          </div>
-        </div>
-
-        <div style="display: flex; flex-direction: column; gap: 14px; animation: vamIn 1ms both; animation-timeline: view(); animation-range: entry 0% cover 20%;">
-          <div style="border-radius: 26px; background: #ffffff; border: 1px solid rgba(18,24,32,0.09); padding: 26px; box-shadow: 0 44px 80px -54px #4f5762; display: flex; flex-direction: column; gap: 18px;">
-            <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">
-              <span style="font-family: 'Martian Mono', monospace; font-size: 10px; color: #59616c;">server.cfg</span>
-              <span style="font-family: 'Martian Mono', monospace; font-size: 10px; color: #0a6f68;">10 resources · 0.19 ms total</span>
-            </div>
-            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-              <sc-for list="{{ suitePills }}" as="p" hint-placeholder-count="10">
-                <span style="font-family: 'Martian Mono', monospace; font-size: 10.5px; padding: 9px 14px; border-radius: 999px; background: {{ p.bg }}; color: {{ p.fg }}; border: 1px solid {{ p.border }};" >{{ p.slug }}</span>
-              </sc-for>
-            </div>
-            <div style="height: 1px; background: rgba(18,24,32,0.09);"></div>
-            <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
-              <span style="font-size: 14.5px; color: #474f5a; max-width: 30ch;">Every pill above shares the same item table, permission model and notification stack.</span>
-              <a href="#suite" style="font-family: 'Martian Mono', monospace; font-size: 10.5px; color: #1450c8;">inspect ›</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="demo" style="background: #0c1520; padding: clamp(70px, 10vw, 130px) clamp(18px, 4vw, 40px); scroll-margin-top: 68px;">
-      <div style="max-width: 1300px; margin: 0 auto; display: flex; flex-direction: column; gap: clamp(28px, 4vw, 46px);">
-        <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 26px; flex-wrap: wrap;">
-          <h2 style="margin: 0; font-size: clamp(30px, 4.6vw, 58px); line-height: 1.02; font-weight: 600; letter-spacing: -0.045em; color: #ffffff; max-width: 18ch;">Eleven minutes, one server, nothing cut.</h2>
-          <p style="margin: 0; font-size: 16.5px; line-height: 1.6; color: rgba(255,255,255,0.58); max-width: 40ch;">Recorded on a Saturday night with 61 players online. Jump to whichever system you were going to ask about anyway.</p>
-        </div>
-
-        <div style="border-radius: clamp(16px, 2vw, 26px); overflow: hidden; border: 1px solid rgba(255,255,255,0.12); background: #060d15; animation: vamSoft 1ms both; animation-timeline: view(); animation-range: entry 0% cover 22%;">
-          <div style="height: clamp(220px, 42vw, 640px); background: repeating-linear-gradient(135deg, rgba(255,255,255,0.05) 0 15px, rgba(255,255,255,0.015) 15px 30px); display: grid; place-items: center;">
-            <span style="font-family: 'Martian Mono', monospace; font-size: clamp(9.5px, 1.1vw, 11.5px); color: rgba(255,255,255,0.62); text-align: center; padding: 0 20px;">demo video · 2400×1240 · {{ activeChapter }}</span>
-          </div>
-        </div>
-
-        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-          <sc-for list="{{ chapters }}" as="c" hint-placeholder-count="6">
-            <button onClick="{{ c.onClick }}" style="font-family: 'Martian Mono', monospace; font-size: 10.5px; padding: 10px 16px; border-radius: 999px; cursor: pointer; background: {{ c.bg }}; color: {{ c.fg }}; border: 1px solid {{ c.border }};">{{ c.label }}</button>
-          </sc-for>
-        </div>
-      </div>
-    </section>
-
-    <section id="suite" style="padding: clamp(80px, 11vw, 150px) clamp(18px, 4vw, 40px); scroll-margin-top: 68px;">
-      <div style="max-width: 1300px; margin: 0 auto; display: flex; flex-direction: column; gap: clamp(30px, 4vw, 52px);">
-        <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 26px; flex-wrap: wrap;">
-          <h2 style="margin: 0; font-size: clamp(32px, 5vw, 64px); line-height: 1; font-weight: 600; letter-spacing: -0.045em; max-width: 16ch;">What's in the suite.</h2>
-          <span style="font-family: 'Martian Mono', monospace; font-size: 10.5px; color: #4f5762;">pick a system to inspect it</span>
-        </div>
-
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: clamp(20px, 3vw, 40px); align-items: start;">
-          <div style="display: flex; flex-direction: column; gap: 6px;">
-            <sc-for list="{{ rows }}" as="r" hint-placeholder-count="10">
-              <button onClick="{{ r.onClick }}" style="text-align: left; cursor: pointer; display: flex; align-items: center; gap: 14px; padding: 15px 18px; border-radius: 999px; border: 1px solid {{ r.border }}; background: {{ r.bg }}; font-family: 'Instrument Sans', sans-serif;">
-                <span style="font-family: 'Martian Mono', monospace; font-size: 10px; padding: 6px 11px; border-radius: 999px; background: {{ r.pillBg }}; color: {{ r.pillFg }}; white-space: nowrap;">{{ r.slug }}</span>
-                <span style="font-size: 15.5px; font-weight: 500; color: {{ r.nameFg }};">{{ r.name }}</span>
-                <span style="margin-left: auto; font-family: 'Martian Mono', monospace; font-size: 11px; color: {{ r.metaFg }};">{{ r.price }}</span>
-              </button>
-            </sc-for>
-          </div>
-
-          <div style="position: sticky; top: 92px; border-radius: 26px; background: #ffffff; border: 1px solid rgba(18,24,32,0.09); overflow: hidden; box-shadow: 0 40px 80px -56px #4f5762;">
-            <div style="height: clamp(190px, 26vw, 300px); background: repeating-linear-gradient(135deg, rgba(18,24,32,0.055) 0 13px, rgba(18,24,32,0.015) 13px 26px); display: grid; place-items: center;">
-              <span style="font-family: 'Martian Mono', monospace; font-size: 10.5px; color: #5b636e; text-align: center; padding: 0 18px;">{{ active.slug }} · ui shot · 1600×900</span>
-            </div>
-            <div style="padding: clamp(22px, 3vw, 32px); display: flex; flex-direction: column; gap: 16px;">
-              <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 14px;">
-                <h3 style="margin: 0; font-size: clamp(22px, 2.6vw, 30px); font-weight: 600; letter-spacing: -0.035em;">{{ active.name }}</h3>
-                <span style="font-family: 'Martian Mono', monospace; font-size: 15px; color: #0a6f68;">{{ active.price }}</span>
-              </div>
-              <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #434b56;">{{ active.body }}</p>
-              <div style="display: flex; flex-direction: column; gap: 11px;">
-                <sc-for list="{{ active.facts }}" as="f" hint-placeholder-count="3">
-                  <div style="display: flex; align-items: baseline; gap: 14px;">
-                    <span style="font-family: 'Martian Mono', monospace; font-size: 11px; min-width: 74px; color: #1450c8;">{{ f.k }}</span>
-                    <span style="font-size: 14.5px; line-height: 1.5; color: #454d58;">{{ f.v }}</span>
-                  </div>
-                </sc-for>
-              </div>
-              <div style="display: flex; align-items: center; gap: 7px; flex-wrap: wrap;">
-                <sc-for list="{{ active.fw }}" as="f" hint-placeholder-count="3">
-                  <span style="font-family: 'Martian Mono', monospace; font-size: 10px; padding: 7px 12px; border-radius: 999px; border: 1px solid rgba(18,24,32,0.16); color: #474f5a;">{{ f }}</span>
-                </sc-for>
-              </div>
-              <a href="#" style="text-align: center; font-size: 14.5px; font-weight: 500; color: #ffffff; background: #121820; padding: 13px; border-radius: 999px;" style-hover="background: #1450c8;">Buy {{ active.name }} on Tebex</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="compare" style="padding: clamp(80px, 11vw, 150px) clamp(18px, 4vw, 40px); scroll-margin-top: 68px;">
-      <div style="max-width: 1080px; margin: 0 auto; display: flex; flex-direction: column; gap: clamp(28px, 4vw, 44px);">
-        <div style="display: flex; flex-direction: column; gap: 16px; max-width: 34ch;">
-          <h2 style="margin: 0; font-size: clamp(32px, 5vw, 62px); line-height: 1; font-weight: 600; letter-spacing: -0.045em;">One vendor, or five.</h2>
-          <p style="margin: 0; font-size: 17px; line-height: 1.6; color: #454d58;">Nothing here is a dig at single-script developers — plenty are excellent. It's just a different shape of problem once you run ten of them side by side.</p>
-        </div>
-
-        <div style="border-radius: 24px; background: #ffffff; border: 1px solid rgba(18,24,32,0.09); overflow: hidden;">
-          <div style="display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 0; padding: 18px clamp(18px, 3vw, 30px); border-bottom: 1px solid rgba(18,24,32,0.09); font-family: 'Martian Mono', monospace; font-size: 10px; color: #59616c;">
-            <span></span>
-            <span style="text-align: center; color: #121820;">vamore suite</span>
-            <span style="text-align: center;">mixed vendors</span>
-          </div>
-          <sc-for list="{{ comparison }}" as="c" hint-placeholder-count="6">
-            <div style="display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 12px; align-items: center; padding: 18px clamp(18px, 3vw, 30px); border-bottom: 1px solid rgba(18,24,32,0.07);">
-              <span style="font-size: 15.5px; font-weight: 500;">{{ c.label }}</span>
-              <span style="text-align: center; font-size: 14px; color: #0a6f68;">{{ c.ours }}</span>
-              <span style="text-align: center; font-size: 14px; color: #4f5762;">{{ c.theirs }}</span>
-            </div>
-          </sc-for>
-        </div>
-      </div>
-    </section>
-
-    <section id="support" style="background: #0c1520; padding: clamp(80px, 11vw, 150px) clamp(18px, 4vw, 40px); scroll-margin-top: 68px;">
-      <div style="max-width: 1300px; margin: 0 auto; display: flex; flex-direction: column; gap: clamp(34px, 5vw, 60px);">
-        <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 26px; flex-wrap: wrap;">
-          <h2 style="margin: 0; font-size: clamp(32px, 5vw, 62px); line-height: 1; font-weight: 600; letter-spacing: -0.045em; color: #ffffff; max-width: 18ch;">Support you can put a number on.</h2>
-          <span style="font-family: 'Martian Mono', monospace; font-size: 10.5px; color: rgba(255,255,255,0.62);">rolling 90-day window · updated weekly</span>
-        </div>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: clamp(24px, 4vw, 54px);">
-          <sc-for list="{{ supportStats }}" as="s" hint-placeholder-count="4">
-            <div style="display: flex; flex-direction: column; gap: 10px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,0.16);">
-              <span style="font-size: clamp(34px, 4.4vw, 54px); font-weight: 600; letter-spacing: -0.045em; color: #ffffff; line-height: 1;">{{ s.v }}</span>
-              <span style="font-size: 15px; font-weight: 500; color: #25c9b0;">{{ s.k }}</span>
-              <span style="font-size: 14px; line-height: 1.55; color: rgba(255,255,255,0.68);">{{ s.note }}</span>
-            </div>
-          </sc-for>
-        </div>
-      </div>
-    </section>
-
-    <section id="pricing" style="padding: clamp(80px, 11vw, 150px) clamp(18px, 4vw, 40px); scroll-margin-top: 68px;">
-      <div style="max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: clamp(24px, 3vw, 40px); align-items: center;">
-        <div style="display: flex; flex-direction: column; gap: 20px;">
-          <h2 style="margin: 0; font-size: clamp(32px, 5vw, 60px); line-height: 1; font-weight: 600; letter-spacing: -0.045em; max-width: 14ch;">Take the whole layer.</h2>
-          <p style="margin: 0; font-size: 17px; line-height: 1.6; color: #454d58; max-width: 44ch;">Ten systems, one license key, one Discord thread. Buy scripts individually if you'd rather start small — the suite price stays open to you as an upgrade for the difference.</p>
-          <div style="display: flex; gap: 24px; flex-wrap: wrap; font-family: 'Martian Mono', monospace; font-size: 10.5px; color: #4f5762;">
-            <span>14-day refund</span><span>escrow protected</span><span>lifetime updates</span>
-          </div>
-        </div>
-        <div style="border-radius: 26px; background: #121820; padding: clamp(28px, 4vw, 42px); display: flex; flex-direction: column; gap: 20px;">
-          <span style="font-family: 'Martian Mono', monospace; font-size: 10px; color: #25c9b0;">full suite</span>
-          <div style="display: flex; align-items: baseline; gap: 12px;">
-            <span style="font-size: clamp(44px, 6vw, 66px); font-weight: 600; letter-spacing: -0.05em; color: #ffffff; line-height: 1;">€199</span>
-            <span style="font-size: 15px; color: rgba(255,255,255,0.64);">instead of €297</span>
-          </div>
-          <div style="display: flex; flex-wrap: wrap; gap: 7px;">
-            <sc-for list="{{ suitePillsDark }}" as="p" hint-placeholder-count="10">
-              <span style="font-family: 'Martian Mono', monospace; font-size: 9.5px; padding: 7px 11px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.18); color: rgba(255,255,255,0.62);">{{ p }}</span>
-            </sc-for>
-          </div>
-          <a href="#" style="text-align: center; font-size: 15.5px; font-weight: 500; color: #121820; background: #ffffff; padding: 15px; border-radius: 999px;" style-hover="background: #25c9b0;">Get it on Tebex</a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer style="background: #e5eaf0; border-top: 1px solid rgba(18,24,32,0.08); padding: clamp(46px, 7vw, 76px) clamp(18px, 4vw, 40px) 34px;">
-    <div style="max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 34px;">
-      <div style="display: flex; flex-direction: column; gap: 14px;">
-        <div style="display: flex; align-items: center; gap: 10px;">
-          <svg width="24" height="24" viewBox="0 0 128 128" fill="none" aria-hidden="true">
-            <defs><linearGradient id="vamMarkF" gradientUnits="userSpaceOnUse" x1="14" y1="104" x2="110" y2="20"><stop offset="0%" stop-color="#1450c8"></stop><stop offset="100%" stop-color="#25c9b0"></stop></linearGradient></defs>
-            <path d="M14 24 L27 54" stroke="url(#vamMarkF)" stroke-width="15"></path>
-            <path d="M30.5 62 L46 98 L78 24 L110 98" stroke="url(#vamMarkF)" stroke-width="15" stroke-linejoin="miter"></path>
-            <path d="M50 74 H107" stroke="url(#vamMarkF)" stroke-width="15"></path>
-          </svg>
-          <span style="font-size: 15px; font-weight: 600; letter-spacing: -0.025em;">VAmore Systems</span>
-        </div>
-        <span style="font-size: 13.5px; line-height: 1.6; color: #4a525d; max-width: 27ch;">The whole server layer from one place, maintained by the people who run a server on it.</span>
-        <div style="display: flex; gap: 7px;">
-          <a href="#" style="font-family: 'Martian Mono', monospace; font-size: 10px; padding: 8px 13px; border-radius: 999px; border: 1px solid rgba(18,24,32,0.16); color: #474f5a;" style-hover="color: #121820; border-color: rgba(18,24,32,0.36);">discord</a>
-          <a href="#" style="font-family: 'Martian Mono', monospace; font-size: 10px; padding: 8px 13px; border-radius: 999px; border: 1px solid rgba(18,24,32,0.16); color: #474f5a;" style-hover="color: #121820; border-color: rgba(18,24,32,0.36);">youtube</a>
-        </div>
-      </div>
-      <sc-for list="{{ footerCols }}" as="col" hint-placeholder-count="3">
-        <div style="display: flex; flex-direction: column; gap: 10px;">
-          <span style="font-family: 'Martian Mono', monospace; font-size: 10px; color: #5b636e;">{{ col.title }}</span>
-          <sc-for list="{{ col.links }}" as="l" hint-placeholder-count="4">
-            <a href="#" style="font-size: 14px; color: #474f5a;" style-hover="color: #121820;">{{ l }}</a>
-          </sc-for>
-        </div>
-      </sc-for>
+    <div class="footer-col">
+      <span class="footer-col-title">suite</span>
+      <a href="#suite">Inventory</a>
+      <a href="#suite">Phone</a>
+      <a href="#suite">Housing</a>
+      <a href="#suite">All ten systems</a>
     </div>
-    <div style="max-width: 1300px; margin: 36px auto 0; padding-top: 20px; border-top: 1px solid rgba(18,24,32,0.08); display: flex; gap: 20px; flex-wrap: wrap; font-family: 'Martian Mono', monospace; font-size: 9.5px; color: #5b636e;">
-      <span>© 2026 vamore systems</span>
-      <span>not affiliated with rockstar games or cfx.re</span>
-      <a href="#" style="color: #5b636e;" style-hover="color: #121820;">impressum</a>
-      <a href="#" style="color: #5b636e;" style-hover="color: #121820;">privacy</a>
-      <a href="#" style="color: #5b636e;" style-hover="color: #121820;">terms</a>
+    <div class="footer-col">
+      <span class="footer-col-title">resources</span>
+      <a href="#" data-placeholder="true">Documentation</a>
+      <a href="#" data-placeholder="true">Changelog</a>
+      <a href="#" data-placeholder="true">Framework bridges</a>
+      <a href="#" data-placeholder="true">Status</a>
     </div>
-  </footer>
-</div>
-</x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1440}}">
-const SYSTEMS = [
-  { slug: 'va-inventory', name: 'Inventory', price: '€35', fw: ['ESX', 'QBCore', 'Qbox'],
-    body: 'The table everything else writes to. Grid slots with real weight, stashes, shops, trunks — and metadata that survives every trade.',
-    facts: [{ k: '0.04 ms', v: 'peak with 64 players moving items' }, { k: 'ox-compatible', v: 'existing items and shops migrate as-is' }, { k: 'keyboard', v: 'full control without a mouse, visible focus' }] },
-  { slug: 'va-phone', name: 'Phone', price: '€45', fw: ['ESX', 'QBCore', 'Qbox'],
-    body: 'Nine apps, each one toggleable. The banking app reads the same accounts as va-banking, the marketplace escrows through the same inventory.',
-    facts: [{ k: '0.00 ms', v: 'while closed — nothing polls in the background' }, { k: '9 locales', v: 'shipped, community-editable' }, { k: 'no NUI leak', v: 'unmounts cleanly on player drop' }] },
-  { slug: 'va-housing', name: 'Housing', price: '€40', fw: ['QBCore', 'Qbox'],
-    body: 'Buy, rent, furnish, hand over keys. Interiors persist per property and decoration happens in-game rather than in a config file.',
-    facts: [{ k: '0.03 ms', v: 'idle with 400 registered properties' }, { k: 'MLO + shell', v: 'both, mixed on one server' }, { k: '1 migration', v: 'no shadow tables' }] },
-  { slug: 'va-banking', name: 'Banking', price: '€30', fw: ['ESX', 'QBCore'],
-    body: 'Accounts, transfers, business ledgers and ATMs. Every job payout in the suite lands here instead of in a private balance column.',
-    facts: [{ k: '0.02 ms', v: 'idle' }, { k: 'ledger export', v: 'CSV from the admin panel' }, { k: 'shared accounts', v: 'per-employee limits' }] },
-  { slug: 'va-dispatch', name: 'Dispatch', price: '€32', fw: ['ESX', 'QBCore'],
-    body: 'MDT, unit status and a live map for police and EMS. Reads jobs and grades straight from va-jobs — no duplicated whitelist.',
-    facts: [{ k: '1 Hz', v: 'unit positions stream instead of polling' }, { k: 'EMS triage', v: 'separate view for medics' }, { k: 'evidence', v: 'items link back to the inventory' }] },
-  { slug: 'va-jobs', name: 'Jobs', price: '€28', fw: ['ESX', 'QBCore'],
-    body: 'Shifts, payroll and per-grade permissions. One source of truth for who is allowed to do what, used by dispatch, housing and banking.',
-    facts: [{ k: '0.02 ms', v: 'idle' }, { k: 'payroll', v: 'runs against banking, not a side table' }, { k: 'grades', v: 'inherited by every other system' }] },
-  { slug: 'va-garage', name: 'Garage', price: '€25', fw: ['ESX', 'QBCore'],
-    body: 'Persistent vehicle storage with insurance, impound and shared house garages tied to the properties in va-housing.',
-    facts: [{ k: '0.01 ms', v: 'idle' }, { k: 'house garages', v: 'resolved from housing keyholders' }, { k: 'impound', v: 'police release through dispatch' }] },
-  { slug: 'va-admin', name: 'Admin', price: '€22', fw: ['ESX', 'QBCore', 'Standalone'],
-    body: 'One menu for the whole suite: inspect a player and see their inventory, properties, accounts and open tickets in one panel.',
-    facts: [{ k: 'suite-aware', v: 'reads every VAmore resource it finds' }, { k: 'audit log', v: 'every admin action, exportable' }, { k: 'anticheat', v: 'lightweight hooks, no false positives' }] },
-  { slug: 'va-crafting', name: 'Crafting', price: '€18', fw: ['ESX', 'QBCore', 'Standalone'],
-    body: 'Blueprint crafting with skill levels, benches and durability — quality written into the same item metadata the inventory carries.',
-    facts: [{ k: '0.01 ms', v: 'idle' }, { k: 'durability', v: 'stored as metadata, not a parallel table' }, { k: 'benches', v: 'placed in-game with ox_target' }] },
-  { slug: 'va-fuel', name: 'Fuel', price: '€12', fw: ['Standalone'],
-    body: 'Stations, jerrycans, electric charging and per-vehicle consumption. Standalone, so it drops into a server that runs none of the rest.',
-    facts: [{ k: '0.00 ms', v: 'idle' }, { k: 'electric', v: 'charging stations with queue' }, { k: 'standalone', v: 'no framework required' }] }
-];
+    <div class="footer-col">
+      <span class="footer-col-title">company</span>
+      <a href="#support">Support</a>
+      <a href="#" data-placeholder="true">Tebex store</a>
+      <a href="#" data-placeholder="true">Discord</a>
+      <a href="#" data-placeholder="true">Report misuse</a>
+    </div>
+  </div>
+  <div class="container footer-legal">
+    <span>© 2026 vamore systems</span>
+    <span>not affiliated with rockstar games or cfx.re</span>
+    <a href="#" data-placeholder="true">impressum</a>
+    <a href="#" data-placeholder="true">privacy</a>
+    <a href="#" data-placeholder="true">terms</a>
+  </div>
+</footer>
 
-const CHAPTERS = ['00:00 boot', '01:12 inventory', '03:40 phone', '05:55 housing', '08:02 dispatch', '09:48 admin'];
-
-class Component extends DCLogic {
-  state = { scrolled: false, active: 0, chapter: 0 };
-
-  componentDidMount() {
-    this.onScroll = () => {
-      const s = window.scrollY > 30;
-      if (s !== this.state.scrolled) this.setState({ scrolled: s });
-    };
-    window.addEventListener('scroll', this.onScroll, { passive: true });
-    this.onScroll();
-  }
-
-  componentWillUnmount() { window.removeEventListener('scroll', this.onScroll); }
-
-  renderVals() {
-    const { scrolled, active, chapter } = this.state;
-    return {
-      navBg: scrolled ? 'rgba(246,248,251,0.85)' : 'transparent',
-      navBorder: scrolled ? 'rgba(18,24,32,0.1)' : 'transparent',
-      suitePills: SYSTEMS.map((s, i) => ({
-        slug: s.slug,
-        bg: i === active ? '#121820' : 'transparent',
-        fg: i === active ? '#ffffff' : '#454d58',
-        border: i === active ? '#121820' : 'rgba(18,24,32,0.16)'
-      })),
-      suitePillsDark: SYSTEMS.map(s => s.slug),
-      rows: SYSTEMS.map((s, i) => ({
-        slug: s.slug, name: s.name, price: s.price,
-        onClick: () => this.setState({ active: i }),
-        bg: i === active ? '#ffffff' : 'transparent',
-        border: i === active ? 'rgba(18,24,32,0.12)' : 'transparent',
-        pillBg: i === active ? '#1450c8' : 'rgba(18,24,32,0.06)',
-        pillFg: i === active ? '#ffffff' : '#3f4751',
-        nameFg: i === active ? '#121820' : '#2c333d',
-        metaFg: i === active ? '#0a6f68' : '#3f4751'
-      })),
-      active: SYSTEMS[active],
-      chapters: CHAPTERS.map((c, i) => ({
-        label: c,
-        onClick: () => this.setState({ chapter: i }),
-        bg: i === chapter ? '#ffffff' : 'transparent',
-        fg: i === chapter ? '#0c1520' : 'rgba(255,255,255,0.72)',
-        border: i === chapter ? '#ffffff' : 'rgba(255,255,255,0.2)'
-      })),
-      activeChapter: CHAPTERS[chapter],
-      comparison: [
-        { label: 'Item metadata across systems', ours: 'one table', theirs: 'bridge per pair' },
-        { label: 'Permissions and job grades', ours: 'inherited', theirs: 'redefined per script' },
-        { label: 'Notification style', ours: 'one stack', theirs: 'three or four' },
-        { label: 'A bug between two systems', ours: 'one ticket', theirs: 'two vendors pointing at each other' },
-        { label: 'Framework migration', ours: 'suite-wide, one release', theirs: 'whenever each vendor gets to it' },
-        { label: 'Total idle cost', ours: '0.19 ms', theirs: 'typically 0.6–1.4 ms' }
-      ],
-      supportStats: [
-        { v: '2h 40m', k: 'Median first reply', note: 'Answered by the developer who wrote the resource, not a reseller.' },
-        { v: '94%', k: 'Closed same day', note: 'Of 1 180 tickets in the last 90 days, escalations included.' },
-        { v: '31', k: 'Releases this year', note: 'Every one documented in the public changelog before it ships.' },
-        { v: '0', k: 'Paid version bumps', note: 'Updates and framework migrations never cost extra.' }
-      ],
-      footerCols: [
-        { title: 'suite', links: ['Inventory', 'Phone', 'Housing', 'All ten systems'] },
-        { title: 'resources', links: ['Documentation', 'Changelog', 'Framework bridges', 'Status'] },
-        { title: 'company', links: ['Support', 'Tebex store', 'Discord', 'Report misuse'] }
-      ]
-    };
-  }
-}
-</script>
+<script src="script.js"></script>
 </body>
 </html>
