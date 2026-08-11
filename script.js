@@ -1,3 +1,5 @@
+// TODO: slugs, names, prices and bodies below are placeholder content for a
+// still-fictional lineup — replace every entry with the real suite before launch.
 const SYSTEMS = [
   { slug: 'va-inventory', name: 'Inventory', price: '€35', fw: ['ESX', 'QBCore', 'Qbox'],
     body: 'Grid-slot inventory with real weight, stashes, shops and trunks. (placeholder)',
@@ -39,6 +41,7 @@ function renderHeroPills() {
 
 function renderSuitePanel(index) {
   const panel = document.getElementById('suite-panel');
+  if (!panel) return;
   const s = SYSTEMS[index];
   panel.innerHTML = `
     <div class="suite-panel-image"><span>${s.slug} · ui shot · 1600×900</span></div>
