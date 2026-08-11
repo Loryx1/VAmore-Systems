@@ -104,8 +104,36 @@ function renderPricingPills() {
   wrap.innerHTML = SYSTEMS.map((s) => `<span class="pill">${s.slug}</span>`).join('');
 }
 
+function initNavScroll() {
+  const nav = document.getElementById('nav');
+  if (!nav) return;
+  const update = () => nav.classList.toggle('is-scrolled', window.scrollY > 30);
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+}
+
+function initScrollReveal() {
+  const targets = document.querySelectorAll('.reveal');
+  if (!targets.length) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    targets.forEach((el) => el.classList.add('is-visible'));
+    return;
+  }
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+  targets.forEach((el) => observer.observe(el));
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  initNavScroll();
   initDemoChapters();
   initSuite();
   renderPricingPills();
+  initScrollReveal();
 });
