@@ -54,7 +54,9 @@ img { max-width: 100%; display: block; }
   color: var(--color-text-muted);
   display: inline-flex;
   align-items: center;
+  transition: color 160ms ease, border-color 160ms ease;
 }
+a.pill:hover { color: var(--color-text); border-color: rgba(18, 24, 32, 0.36); }
 .pill-solid { background: var(--color-text); color: #fff; border-color: var(--color-text); }
 
 .btn {
