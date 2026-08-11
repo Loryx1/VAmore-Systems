@@ -98,7 +98,14 @@ function initSuite() {
   renderHeroPills();
 }
 
+function renderPricingPills() {
+  const wrap = document.getElementById('pricing-pills');
+  if (!wrap) return;
+  wrap.innerHTML = SYSTEMS.map((s) => `<span class="pill">${s.slug}</span>`).join('');
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initDemoChapters();
   initSuite();
+  renderPricingPills();
 });
