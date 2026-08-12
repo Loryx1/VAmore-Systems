@@ -129,9 +129,9 @@ a.pill:hover { color: var(--color-text); border-color: rgba(18, 24, 32, 0.36); }
 
 .hero { padding-top: clamp(122px, 17vh, 190px); padding-bottom: clamp(60px, 9vw, 110px); background: radial-gradient(130% 80% at 78% -10%, #ffffff 0%, #f4f6fa 44%, #e9edf3 100%); }
 .hero-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: clamp(36px, 5vw, 76px); align-items: center; }
-.hero-copy { position: relative; display: flex; flex-direction: column; gap: 26px; max-width: 620px; }
+.hero-copy { position: relative; isolation: isolate; display: flex; flex-direction: column; gap: 26px; max-width: 620px; }
 .hero-copy::before {
-  content: ''; position: absolute; top: -90px; left: -110px; width: 380px; height: 380px;
+  content: ''; position: absolute; top: -140px; left: -160px; width: 380px; height: 380px;
   background: var(--glow-blue); filter: blur(50px); z-index: -1; pointer-events: none;
 }
 .hero-badges { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
@@ -215,6 +215,10 @@ a.pill:hover { color: var(--color-text); border-color: rgba(18, 24, 32, 0.36); }
 .flagship-panel { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: clamp(32px, 5vw, 70px); align-items: center; }
 .flagship-panel-reverse .flagship-image { order: 2; }
 .flagship-panel-reverse .flagship-copy { order: 1; }
+@media (max-width: 760px) {
+  .flagship-panel-reverse .flagship-image,
+  .flagship-panel-reverse .flagship-copy { order: 0; }
+}
 
 .flagship-image {
   height: clamp(320px, 38vw, 520px); border-radius: var(--radius-card); overflow: hidden;
@@ -223,9 +227,9 @@ a.pill:hover { color: var(--color-text); border-color: rgba(18, 24, 32, 0.36); }
 }
 .flagship-image span { font-family: var(--font-mono); font-size: 11px; color: #5b636e; text-align: center; padding: 0 20px; }
 
-.flagship-copy { position: relative; display: flex; flex-direction: column; gap: 18px; max-width: 460px; }
+.flagship-copy { position: relative; isolation: isolate; display: flex; flex-direction: column; gap: 18px; max-width: 460px; }
 .flagship-copy::before {
-  content: ''; position: absolute; top: -60px; left: -60px; width: 320px; height: 320px;
+  content: ''; position: absolute; top: -110px; left: -120px; width: 320px; height: 320px;
   filter: blur(50px); z-index: -1; pointer-events: none;
 }
 .flagship-glow-blue::before { background: var(--glow-blue); }
@@ -237,6 +241,7 @@ a.pill:hover { color: var(--color-text); border-color: rgba(18, 24, 32, 0.36); }
 .flagship-copy > p { margin: 0; font-size: 17px; line-height: 1.6; color: var(--color-text-secondary); }
 
 .suite-head-explore { margin-top: clamp(10px, 2vw, 20px); }
+.suite-head-explore h2 { font-size: clamp(26px, 3.4vw, 46px); max-width: 22ch; }
 
 .compare-inner { max-width: 1080px; margin: 0 auto; display: flex; flex-direction: column; gap: clamp(28px, 4vw, 44px); }
 .compare-head { display: flex; flex-direction: column; gap: 16px; max-width: 34ch; }
@@ -263,10 +268,10 @@ a.pill:hover { color: var(--color-text); border-color: rgba(18, 24, 32, 0.36); }
 .stat-note { font-size: 14px; line-height: 1.55; color: rgba(255, 255, 255, 0.68); }
 
 .pricing-grid { max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: clamp(24px, 3vw, 40px); align-items: center; }
-.pricing-copy { position: relative; display: flex; flex-direction: column; gap: 20px; }
+.pricing-copy { position: relative; isolation: isolate; display: flex; flex-direction: column; gap: 20px; }
 .pricing-copy h2 { margin: 0; font-size: clamp(34px, 5.4vw, 74px); line-height: 1; font-weight: 600; letter-spacing: -0.045em; max-width: 14ch; }
 .pricing-copy::before {
-  content: ''; position: absolute; top: -70px; left: -80px; width: 340px; height: 340px;
+  content: ''; position: absolute; top: -120px; left: -130px; width: 340px; height: 340px;
   background: var(--glow-teal); filter: blur(50px); z-index: -1; pointer-events: none;
 }
 .pricing-copy p { margin: 0; font-size: 17px; line-height: 1.6; color: #454d58; max-width: 44ch; }

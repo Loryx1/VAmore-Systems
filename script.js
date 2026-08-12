@@ -36,12 +36,23 @@ const SYSTEMS = [
 ];
 
 const FLAGSHIP_SLUGS = ['va-inventory', 'va-phone', 'va-housing', 'va-dispatch'];
+const FLAGSHIP_SYSTEMS = FLAGSHIP_SLUGS.map((slug) => SYSTEMS.find((sys) => sys.slug === slug)).filter(Boolean);
+
+function systemDetailMarkup(s) {
+  return `
+    <div class="suite-facts">
+      ${s.facts.map((f) => `<div class="suite-fact"><span class="suite-fact-key">${f.k}</span><span class="suite-fact-val">${f.v}</span></div>`).join('')}
+    </div>
+    <div class="suite-fw">
+      ${s.fw.map((f) => `<span class="pill">${f}</span>`).join('')}
+    </div>
+    <a href="#" class="btn btn-primary" data-placeholder="true">Buy ${s.name} on Tebex</a>`;
+}
 
 function renderFlagshipPanels() {
   const wrap = document.getElementById('flagship-list');
   if (!wrap) return;
-  wrap.innerHTML = FLAGSHIP_SLUGS.map((slug, i) => {
-    const s = SYSTEMS.find((sys) => sys.slug === slug);
+  wrap.innerHTML = FLAGSHIP_SYSTEMS.map((s, i) => {
     const reversed = i % 2 === 1;
     const glow = i % 2 === 0 ? 'flagship-glow-blue' : 'flagship-glow-teal';
     return `
@@ -50,13 +61,7 @@ function renderFlagshipPanels() {
       <div class="flagship-copy ${glow}">
         <div class="flagship-copy-head"><h3>${s.name}</h3><span>${s.price}</span></div>
         <p>${s.body}</p>
-        <div class="suite-facts">
-          ${s.facts.map((f) => `<div class="suite-fact"><span class="suite-fact-key">${f.k}</span><span class="suite-fact-val">${f.v}</span></div>`).join('')}
-        </div>
-        <div class="suite-fw">
-          ${s.fw.map((f) => `<span class="pill">${f}</span>`).join('')}
-        </div>
-        <a href="#" class="btn btn-primary" data-placeholder="true">Buy ${s.name} on Tebex</a>
+        ${systemDetailMarkup(s)}
       </div>
     </div>`;
   }).join('');
@@ -77,13 +82,7 @@ function renderSuitePanel(list, index) {
     <div class="suite-panel-body">
       <div class="suite-panel-title"><h3>${s.name}</h3><span>${s.price}</span></div>
       <p>${s.body}</p>
-      <div class="suite-facts">
-        ${s.facts.map((f) => `<div class="suite-fact"><span class="suite-fact-key">${f.k}</span><span class="suite-fact-val">${f.v}</span></div>`).join('')}
-      </div>
-      <div class="suite-fw">
-        ${s.fw.map((f) => `<span class="pill">${f}</span>`).join('')}
-      </div>
-      <a href="#" class="btn btn-primary" data-placeholder="true">Buy ${s.name} on Tebex</a>
+      ${systemDetailMarkup(s)}
     </div>`;
 }
 
@@ -103,7 +102,7 @@ function initDemoChapters() {
 function initSuite() {
   const list = document.getElementById('suite-list');
   if (!list) return;
-  const rest = SYSTEMS.filter((s) => !FLAGSHIP_SLUGS.includes(s.slug));
+  const rest = SYSTEMS.filter((s) => !FLAGSHIP_SYSTEMS.includes(s));
   let active = 0;
 
   function renderList() {
