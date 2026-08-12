@@ -25,6 +25,7 @@ const SYSTEMS = [
 
 const FLAGSHIP_SLUGS = ['va-inventory', 'va-phone', 'va-housing', 'va-dispatch'];
 
+// NOTE: "product shot placeholder" labels below stand in for real PNG screenshots — replace before launch.
 function renderFlagshipPanels() {
   const wrap = document.getElementById('flagship-list');
   if (!wrap) return;

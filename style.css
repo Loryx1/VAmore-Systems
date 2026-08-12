@@ -96,6 +96,11 @@ a.pill:hover { color: var(--color-text); border-color: rgba(245, 247, 250, 0.4);
 .nav-links a:hover { color: var(--color-text); }
 .nav-actions { display: flex; align-items: center; gap: 9px; justify-self: end; }
 
+@media (max-width: 700px) {
+  .nav-links { display: none; }
+  .nav-inner { grid-template-columns: auto 1fr; }
+}
+
 .hero { padding-top: clamp(140px, 18vh, 200px); padding-bottom: clamp(48px, 7vw, 90px); text-align: center; }
 .hero-inner { display: flex; flex-direction: column; align-items: center; gap: 22px; max-width: 760px; margin: 0 auto; }
 .hero-badges { display: flex; align-items: center; justify-content: center; gap: 7px; flex-wrap: wrap; }
@@ -118,6 +123,7 @@ a.pill:hover { color: var(--color-text); border-color: rgba(245, 247, 250, 0.4);
 .suite-head h2 { margin: 0; font-size: clamp(30px, 4.4vw, 58px); line-height: 1; font-weight: 600; letter-spacing: -0.045em; }
 .mono-label { font-family: var(--font-mono); font-size: 10.5px; color: var(--color-text-muted); }
 
+.admin-panel { background: var(--color-surface); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
 .admin-panel-inner { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: clamp(28px, 4vw, 56px); align-items: center; }
 .admin-panel-copy { display: flex; flex-direction: column; gap: 14px; }
 .admin-panel-copy h2 { margin: 0; font-size: clamp(30px, 4.4vw, 58px); line-height: 1.02; font-weight: 600; letter-spacing: -0.045em; }
@@ -133,7 +139,7 @@ a.pill:hover { color: var(--color-text); border-color: rgba(245, 247, 250, 0.4);
 .flagship-panel { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: clamp(28px, 4vw, 56px); align-items: center; }
 .flagship-panel-reverse .flagship-image { order: 2; }
 .flagship-panel-reverse .flagship-copy { order: 1; }
-@media (max-width: 760px) {
+@media (max-width: 700px) {
   .flagship-panel-reverse .flagship-image,
   .flagship-panel-reverse .flagship-copy { order: 0; }
 }
