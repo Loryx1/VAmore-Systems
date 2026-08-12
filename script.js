@@ -80,6 +80,21 @@ function initDemoChapters() {
   });
 }
 
+function initHeroTypewriter() {
+  const el = document.getElementById('hero-type-text');
+  if (!el) return;
+  const full = el.textContent;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  el.textContent = '';
+  let i = 0;
+  const step = () => {
+    i += 1;
+    el.textContent = full.slice(0, i);
+    if (i < full.length) window.setTimeout(step, 38);
+  };
+  window.setTimeout(step, 300);
+}
+
 function initNavScroll() {
   const nav = document.getElementById('nav');
   if (!nav) return;
@@ -107,6 +122,7 @@ function initScrollReveal() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  initHeroTypewriter();
   initNavScroll();
   renderProductGrid();
   renderFlagshipPanels();
