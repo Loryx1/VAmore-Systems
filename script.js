@@ -1,5 +1,7 @@
 // TODO: slugs, names, prices and bodies below are placeholder content for a
 // still-fictional lineup — replace every entry with the real suite before launch.
+// NOTE: every "ui shot · WxH" label rendered from this data (flagship panels,
+// suite panel) is a placeholder mockup dimension, not a real screenshot.
 const SYSTEMS = [
   { slug: 'va-inventory', name: 'Inventory', price: '€35', fw: ['ESX', 'QBCore', 'Qbox'],
     body: 'Grid-slot inventory with real weight, stashes, shops and trunks. (placeholder)',
@@ -32,6 +34,33 @@ const SYSTEMS = [
     body: 'Stations, jerrycans, electric charging and per-vehicle consumption. (placeholder)',
     facts: [{ k: 'placeholder', v: 'replace with real perf/feature facts before launch' }] }
 ];
+
+const FLAGSHIP_SLUGS = ['va-inventory', 'va-phone', 'va-housing', 'va-dispatch'];
+
+function renderFlagshipPanels() {
+  const wrap = document.getElementById('flagship-list');
+  if (!wrap) return;
+  wrap.innerHTML = FLAGSHIP_SLUGS.map((slug, i) => {
+    const s = SYSTEMS.find((sys) => sys.slug === slug);
+    const reversed = i % 2 === 1;
+    const glow = i % 2 === 0 ? 'flagship-glow-blue' : 'flagship-glow-teal';
+    return `
+    <div class="flagship-panel${reversed ? ' flagship-panel-reverse' : ''} reveal">
+      <div class="flagship-image"><span>${s.slug} · ui shot · 1600×900</span></div>
+      <div class="flagship-copy ${glow}">
+        <div class="flagship-copy-head"><h3>${s.name}</h3><span>${s.price}</span></div>
+        <p>${s.body}</p>
+        <div class="suite-facts">
+          ${s.facts.map((f) => `<div class="suite-fact"><span class="suite-fact-key">${f.k}</span><span class="suite-fact-val">${f.v}</span></div>`).join('')}
+        </div>
+        <div class="suite-fw">
+          ${s.fw.map((f) => `<span class="pill">${f}</span>`).join('')}
+        </div>
+        <a href="#" class="btn btn-primary" data-placeholder="true">Buy ${s.name} on Tebex</a>
+      </div>
+    </div>`;
+  }).join('');
+}
 
 function renderHeroPills() {
   const wrap = document.getElementById('hero-pills');
@@ -132,6 +161,8 @@ function initScrollReveal() {
 
 document.addEventListener('DOMContentLoaded', () => {
   initNavScroll();
+  renderHeroPills();
+  renderFlagshipPanels();
   initDemoChapters();
   initSuite();
   renderPricingPills();
