@@ -81,18 +81,45 @@ function initDemoChapters() {
 }
 
 function initHeroTypewriter() {
-  const el = document.getElementById('hero-type-text');
-  if (!el) return;
-  const full = el.textContent;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  el.textContent = '';
-  let i = 0;
-  const step = () => {
-    i += 1;
-    el.textContent = full.slice(0, i);
-    if (i < full.length) window.setTimeout(step, 38);
+  const h1El = document.getElementById('hero-type-text');
+  const subEl = document.getElementById('hero-type-subtext');
+  const cursor1 = document.getElementById('hero-cursor-1');
+  const cursor2 = document.getElementById('hero-cursor-2');
+  if (!h1El) return;
+  const fullH1 = h1El.textContent;
+  const fullSub = subEl ? subEl.textContent : '';
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (cursor1) cursor1.style.display = 'none';
+    return;
+  }
+  h1El.textContent = '';
+  if (subEl) subEl.textContent = '';
+  if (cursor2) cursor2.style.display = 'none';
+
+  const typeSub = () => {
+    let j = 0;
+    const step = () => {
+      j += 1;
+      subEl.textContent = fullSub.slice(0, j);
+      if (j < fullSub.length) window.setTimeout(step, 38);
+    };
+    step();
   };
-  window.setTimeout(step, 300);
+
+  const startSub = () => {
+    if (cursor1) cursor1.style.display = 'none';
+    if (cursor2) cursor2.style.display = '';
+    if (subEl) typeSub();
+  };
+
+  let i = 0;
+  const typeH1 = () => {
+    i += 1;
+    h1El.textContent = fullH1.slice(0, i);
+    if (i < fullH1.length) { window.setTimeout(typeH1, 38); return; }
+    window.setTimeout(startSub, 250);
+  };
+  window.setTimeout(typeH1, 300);
 }
 
 function initNavScroll() {
