@@ -24,75 +24,70 @@
       <span>VAmore Systems</span>
     </a>
     <nav class="nav-links">
-      <a href="#suite">The suite</a>
+      <a href="#suite">Suite</a>
       <a href="#demo">Demo</a>
       <a href="#compare">Compare</a>
-      <a href="#support">Support</a>
     </nav>
     <div class="nav-actions">
       <a href="#" class="pill" data-placeholder="true">discord</a>
-      <a href="#pricing" class="pill pill-solid">get the suite</a>
+      <a href="#" class="btn btn-primary" data-placeholder="true">Buy on Tebex</a>
     </div>
   </div>
 </header>
 
 <main id="top">
   <section class="section hero">
-    <div class="container hero-grid">
-      <div class="hero-copy">
-        <div class="hero-badges">
-          <span class="pill pill-solid">esx</span>
-          <span class="pill pill-solid">qbcore</span>
-          <span class="pill pill-solid">qbox</span>
-          <span class="pill">one config line</span>
-        </div>
-        <h1>Ten systems that were written to talk to each other.</h1>
-        <p>Most servers stitch a phone from one vendor onto an inventory from another and spend
-          the season fixing the seam. VAmore ships the whole layer — one item table, one
-          notification stack, one support thread.</p>
-        <div class="hero-cta">
-          <!-- TODO: €199 is placeholder pricing tied to the placeholder script lineup — replace before launch -->
-          <a href="#pricing" class="btn btn-primary">Get the full suite — €199</a>
-          <a href="#suite" class="btn btn-secondary">See what's inside</a>
-        </div>
-      </div>
-      <div class="hero-card reveal">
-        <div class="hero-card-header">
-          <span>server.cfg</span>
-          <!-- TODO: "10 resources · 0.19 ms total" is a placeholder perf claim — replace with a real measurement before launch -->
-          <span class="hero-card-meta">10 resources · 0.19 ms total</span>
-        </div>
-        <div class="hero-card-pills" id="hero-pills"></div>
-        <div class="hero-card-divider"></div>
-        <div class="hero-card-footer">
-          <span>Every pill above shares the same item table, permission model and notification stack.</span>
-          <a href="#suite">inspect ›</a>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="trust">
-    <div class="container trust-inner">
-      <div class="trust-badges">
-        <span class="pill">esx</span>
-        <span class="pill">qbcore</span>
-        <span class="pill">qbox</span>
+    <div class="container hero-inner">
+      <div class="hero-badges">
+        <span class="pill pill-solid">esx</span>
+        <span class="pill pill-solid">qbcore</span>
+        <span class="pill pill-solid">qbox</span>
         <span class="pill">standalone</span>
       </div>
-      <div class="trust-stats">
-        <div class="trust-stat">
-          <span class="trust-stat-value">10</span>
-          <span class="trust-stat-key">systems · 1 codebase</span>
-        </div>
-        <!-- TODO: placeholder trust stat — replace with a real number before launch -->
-        <div class="trust-stat">
-          <span class="trust-stat-value">—</span>
-          <span class="trust-stat-key">servers running the suite (placeholder)</span>
-        </div>
+      <h1>Ten systems that were written to talk to each other.</h1>
+      <p>Most servers stitch a phone from one vendor onto an inventory from another and spend
+        the season fixing the seam. VAmore ships the whole layer — one item table, one
+        notification stack, one support thread.</p>
+      <div class="hero-cta">
+        <a href="#suite" class="btn btn-primary">View the suite</a>
+        <a href="#demo" class="btn btn-secondary">See how it runs</a>
       </div>
     </div>
   </section>
-  <section id="demo" class="section section-dark demo">
+
+  <section class="section features">
+    <div class="container features-grid">
+      <div class="feature reveal">
+        <span class="feature-icon">↻</span>
+        <h3>Regular updates</h3>
+        <!-- TODO: placeholder service claim — confirm real update cadence before launch -->
+        <p>Continuous improvements across the suite. (placeholder)</p>
+      </div>
+      <div class="feature reveal">
+        <span class="feature-icon">◆</span>
+        <h3>Active support</h3>
+        <!-- TODO: placeholder service claim — confirm real support commitment before launch -->
+        <p>We're here when something breaks. (placeholder)</p>
+      </div>
+      <div class="feature reveal">
+        <span class="feature-icon">10</span>
+        <h3>Systems, one codebase</h3>
+        <p>Every system in the suite shares the same item table, permissions and notifications.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="suite" class="section suite">
+    <div class="container suite-inner">
+      <div class="suite-head">
+        <h2>What's in the suite.</h2>
+        <span class="mono-label">ten systems, one vendor</span>
+      </div>
+      <div class="product-grid" id="product-grid"></div>
+    </div>
+  </section>
+
+  <section id="demo" class="section demo">
     <div class="container demo-inner">
       <!-- TODO: this whole demo block (headline, subcopy, video resolution, chapter timestamps) describes a specific recording that doesn't exist yet — replace once a real demo video is recorded -->
       <div class="demo-head">
@@ -113,24 +108,7 @@
       </div>
     </div>
   </section>
-  <section id="suite" class="section suite">
-    <div class="container suite-inner">
-      <div class="suite-head">
-        <h2>What's in the suite.</h2>
-        <span class="mono-label">four of the ten, up close</span>
-      </div>
-      <div class="flagship-list" id="flagship-list"></div>
 
-      <div class="suite-head suite-head-explore">
-        <h2>Explore the rest of the suite.</h2>
-        <span class="mono-label">pick a system to inspect it</span>
-      </div>
-      <div class="suite-grid">
-        <div class="suite-list" id="suite-list"></div>
-        <div class="suite-panel" id="suite-panel"></div>
-      </div>
-    </div>
-  </section>
   <section id="compare" class="section compare">
     <div class="container compare-inner">
       <div class="compare-head">
@@ -178,63 +156,6 @@
       </div>
     </div>
   </section>
-
-  <section id="support" class="section section-dark support">
-    <div class="container support-inner">
-      <!-- TODO: headline, "rolling 90-day window" methodology claim, and every stat below are placeholder — none of this is measured yet. Replace before launch. -->
-      <div class="support-head">
-        <h2>Support you can put a number on.</h2>
-        <span class="mono-label mono-label-dark">rolling 90-day window · updated weekly</span>
-      </div>
-      <div class="support-grid">
-        <div class="stat">
-          <span class="stat-value">— h — m</span>
-          <span class="stat-key">Median first reply (placeholder)</span>
-          <span class="stat-note">Replace with a real measured value before launch.</span>
-        </div>
-        <div class="stat">
-          <span class="stat-value">—%</span>
-          <span class="stat-key">Closed same day (placeholder)</span>
-          <span class="stat-note">Replace with a real measured value before launch.</span>
-        </div>
-        <div class="stat">
-          <span class="stat-value">—</span>
-          <span class="stat-key">Releases this year (placeholder)</span>
-          <span class="stat-note">Replace with a real measured value before launch.</span>
-        </div>
-        <div class="stat">
-          <span class="stat-value">0</span>
-          <span class="stat-key">Paid version bumps (placeholder)</span>
-          <span class="stat-note">Confirm this policy, then keep or replace.</span>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section id="pricing" class="section pricing">
-    <div class="container pricing-grid">
-      <div class="pricing-copy">
-        <h2>Take the whole layer.</h2>
-        <p>Ten systems, one license key, one Discord thread. Buy scripts individually if you'd
-          rather start small — the suite price stays open to you as an upgrade for the
-          difference.</p>
-        <!-- TODO: refund window / escrow / update policy below are placeholder claims — confirm real terms before launch -->
-        <div class="pricing-terms">
-          <span>14-day refund</span><span>escrow protected</span><span>lifetime updates</span>
-        </div>
-      </div>
-      <div class="pricing-card">
-        <span class="pricing-card-label">full suite</span>
-        <!-- TODO: €199 / €297 are placeholder pricing tied to the placeholder script lineup — replace before launch.
-             Note: €297 doesn't currently sum from the SYSTEMS prices (they total €287) — reconcile when replacing. -->
-        <div class="pricing-card-price">
-          <span class="pricing-card-amount">€199</span>
-          <span class="pricing-card-was">instead of €297</span>
-        </div>
-        <div class="pricing-card-pills" id="pricing-pills"></div>
-        <a href="#" class="btn btn-light" data-placeholder="true">Get it on Tebex</a>
-      </div>
-    </div>
-  </section>
 </main>
 
 <footer class="footer">
@@ -271,7 +192,7 @@
     </div>
     <div class="footer-col">
       <span class="footer-col-title">company</span>
-      <a href="#support">Support</a>
+      <a href="#" data-placeholder="true">Support</a>
       <a href="#" data-placeholder="true">Tebex store</a>
       <a href="#" data-placeholder="true">Discord</a>
       <a href="#" data-placeholder="true">Report misuse</a>
