@@ -1,7 +1,5 @@
 // TODO: slugs, names, prices and bodies below are placeholder content for a
 // still-fictional lineup — replace every entry with the real suite before launch.
-// NOTE: every "ui shot · WxH" label rendered from this data (flagship panels,
-// suite panel) is a placeholder mockup dimension, not a real screenshot.
 const SYSTEMS = [
   { slug: 'va-inventory', name: 'Inventory', price: '€35', fw: ['ESX', 'QBCore', 'Qbox'],
     body: 'Grid-slot inventory with real weight, stashes, shops and trunks. (placeholder)',
@@ -35,55 +33,22 @@ const SYSTEMS = [
     facts: [{ k: 'placeholder', v: 'replace with real perf/feature facts before launch' }] }
 ];
 
-const FLAGSHIP_SLUGS = ['va-inventory', 'va-phone', 'va-housing', 'va-dispatch'];
-const FLAGSHIP_SYSTEMS = FLAGSHIP_SLUGS.map((slug) => SYSTEMS.find((sys) => sys.slug === slug)).filter(Boolean);
-
-function systemDetailMarkup(s) {
-  return `
-    <div class="suite-facts">
-      ${s.facts.map((f) => `<div class="suite-fact"><span class="suite-fact-key">${f.k}</span><span class="suite-fact-val">${f.v}</span></div>`).join('')}
-    </div>
-    <div class="suite-fw">
-      ${s.fw.map((f) => `<span class="pill">${f}</span>`).join('')}
-    </div>
-    <a href="#" class="btn btn-primary" data-placeholder="true">Buy ${s.name} on Tebex</a>`;
-}
-
-function renderFlagshipPanels() {
-  const wrap = document.getElementById('flagship-list');
+function renderProductGrid() {
+  const wrap = document.getElementById('product-grid');
   if (!wrap) return;
-  wrap.innerHTML = FLAGSHIP_SYSTEMS.map((s, i) => {
-    const reversed = i % 2 === 1;
-    const glow = i % 2 === 0 ? 'flagship-glow-blue' : 'flagship-glow-teal';
-    return `
-    <div class="flagship-panel${reversed ? ' flagship-panel-reverse' : ''} reveal">
-      <div class="flagship-image"><span>${s.slug} · ui shot · 1600×900</span></div>
-      <div class="flagship-copy ${glow}">
-        <div class="flagship-copy-head"><h3>${s.name}</h3><span>${s.price}</span></div>
-        <p>${s.body}</p>
-        ${systemDetailMarkup(s)}
+  wrap.innerHTML = SYSTEMS.map((s) => `
+    <div class="product-card reveal">
+      <div class="product-card-head">
+        <span class="product-card-slug">${s.slug}</span>
+        <span class="product-card-price">${s.price}</span>
       </div>
-    </div>`;
-  }).join('');
-}
-
-function renderHeroPills() {
-  const wrap = document.getElementById('hero-pills');
-  if (!wrap) return;
-  wrap.innerHTML = SYSTEMS.map((s) => `<span class="pill">${s.slug}</span>`).join('');
-}
-
-function renderSuitePanel(list, index) {
-  const panel = document.getElementById('suite-panel');
-  if (!panel) return;
-  const s = list[index];
-  panel.innerHTML = `
-    <div class="suite-panel-image"><span>${s.slug} · ui shot · 1600×900</span></div>
-    <div class="suite-panel-body">
-      <div class="suite-panel-title"><h3>${s.name}</h3><span>${s.price}</span></div>
+      <h3>${s.name}</h3>
       <p>${s.body}</p>
-      ${systemDetailMarkup(s)}
-    </div>`;
+      <div class="product-card-fw">
+        ${s.fw.map((f) => `<span class="pill">${f}</span>`).join('')}
+      </div>
+      <a href="#" class="btn btn-primary" data-placeholder="true">Buy on Tebex</a>
+    </div>`).join('');
 }
 
 function initDemoChapters() {
@@ -97,39 +62,6 @@ function initDemoChapters() {
     btn.classList.add('is-active');
     label.textContent = `demo video · 2400×1240 · ${btn.dataset.chapter}`;
   });
-}
-
-function initSuite() {
-  const list = document.getElementById('suite-list');
-  if (!list) return;
-  const rest = SYSTEMS.filter((s) => !FLAGSHIP_SYSTEMS.includes(s));
-  let active = 0;
-
-  function renderList() {
-    list.innerHTML = rest.map((s, i) => `
-      <button class="suite-row${i === active ? ' is-active' : ''}" data-index="${i}">
-        <span class="suite-row-slug">${s.slug}</span>
-        <span class="suite-row-name">${s.name}</span>
-        <span class="suite-row-price">${s.price}</span>
-      </button>`).join('');
-  }
-
-  list.addEventListener('click', (event) => {
-    const btn = event.target.closest('.suite-row');
-    if (!btn) return;
-    active = Number(btn.dataset.index);
-    renderList();
-    renderSuitePanel(rest, active);
-  });
-
-  renderList();
-  renderSuitePanel(rest, active);
-}
-
-function renderPricingPills() {
-  const wrap = document.getElementById('pricing-pills');
-  if (!wrap) return;
-  wrap.innerHTML = SYSTEMS.map((s) => `<span class="pill">${s.slug}</span>`).join('');
 }
 
 function initNavScroll() {
@@ -160,10 +92,7 @@ function initScrollReveal() {
 
 document.addEventListener('DOMContentLoaded', () => {
   initNavScroll();
-  renderHeroPills();
-  renderFlagshipPanels();
+  renderProductGrid();
   initDemoChapters();
-  initSuite();
-  renderPricingPills();
   initScrollReveal();
 });
