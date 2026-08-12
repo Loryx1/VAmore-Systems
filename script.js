@@ -2,35 +2,25 @@
 // still-fictional lineup — replace every entry with the real suite before launch.
 const SYSTEMS = [
   { slug: 'va-inventory', name: 'Inventory', price: '€35', fw: ['ESX', 'QBCore', 'Qbox'],
-    body: 'Grid-slot inventory with real weight, stashes, shops and trunks. (placeholder)',
-    facts: [{ k: 'placeholder', v: 'replace with real perf/feature facts before launch' }] },
+    body: 'Grid-slot inventory with real weight, stashes, shops and trunks. (placeholder)' },
   { slug: 'va-phone', name: 'Phone', price: '€45', fw: ['ESX', 'QBCore', 'Qbox'],
-    body: 'Multi-app phone sharing accounts and inventory with the rest of the suite. (placeholder)',
-    facts: [{ k: 'placeholder', v: 'replace with real perf/feature facts before launch' }] },
+    body: 'Multi-app phone sharing accounts and inventory with the rest of the suite. (placeholder)' },
   { slug: 'va-housing', name: 'Housing', price: '€40', fw: ['QBCore', 'Qbox'],
-    body: 'Buy, rent, furnish, hand over keys, persistent interiors. (placeholder)',
-    facts: [{ k: 'placeholder', v: 'replace with real perf/feature facts before launch' }] },
+    body: 'Buy, rent, furnish, hand over keys, persistent interiors. (placeholder)' },
   { slug: 'va-banking', name: 'Banking', price: '€30', fw: ['ESX', 'QBCore'],
-    body: 'Accounts, transfers, business ledgers and ATMs. (placeholder)',
-    facts: [{ k: 'placeholder', v: 'replace with real perf/feature facts before launch' }] },
+    body: 'Accounts, transfers, business ledgers and ATMs. (placeholder)' },
   { slug: 'va-dispatch', name: 'Dispatch', price: '€32', fw: ['ESX', 'QBCore'],
-    body: 'MDT, unit status and a live map for police and EMS. (placeholder)',
-    facts: [{ k: 'placeholder', v: 'replace with real perf/feature facts before launch' }] },
+    body: 'MDT, unit status and a live map for police and EMS. (placeholder)' },
   { slug: 'va-jobs', name: 'Jobs', price: '€28', fw: ['ESX', 'QBCore'],
-    body: 'Shifts, payroll and per-grade permissions shared across the suite. (placeholder)',
-    facts: [{ k: 'placeholder', v: 'replace with real perf/feature facts before launch' }] },
+    body: 'Shifts, payroll and per-grade permissions shared across the suite. (placeholder)' },
   { slug: 'va-garage', name: 'Garage', price: '€25', fw: ['ESX', 'QBCore'],
-    body: 'Persistent vehicle storage with insurance and impound. (placeholder)',
-    facts: [{ k: 'placeholder', v: 'replace with real perf/feature facts before launch' }] },
+    body: 'Persistent vehicle storage with insurance and impound. (placeholder)' },
   { slug: 'va-admin', name: 'Admin', price: '€22', fw: ['ESX', 'QBCore', 'Standalone'],
-    body: 'One menu across the whole suite: inventory, properties, accounts, tickets. (placeholder)',
-    facts: [{ k: 'placeholder', v: 'replace with real perf/feature facts before launch' }] },
+    body: 'One menu across the whole suite: inventory, properties, accounts, tickets. (placeholder)' },
   { slug: 'va-crafting', name: 'Crafting', price: '€18', fw: ['ESX', 'QBCore', 'Standalone'],
-    body: 'Blueprint crafting with skill levels, benches and durability. (placeholder)',
-    facts: [{ k: 'placeholder', v: 'replace with real perf/feature facts before launch' }] },
+    body: 'Blueprint crafting with skill levels, benches and durability. (placeholder)' },
   { slug: 'va-fuel', name: 'Fuel', price: '€12', fw: ['Standalone'],
-    body: 'Stations, jerrycans, electric charging and per-vehicle consumption. (placeholder)',
-    facts: [{ k: 'placeholder', v: 'replace with real perf/feature facts before launch' }] }
+    body: 'Stations, jerrycans, electric charging and per-vehicle consumption. (placeholder)' }
 ];
 
 function renderProductGrid() {
@@ -47,10 +37,11 @@ function renderProductGrid() {
       <div class="product-card-fw">
         ${s.fw.map((f) => `<span class="pill">${f}</span>`).join('')}
       </div>
-      <a href="#" class="btn btn-primary" data-placeholder="true">Buy on Tebex</a>
+      <a href="#" class="btn btn-secondary" data-placeholder="true">Buy on Tebex</a>
     </div>`).join('');
 }
 
+// NOTE: "2400×1240" in the label below is a placeholder resolution, not a real recording — see the <!-- TODO --> above the demo section in index.html.
 function initDemoChapters() {
   const wrap = document.getElementById('demo-chapters');
   const label = document.getElementById('demo-video-label');

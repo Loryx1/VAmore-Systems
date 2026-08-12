@@ -73,7 +73,7 @@ a.pill:hover { color: var(--color-text); border-color: rgba(245, 247, 250, 0.4);
 .btn-primary { color: var(--color-bg); background: #fff; }
 .btn-primary:hover { background: var(--color-accent-teal-bright); color: var(--color-bg); }
 .btn-secondary { color: var(--color-text); border-color: var(--color-border-soft); }
-.btn-secondary:hover { border-color: var(--color-text); }
+.btn-secondary:hover { border-color: var(--color-text); color: var(--color-text); }
 
 .reveal { opacity: 0; }
 .reveal.is-visible { animation: vamIn 560ms ease both; }
@@ -87,13 +87,14 @@ a.pill:hover { color: var(--color-text); border-color: rgba(245, 247, 250, 0.4);
 .nav.is-scrolled { background: rgba(10, 15, 22, 0.85); border-bottom-color: var(--color-border); }
 .nav-inner {
   height: var(--nav-height);
-  display: flex; align-items: center; gap: clamp(16px, 3vw, 40px);
+  display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: clamp(16px, 3vw, 40px);
 }
 .nav-logo { display: flex; align-items: center; gap: 10px; color: var(--color-text); font-size: 16px; font-weight: 600; letter-spacing: -0.03em; }
-.nav-links { display: flex; align-items: center; gap: clamp(12px, 2vw, 24px); font-size: 14px; flex-wrap: wrap; margin: 0 auto; }
+.nav-logo:hover { color: var(--color-text); }
+.nav-links { display: flex; align-items: center; gap: clamp(12px, 2vw, 24px); font-size: 14px; flex-wrap: wrap; justify-self: center; }
 .nav-links a { color: var(--color-text-muted); }
 .nav-links a:hover { color: var(--color-text); }
-.nav-actions { margin-left: auto; display: flex; align-items: center; gap: 9px; }
+.nav-actions { display: flex; align-items: center; gap: 9px; justify-self: end; }
 
 .hero { padding-top: clamp(140px, 18vh, 200px); padding-bottom: clamp(48px, 7vw, 90px); text-align: center; }
 .hero-inner { display: flex; flex-direction: column; align-items: center; gap: 22px; max-width: 760px; margin: 0 auto; }
@@ -117,7 +118,7 @@ a.pill:hover { color: var(--color-text); border-color: rgba(245, 247, 250, 0.4);
 .suite-head h2 { margin: 0; font-size: clamp(30px, 4.4vw, 58px); line-height: 1; font-weight: 600; letter-spacing: -0.045em; }
 .mono-label { font-family: var(--font-mono); font-size: 10.5px; color: var(--color-text-muted); }
 
-.product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
 .product-card {
   border-radius: var(--radius-card); background: var(--color-surface); border: 1px solid var(--color-border);
   padding: 22px; display: flex; flex-direction: column; gap: 12px;
