@@ -68,10 +68,10 @@ function renderHeroPills() {
   wrap.innerHTML = SYSTEMS.map((s) => `<span class="pill">${s.slug}</span>`).join('');
 }
 
-function renderSuitePanel(index) {
+function renderSuitePanel(list, index) {
   const panel = document.getElementById('suite-panel');
   if (!panel) return;
-  const s = SYSTEMS[index];
+  const s = list[index];
   panel.innerHTML = `
     <div class="suite-panel-image"><span>${s.slug} · ui shot · 1600×900</span></div>
     <div class="suite-panel-body">
@@ -103,10 +103,11 @@ function initDemoChapters() {
 function initSuite() {
   const list = document.getElementById('suite-list');
   if (!list) return;
+  const rest = SYSTEMS.filter((s) => !FLAGSHIP_SLUGS.includes(s.slug));
   let active = 0;
 
   function renderList() {
-    list.innerHTML = SYSTEMS.map((s, i) => `
+    list.innerHTML = rest.map((s, i) => `
       <button class="suite-row${i === active ? ' is-active' : ''}" data-index="${i}">
         <span class="suite-row-slug">${s.slug}</span>
         <span class="suite-row-name">${s.name}</span>
@@ -119,12 +120,11 @@ function initSuite() {
     if (!btn) return;
     active = Number(btn.dataset.index);
     renderList();
-    renderSuitePanel(active);
+    renderSuitePanel(rest, active);
   });
 
   renderList();
-  renderSuitePanel(active);
-  renderHeroPills();
+  renderSuitePanel(rest, active);
 }
 
 function renderPricingPills() {
