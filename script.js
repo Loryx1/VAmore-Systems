@@ -23,6 +23,30 @@ const SYSTEMS = [
     body: 'Stations, jerrycans, electric charging and per-vehicle consumption. (placeholder)' }
 ];
 
+const FLAGSHIP_SLUGS = ['va-inventory', 'va-phone', 'va-housing', 'va-dispatch'];
+
+function renderFlagshipPanels() {
+  const wrap = document.getElementById('flagship-list');
+  if (!wrap) return;
+  wrap.innerHTML = FLAGSHIP_SLUGS.map((slug, i) => {
+    const s = SYSTEMS.find((sys) => sys.slug === slug);
+    if (!s) return '';
+    const reversed = i % 2 === 1;
+    return `
+    <div class="flagship-panel${reversed ? ' flagship-panel-reverse' : ''} reveal">
+      <div class="flagship-image"><span>${s.slug} · product shot placeholder</span></div>
+      <div class="flagship-copy">
+        <h3>${s.name}</h3>
+        <p>${s.body}</p>
+        <div class="flagship-meta">
+          <span class="flagship-price">${s.price}</span>
+          <a href="#" class="btn btn-secondary" data-placeholder="true">Buy on Tebex</a>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
 function renderProductGrid() {
   const wrap = document.getElementById('product-grid');
   if (!wrap) return;
@@ -84,6 +108,7 @@ function initScrollReveal() {
 document.addEventListener('DOMContentLoaded', () => {
   initNavScroll();
   renderProductGrid();
+  renderFlagshipPanels();
   initDemoChapters();
   initScrollReveal();
 });
