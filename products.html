@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VAmore Systems — All scripts</title>
+<link rel="icon" href="assets/vamore-favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Martian+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo">
+      <svg width="26" height="26" viewBox="0 0 128 128" fill="none" aria-hidden="true">
+        <defs><linearGradient id="vamMark" gradientUnits="userSpaceOnUse" x1="14" y1="104" x2="110" y2="20"><stop offset="0%" stop-color="#1450c8"></stop><stop offset="55%" stop-color="#1b8fc4"></stop><stop offset="100%" stop-color="#25c9b0"></stop></linearGradient></defs>
+        <path d="M14 24 L27 54" stroke="url(#vamMark)" stroke-width="15"></path>
+        <path d="M30.5 62 L46 98 L78 24 L110 98" stroke="url(#vamMark)" stroke-width="15" stroke-linejoin="miter"></path>
+        <path d="M50 74 H107" stroke="url(#vamMark)" stroke-width="15"></path>
+      </svg>
+      <span>VAmore Systems</span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html#suite">Suite</a>
+      <a href="index.html#demo">Demo</a>
+      <a href="index.html#compare">Compare</a>
+      <a href="products.html">All Scripts</a>
+    </nav>
+    <div class="nav-actions">
+      <a href="#" class="pill" data-placeholder="true">discord</a>
+      <a href="#" class="btn btn-primary" data-placeholder="true">Buy on Tebex</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="section products-head">
+    <div class="container">
+      <h1>The full suite.</h1>
+      <p>All ten systems, one vendor, one codebase. Pick one to start, or take the whole layer.</p>
+    </div>
+  </section>
+
+  <section class="section products-list">
+    <div class="container">
+      <div class="product-grid" id="product-grid"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <div class="nav-logo">
+        <svg width="24" height="24" viewBox="0 0 128 128" fill="none" aria-hidden="true">
+          <defs><linearGradient id="vamMarkF" gradientUnits="userSpaceOnUse" x1="14" y1="104" x2="110" y2="20"><stop offset="0%" stop-color="#1450c8"></stop><stop offset="100%" stop-color="#25c9b0"></stop></linearGradient></defs>
+          <path d="M14 24 L27 54" stroke="url(#vamMarkF)" stroke-width="15"></path>
+          <path d="M30.5 62 L46 98 L78 24 L110 98" stroke="url(#vamMarkF)" stroke-width="15" stroke-linejoin="miter"></path>
+          <path d="M50 74 H107" stroke="url(#vamMarkF)" stroke-width="15"></path>
+        </svg>
+        <span>VAmore Systems</span>
+      </div>
+      <!-- TODO: placeholder claim — "maintained by the people who run a server on it" implies an existing operating server; confirm or rewrite before launch. -->
+      <p>The whole server layer from one place, maintained by the people who run a server on it.</p>
+      <div class="footer-socials">
+        <a href="#" class="pill" data-placeholder="true">discord</a>
+        <a href="#" class="pill" data-placeholder="true">youtube</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <span class="footer-col-title">suite</span>
+      <a href="index.html#suite">Inventory</a>
+      <a href="index.html#suite">Phone</a>
+      <a href="index.html#suite">Housing</a>
+      <a href="products.html">All ten systems</a>
+    </div>
+    <div class="footer-col">
+      <span class="footer-col-title">resources</span>
+      <a href="#" data-placeholder="true">Documentation</a>
+      <a href="#" data-placeholder="true">Changelog</a>
+      <a href="#" data-placeholder="true">Framework bridges</a>
+      <a href="#" data-placeholder="true">Status</a>
+    </div>
+    <div class="footer-col">
+      <span class="footer-col-title">company</span>
+      <a href="#" data-placeholder="true">Support</a>
+      <a href="#" data-placeholder="true">Tebex store</a>
+      <a href="#" data-placeholder="true">Discord</a>
+      <a href="#" data-placeholder="true">Report misuse</a>
+    </div>
+  </div>
+  <div class="container footer-legal">
+    <span>© 2026 vamore systems</span>
+    <span>not affiliated with rockstar games or cfx.re</span>
+    <a href="#" data-placeholder="true">impressum</a>
+    <a href="#" data-placeholder="true">privacy</a>
+    <a href="#" data-placeholder="true">terms</a>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
