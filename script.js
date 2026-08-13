@@ -34,7 +34,7 @@ function renderFlagshipPanels() {
     if (!s) return '';
     const reversed = i % 2 === 1;
     const image = s.slug === 'va-inventory'
-      ? `<model-viewer src="assets/glb/creditcard.glb" alt="${s.name} 3D model" auto-rotate rotation-per-second="8deg" auto-rotate-delay="0" camera-controls disable-zoom interaction-prompt="none" shadow-intensity="1"></model-viewer>`
+      ? `<model-viewer src="assets/glb/creditcard.glb" alt="${s.name} 3D model" orientation="90deg 0deg 0deg" auto-rotate rotation-per-second="8deg" auto-rotate-delay="0" camera-controls disable-zoom interaction-prompt="none" shadow-intensity="1"></model-viewer>`
       : `<span>${s.slug} · product shot placeholder</span>`;
     return `
     <div class="flagship-panel${reversed ? ' flagship-panel-reverse' : ''} reveal">
