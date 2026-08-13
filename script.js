@@ -23,7 +23,7 @@ const SYSTEMS = [
     body: 'Stations, jerrycans, electric charging and per-vehicle consumption. (placeholder)' }
 ];
 
-const FLAGSHIP_SLUGS = ['va-inventory', 'va-phone', 'va-housing', 'va-dispatch'];
+const FLAGSHIP_SLUGS = ['va-banking', 'va-phone', 'va-housing', 'va-dispatch'];
 
 // NOTE: "product shot placeholder" labels below stand in for real PNG screenshots — replace before launch.
 function renderFlagshipPanels() {
@@ -33,7 +33,7 @@ function renderFlagshipPanels() {
     const s = SYSTEMS.find((sys) => sys.slug === slug);
     if (!s) return '';
     const reversed = i % 2 === 1;
-    const image = s.slug === 'va-inventory'
+    const image = s.slug === 'va-banking'
       ? `<model-viewer src="assets/glb/creditcard.glb" alt="${s.name} 3D model" orientation="90deg 30deg 0deg" auto-rotate rotation-per-second="8deg" auto-rotate-delay="0" camera-controls disable-zoom interaction-prompt="none" shadow-intensity="1"></model-viewer>`
       : `<span>${s.slug} · product shot placeholder</span>`;
     return `
