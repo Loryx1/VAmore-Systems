@@ -33,9 +33,12 @@ function renderFlagshipPanels() {
     const s = SYSTEMS.find((sys) => sys.slug === slug);
     if (!s) return '';
     const reversed = i % 2 === 1;
+    const image = s.slug === 'va-inventory'
+      ? `<model-viewer src="assets/glb/creditcard.glb" alt="${s.name} 3D model" auto-rotate rotation-per-second="8deg" auto-rotate-delay="0" camera-controls disable-zoom interaction-prompt="none" shadow-intensity="1"></model-viewer>`
+      : `<span>${s.slug} · product shot placeholder</span>`;
     return `
     <div class="flagship-panel${reversed ? ' flagship-panel-reverse' : ''} reveal">
-      <div class="flagship-image"><span>${s.slug} · product shot placeholder</span></div>
+      <div class="flagship-image">${image}</div>
       <div class="flagship-copy">
         <h3>${s.name}</h3>
         <p>${s.body}</p>
