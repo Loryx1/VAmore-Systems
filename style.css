@@ -96,6 +96,7 @@ a.pill:hover { color: var(--color-text); border-color: rgba(245, 247, 250, 0.4);
 .nav-links a { color: var(--color-text-muted); }
 .nav-links a:hover { color: var(--color-text); }
 .nav-actions { display: flex; align-items: center; gap: 9px; justify-self: end; }
+.nav-actions .btn { font-family: var(--font-mono); font-size: 10px; padding: 6px 11px; }
 
 @media (max-width: 700px) {
   .nav-links { display: none; }
