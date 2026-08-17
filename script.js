@@ -2,25 +2,25 @@
 // still-fictional lineup — replace every entry with the real suite before launch.
 const SYSTEMS = [
   { slug: 'va-inventory', name: 'Inventory', price: '€35', fw: ['ESX', 'QBCore', 'Qbox'],
-    body: 'Grid-slot inventory with real weight, stashes, shops and trunks. (placeholder)' },
+    body: 'Grid-slot inventory with real weight, stashes, shops and trunks. [Work In Progress]' },
   { slug: 'va-phone', name: 'Phone', price: '€45', fw: ['ESX', 'QBCore', 'Qbox'],
-    body: 'Multi-app phone sharing accounts and inventory with the rest of the suite. (placeholder)' },
+    body: 'Multi-app phone sharing accounts and inventory with the rest of the suite. [Work In Progress]' },
   { slug: 'va-housing', name: 'Housing', price: '€40', fw: ['QBCore', 'Qbox'],
-    body: 'Buy, rent, furnish, hand over keys, persistent interiors. (placeholder)' },
+    body: 'Buy, rent, furnish, hand over keys, persistent interiors. [Work In Progress]' },
   { slug: 'va-banking', name: 'Banking', price: '€30', fw: ['ESX', 'QBCore'],
-    body: 'Accounts, transfers, business ledgers and ATMs. (placeholder)' },
+    body: 'Accounts, transfers, business ledgers and ATMs. [Work In Progress]' },
   { slug: 'va-dispatch', name: 'Dispatch', price: '€32', fw: ['ESX', 'QBCore'],
-    body: 'MDT, unit status and a live map for police and EMS. (placeholder)' },
+    body: 'MDT, unit status and a live map for police and EMS. [Work In Progress]' },
   { slug: 'va-jobs', name: 'Jobs', price: '€28', fw: ['ESX', 'QBCore'],
-    body: 'Shifts, payroll and per-grade permissions shared across the suite. (placeholder)' },
+    body: 'Shifts, payroll and per-grade permissions shared across the suite. [Work In Progress]' },
   { slug: 'va-garage', name: 'Garage', price: '€25', fw: ['ESX', 'QBCore'],
-    body: 'Persistent vehicle storage with insurance and impound. (placeholder)' },
+    body: 'Persistent vehicle storage with insurance and impound. [Work In Progress]' },
   { slug: 'va-admin', name: 'Admin', price: '€22', fw: ['ESX', 'QBCore', 'Standalone'],
-    body: 'One menu across the whole suite: inventory, properties, accounts, tickets. (placeholder)' },
+    body: 'One menu across the whole suite: inventory, properties, accounts, tickets. [Work In Progress]' },
   { slug: 'va-crafting', name: 'Crafting', price: '€18', fw: ['ESX', 'QBCore', 'Standalone'],
-    body: 'Blueprint crafting with skill levels, benches and durability. (placeholder)' },
+    body: 'Blueprint crafting with skill levels, benches and durability. [Work In Progress]' },
   { slug: 'va-fuel', name: 'Fuel', price: '€12', fw: ['Standalone'],
-    body: 'Stations, jerrycans, electric charging and per-vehicle consumption. (placeholder)' }
+    body: 'Stations, jerrycans, electric charging and per-vehicle consumption. [Work In Progress]' }
 ];
 
 const FLAGSHIP_SLUGS = ['va-banking', 'va-phone', 'va-housing', 'va-dispatch'];
@@ -35,7 +35,7 @@ function renderFlagshipPanels() {
     const reversed = i % 2 === 1;
     const image = s.slug === 'va-banking'
       ? `<model-viewer src="assets/glb/creditcard.glb" alt="${s.name} 3D model" orientation="90deg 30deg 0deg" auto-rotate rotation-per-second="8deg" auto-rotate-delay="0" camera-controls disable-zoom interaction-prompt="none" shadow-intensity="1"></model-viewer>`
-      : `<span>${s.slug} · product shot placeholder</span>`;
+      : `<span>${s.slug} · product shot [Work In Progress]</span>`;
     return `
     <div class="flagship-panel${reversed ? ' flagship-panel-reverse' : ''} reveal">
       <div class="flagship-image">${image}</div>
