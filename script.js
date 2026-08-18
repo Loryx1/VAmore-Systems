@@ -23,7 +23,7 @@ const SYSTEMS = [
     body: 'Multi-app phone sharing accounts and inventory with the rest of the suite. [Work In Progress]' },
   { slug: 'va-housing', name: 'Housing', price: '€40', fw: ['ESX', 'QBCore', 'Qbox'], category: 'core',
     body: 'Buy, rent, furnish, hand over keys, persistent interiors. [Work In Progress]' },
-  { slug: 'va-banking', name: 'Banking', price: '€30', fw: ['ESX', 'QBCore', 'Qbox'], category: 'economy',
+  { slug: 'va-banking', name: 'Banking', price: '€40', fw: ['ESX', 'QBCore', 'Qbox'], category: 'economy',
     body: 'Accounts, transfers, business ledgers and ATMs. [Work In Progress]',
     tebexPackageId: '7627622' },
   { slug: 'va-dispatch', name: 'Dispatch', price: '€32', fw: ['ESX', 'QBCore', 'Qbox'], category: 'safety',
