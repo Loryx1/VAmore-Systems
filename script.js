@@ -39,7 +39,7 @@ const SYSTEMS = [
     body: 'Stations, jerrycans, electric charging and per-vehicle consumption. [Work In Progress]' }
 ];
 
-const FLAGSHIP_SLUGS = ['va-banking', 'va-phone', 'va-housing', 'va-dispatch'];
+const FLAGSHIP_SLUGS = ['va-banking', 'va-phone', 'va-invoices', 'va-jobs'];
 
 // Tebex Headless API: our storefront is this page, Tebex only handles the
 // actual checkout/payment. The public token identifies the store and is
