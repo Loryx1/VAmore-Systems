@@ -3,19 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>VAmore Systems — All scripts</title>
-<link rel="icon" href="assets/vamore-favicon-32.png">
+<title>Invoices — VAmore Systems</title>
+<link rel="icon" href="../assets/vamore-favicon-32.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Martian+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-<script defer src="https://js.tebex.io/v/1.js"></script>
+<link rel="stylesheet" href="../style.css">
 </head>
 <body>
 
 <header class="nav" id="nav">
   <div class="container nav-inner">
-    <a href="index.html" class="nav-logo">
+    <a href="../index.html" class="nav-logo">
       <svg width="26" height="26" viewBox="0 0 128 128" fill="none" aria-hidden="true">
         <defs><linearGradient id="vamMark" gradientUnits="userSpaceOnUse" x1="14" y1="104" x2="110" y2="20"><stop offset="0%" stop-color="#1450c8"></stop><stop offset="55%" stop-color="#1b8fc4"></stop><stop offset="100%" stop-color="#25c9b0"></stop></linearGradient></defs>
         <path d="M14 24 L27 54" stroke="url(#vamMark)" stroke-width="15"></path>
@@ -25,10 +24,10 @@
       <span>VAmore Systems</span>
     </a>
     <nav class="nav-links">
-      <a href="index.html#suite">Suite</a>
-      <a href="index.html#demo">Demo</a>
-      <a href="index.html#compare">Compare</a>
-      <a href="products.html">All Scripts</a>
+      <a href="../index.html#suite">Suite</a>
+      <a href="../index.html#demo">Demo</a>
+      <a href="../index.html#compare">Compare</a>
+      <a href="../products.html">All Scripts</a>
     </nav>
     <div class="nav-actions">
       <a href="#" class="pill" data-placeholder="true">discord</a>
@@ -38,26 +37,31 @@
 </header>
 
 <main id="top">
-  <section class="section products-head">
+  <section class="section product-detail-hero">
     <div class="container">
-      <span class="mono-label">sold individually · built to work together</span>
-      <h1>Every script. One ecosystem.</h1>
-      <!-- TODO: the shared item table/permissions/notifications claim below is a roadmap claim - only Banking is a real, shipped script today. Revisit once more of the lineup is real. -->
-      <p>Every script here stands on its own — buy exactly what your server needs. Add more later
-        and they already speak the same language: one item table, one permission model, one
-        Config Manager for every setting.</p>
-    </div>
-  </section>
-
-  <section class="section products-filter">
-    <div class="container">
-      <div class="category-tabs" id="category-tabs"></div>
-    </div>
-  </section>
-
-  <section class="section products-list">
-    <div class="container">
-      <div class="product-grid" id="product-grid"></div>
+      <a href="../products.html" class="mono-label product-back">&larr; All scripts</a>
+      <div class="flagship-panel">
+        <div class="flagship-image">
+          <span class="product-detail-monogram">I</span>
+        </div>
+        <div class="flagship-copy">
+          <span class="mono-label">economy · not yet available</span>
+          <h1>Invoices</h1>
+          <p>A standalone billing script, splitting VAmore Banking's invoicing feature out on its
+            own: create and pay invoices between any two IBANs, with automatic overdue tracking and
+            optional auto-deduction. Still in development — nothing here is purchasable yet.</p>
+          <div class="flagship-meta">
+            <span class="flagship-price">€25</span>
+            <span class="btn btn-secondary btn-disabled">Coming Soon</span>
+          </div>
+          <span class="product-detail-note">Price is a current estimate, not final.</span>
+          <div class="product-card-fw">
+            <span class="pill">ESX</span>
+            <span class="pill">QBCore</span>
+            <span class="pill">Qbox</span>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 </main>
@@ -74,7 +78,6 @@
         </svg>
         <span>VAmore Systems</span>
       </div>
-      <!-- TODO: placeholder claim — "maintained by the people who run a server on it" implies an existing operating server; confirm or rewrite before launch. -->
       <p>The whole server layer from one place, maintained by the people who run a server on it.</p>
       <div class="footer-socials">
         <a href="#" class="pill" data-placeholder="true">discord</a>
@@ -83,10 +86,10 @@
     </div>
     <div class="footer-col">
       <span class="footer-col-title">suite</span>
-      <a href="index.html#suite">Inventory</a>
-      <a href="index.html#suite">Phone</a>
-      <a href="index.html#suite">Housing</a>
-      <a href="products.html">All scripts</a>
+      <a href="../index.html#suite">Inventory</a>
+      <a href="../index.html#suite">Phone</a>
+      <a href="banking.html">Banking</a>
+      <a href="../products.html">All scripts</a>
     </div>
     <div class="footer-col">
       <span class="footer-col-title">resources</span>
@@ -112,6 +115,6 @@
   </div>
 </footer>
 
-<script src="script.js"></script>
+<script src="../script.js"></script>
 </body>
 </html>

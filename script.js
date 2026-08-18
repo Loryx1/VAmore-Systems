@@ -23,14 +23,15 @@ const SYSTEMS = [
     body: 'Multi-app phone sharing accounts and inventory with the rest of the suite. [Work In Progress]' },
   { slug: 'va-banking', name: 'Banking', price: '€40', fw: ['ESX', 'QBCore', 'Qbox'], category: 'economy',
     body: 'Accounts, transfers, business ledgers and ATMs. [Work In Progress]',
-    tebexPackageId: '7627622' },
+    tebexPackageId: '7627622', detailUrl: 'products/banking.html' },
   { slug: 'va-config', name: 'ConfigManager', price: '€0', fw: ['ESX', 'QBCore', 'Qbox'], category: 'core',
     body: 'Configuration management for the every script.',
-    tebexPackageId: '7627638' },
+    tebexPackageId: '7627638', detailUrl: 'products/configpanel.html' },
   { slug: 'va-jobs', name: 'Jobs', price: '€28', fw: ['ESX', 'QBCore', 'Qbox'], category: 'economy',
     body: 'Shifts, payroll and per-grade permissions shared across the suite. [Work In Progress]' },
   { slug: 'va-invoices', name: 'Invoices', price: '€25', fw: ['ESX', 'QBCore', 'Qbox'], category: 'economy',
-    body: 'Invoices and billing for services rendered. [Work In Progress]'},
+    body: 'Invoices and billing for services rendered. [Work In Progress]',
+    detailUrl: 'products/invoices.html' },
   { slug: 'va-garage', name: 'Garage', price: '€25', fw: ['ESX', 'QBCore', 'Qbox'], category: 'utility',
     body: 'Persistent vehicle storage with insurance and impound. [Work In Progress]' },
   { slug: 'va-admin', name: 'Admin', price: '€22', fw: ['ESX', 'QBCore', 'Qbox', 'Standalone'], category: 'admin',
@@ -71,11 +72,14 @@ async function buyOnTebex(packageId) {
   Tebex.checkout.launch();
 }
 
-function buyButtonHtml(system) {
-  if (!system.tebexPackageId) {
+// The grid/flagship cards only ever link to a product's detail page - the
+// actual Tebex purchase button (data-buy-package, wired below) lives only
+// on that detail page, not on every card.
+function detailButtonHtml(system) {
+  if (!system.detailUrl) {
     return '<span class="btn btn-secondary btn-disabled">Coming Soon</span>';
   }
-  return `<button type="button" class="btn btn-secondary" data-buy-package="${system.tebexPackageId}">Buy on Tebex</button>`;
+  return `<a href="${system.detailUrl}" class="btn btn-secondary">View Details</a>`;
 }
 
 document.addEventListener('click', (event) => {
@@ -103,7 +107,7 @@ function renderFlagshipPanels() {
         <p>${s.body}</p>
         <div class="flagship-meta">
           <span class="flagship-price">${s.price}</span>
-          ${buyButtonHtml(s)}
+          ${detailButtonHtml(s)}
         </div>
       </div>
     </div>`;
@@ -137,7 +141,7 @@ function productCardHtml(s) {
         </div>
       </div>
       <div class="product-card-foot">
-        ${buyButtonHtml(s)}
+        ${detailButtonHtml(s)}
       </div>
     </div>`;
 }

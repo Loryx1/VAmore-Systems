@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Banking — VAmore Systems</title>
+<link rel="icon" href="../assets/vamore-favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Martian+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<script type="module" src="https://unpkg.com/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
+<script defer src="https://js.tebex.io/v/1.js"></script>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg width="26" height="26" viewBox="0 0 128 128" fill="none" aria-hidden="true">
+        <defs><linearGradient id="vamMark" gradientUnits="userSpaceOnUse" x1="14" y1="104" x2="110" y2="20"><stop offset="0%" stop-color="#1450c8"></stop><stop offset="55%" stop-color="#1b8fc4"></stop><stop offset="100%" stop-color="#25c9b0"></stop></linearGradient></defs>
+        <path d="M14 24 L27 54" stroke="url(#vamMark)" stroke-width="15"></path>
+        <path d="M30.5 62 L46 98 L78 24 L110 98" stroke="url(#vamMark)" stroke-width="15" stroke-linejoin="miter"></path>
+        <path d="M50 74 H107" stroke="url(#vamMark)" stroke-width="15"></path>
+      </svg>
+      <span>VAmore Systems</span>
+    </a>
+    <nav class="nav-links">
+      <a href="../index.html#suite">Suite</a>
+      <a href="../index.html#demo">Demo</a>
+      <a href="../index.html#compare">Compare</a>
+      <a href="../products.html">All Scripts</a>
+    </nav>
+    <div class="nav-actions">
+      <a href="#" class="pill" data-placeholder="true">discord</a>
+      <a href="#" class="btn btn-primary" data-placeholder="true">Buy on Tebex</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="section product-detail-hero">
+    <div class="container">
+      <a href="../products.html" class="mono-label product-back">&larr; All scripts</a>
+      <div class="flagship-panel">
+        <div class="flagship-image">
+          <model-viewer src="../assets/glb/creditcard.glb" alt="Banking 3D model" orientation="90deg 30deg 0deg" auto-rotate rotation-per-second="8deg" auto-rotate-delay="0" camera-controls disable-zoom interaction-prompt="none" shadow-intensity="1"></model-viewer>
+        </div>
+        <div class="flagship-copy">
+          <span class="mono-label">economy · esx · qbcore · qbox</span>
+          <h1>Banking</h1>
+          <p>A complete, standalone banking &amp; economy system. Accounts, transfers, a stock and
+            crypto market, faction payroll, and a fraud-detection dashboard — one resource, no
+            framework-specific forks.</p>
+          <div class="flagship-meta">
+            <span class="flagship-price">€40</span>
+            <button type="button" class="btn btn-primary" data-buy-package="7627622">Buy on Tebex</button>
+          </div>
+          <div class="product-card-fw">
+            <span class="pill">ESX</span>
+            <span class="pill">QBCore</span>
+            <span class="pill">Qbox</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section features">
+    <div class="container features-grid">
+      <div class="feature reveal">
+        <span class="feature-icon">◆</span>
+        <h3>Core banking</h3>
+        <p>Automatic IBAN accounts, 4-digit PIN protection, ATM &amp; branch deposits/withdrawals,
+          IBAN-only transfers with contacts, and a fully filterable statement.</p>
+      </div>
+      <div class="feature reveal">
+        <span class="feature-icon">%</span>
+        <h3>Savings &amp; credit</h3>
+        <p>Tiered compounding savings interest with trackable goals, and an event-based credit
+          score with score-tiered loan limits and interest.</p>
+      </div>
+      <div class="feature reveal">
+        <span class="feature-icon">↗</span>
+        <h3>Stock &amp; crypto markets</h3>
+        <p>10 stocks and 5 coins on live, server-driven pricing engines, with price history charts
+          and take-profit/stop-loss orders.</p>
+      </div>
+      <div class="feature reveal">
+        <span class="feature-icon">⚑</span>
+        <h3>Faction accounts</h3>
+        <p>Job-bound accounts with grade-gated access, automatic per-grade salary payouts, and a
+          full accounting ledger — no manual member management.</p>
+      </div>
+      <div class="feature reveal">
+        <span class="feature-icon">⚙</span>
+        <h3>Admin dashboard</h3>
+        <p>Flagged high-value transactions, a suspicious-activity filter, Discord webhook alerts,
+          per-player rate limiting, and configurable daily caps.</p>
+      </div>
+      <div class="feature reveal">
+        <span class="feature-icon">✎</span>
+        <h3>No config.lua editing</h3>
+        <p>Every setting — from PIN lockouts to daily limits to which modules are enabled — is
+          controlled live through VAmore Config Manager. No restarts.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <div class="nav-logo">
+        <svg width="24" height="24" viewBox="0 0 128 128" fill="none" aria-hidden="true">
+          <defs><linearGradient id="vamMarkF" gradientUnits="userSpaceOnUse" x1="14" y1="104" x2="110" y2="20"><stop offset="0%" stop-color="#1450c8"></stop><stop offset="100%" stop-color="#25c9b0"></stop></linearGradient></defs>
+          <path d="M14 24 L27 54" stroke="url(#vamMarkF)" stroke-width="15"></path>
+          <path d="M30.5 62 L46 98 L78 24 L110 98" stroke="url(#vamMarkF)" stroke-width="15" stroke-linejoin="miter"></path>
+          <path d="M50 74 H107" stroke="url(#vamMarkF)" stroke-width="15"></path>
+        </svg>
+        <span>VAmore Systems</span>
+      </div>
+      <p>The whole server layer from one place, maintained by the people who run a server on it.</p>
+      <div class="footer-socials">
+        <a href="#" class="pill" data-placeholder="true">discord</a>
+        <a href="#" class="pill" data-placeholder="true">youtube</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <span class="footer-col-title">suite</span>
+      <a href="../index.html#suite">Inventory</a>
+      <a href="../index.html#suite">Phone</a>
+      <a href="banking.html">Banking</a>
+      <a href="../products.html">All scripts</a>
+    </div>
+    <div class="footer-col">
+      <span class="footer-col-title">resources</span>
+      <a href="#" data-placeholder="true">Documentation</a>
+      <a href="#" data-placeholder="true">Changelog</a>
+      <a href="#" data-placeholder="true">Framework bridges</a>
+      <a href="#" data-placeholder="true">Status</a>
+    </div>
+    <div class="footer-col">
+      <span class="footer-col-title">company</span>
+      <a href="#" data-placeholder="true">Support</a>
+      <a href="#" data-placeholder="true">Tebex store</a>
+      <a href="#" data-placeholder="true">Discord</a>
+      <a href="#" data-placeholder="true">Report misuse</a>
+    </div>
+  </div>
+  <div class="container footer-legal">
+    <span>© 2026 vamore systems</span>
+    <span>not affiliated with rockstar games or cfx.re</span>
+    <a href="#" data-placeholder="true">impressum</a>
+    <a href="#" data-placeholder="true">privacy</a>
+    <a href="#" data-placeholder="true">terms</a>
+  </div>
+</footer>
+
+<script src="../script.js"></script>
+</body>
+</html>
