@@ -1,5 +1,10 @@
 // TODO: slugs, names, prices and bodies below are placeholder content for a
 // still-fictional lineup — replace every entry with the real suite before launch.
+//
+// tebexPackageId: the package's numeric ID in the Tebex store (Packages list
+// in the Tebex Control Panel). Only set for scripts that are actually for
+// sale - undefined renders a disabled "Coming Soon" state instead of a Buy
+// button, matching the [Work In Progress] labels above.
 const SYSTEMS = [
   { slug: 'va-inventory', name: 'Inventory', price: '€35', fw: ['ESX', 'QBCore', 'Qbox'],
     body: 'Grid-slot inventory with real weight, stashes, shops and trunks. [Work In Progress]' },
@@ -8,7 +13,8 @@ const SYSTEMS = [
   { slug: 'va-housing', name: 'Housing', price: '€40', fw: ['QBCore', 'Qbox'],
     body: 'Buy, rent, furnish, hand over keys, persistent interiors. [Work In Progress]' },
   { slug: 'va-banking', name: 'Banking', price: '€30', fw: ['ESX', 'QBCore'],
-    body: 'Accounts, transfers, business ledgers and ATMs. [Work In Progress]' },
+    body: 'Accounts, transfers, business ledgers and ATMs. [Work In Progress]',
+    tebexPackageId: '7627622' },
   { slug: 'va-dispatch', name: 'Dispatch', price: '€32', fw: ['ESX', 'QBCore'],
     body: 'MDT, unit status and a live map for police and EMS. [Work In Progress]' },
   { slug: 'va-jobs', name: 'Jobs', price: '€28', fw: ['ESX', 'QBCore'],
@@ -24,6 +30,49 @@ const SYSTEMS = [
 ];
 
 const FLAGSHIP_SLUGS = ['va-banking', 'va-phone', 'va-housing', 'va-dispatch'];
+
+// Tebex Headless API: our storefront is this page, Tebex only handles the
+// actual checkout/payment. The public token identifies the store and is
+// safe to ship client-side (unlike the store's private key, which never
+// belongs in frontend code). See https://creator.tebex.io/developers/api-keys.
+const TEBEX_PUBLIC_TOKEN = '148lv-00fe39bf66eebb4de4bd960cef52ad1936dc0167';
+const TEBEX_API_BASE = `https://headless.tebex.io/api/accounts/${TEBEX_PUBLIC_TOKEN}`;
+
+async function buyOnTebex(packageId) {
+  const basketRes = await fetch(`${TEBEX_API_BASE}/baskets`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      complete_url: window.location.href,
+      cancel_url: window.location.href,
+    }),
+  });
+  if (!basketRes.ok) return;
+  const basket = (await basketRes.json()).data;
+
+  const addRes = await fetch(`${TEBEX_API_BASE}/baskets/${basket.ident}/packages`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ package_id: packageId, quantity: 1 }),
+  });
+  if (!addRes.ok) return;
+
+  Tebex.checkout.init({ ident: basket.ident, theme: 'auto' });
+  Tebex.checkout.launch();
+}
+
+function buyButtonHtml(system) {
+  if (!system.tebexPackageId) {
+    return '<span class="btn btn-secondary btn-disabled">Coming Soon</span>';
+  }
+  return `<button type="button" class="btn btn-secondary" data-buy-package="${system.tebexPackageId}">Buy on Tebex</button>`;
+}
+
+document.addEventListener('click', (event) => {
+  const btn = event.target.closest('[data-buy-package]');
+  if (!btn) return;
+  buyOnTebex(btn.dataset.buyPackage);
+});
 
 // NOTE: "product shot placeholder" labels below stand in for real PNG screenshots — replace before launch.
 function renderFlagshipPanels() {
@@ -44,7 +93,7 @@ function renderFlagshipPanels() {
         <p>${s.body}</p>
         <div class="flagship-meta">
           <span class="flagship-price">${s.price}</span>
-          <a href="#" class="btn btn-secondary" data-placeholder="true">Buy on Tebex</a>
+          ${buyButtonHtml(s)}
         </div>
       </div>
     </div>`;
@@ -65,7 +114,7 @@ function renderProductGrid() {
       <div class="product-card-fw">
         ${s.fw.map((f) => `<span class="pill">${f}</span>`).join('')}
       </div>
-      <a href="#" class="btn btn-secondary" data-placeholder="true">Buy on Tebex</a>
+      ${buyButtonHtml(s)}
     </div>`).join('');
 }
 

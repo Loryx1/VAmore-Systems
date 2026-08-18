@@ -63,11 +63,14 @@ a.pill:hover { color: var(--color-text); border-color: rgba(245, 247, 250, 0.4);
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  font-family: inherit;
   font-size: 15px;
   font-weight: 500;
   padding: 13px 24px;
   border-radius: var(--radius-pill);
   border: 1px solid transparent;
+  background: none;
+  text-decoration: none;
   cursor: pointer;
   transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
 }
@@ -75,6 +78,8 @@ a.pill:hover { color: var(--color-text); border-color: rgba(245, 247, 250, 0.4);
 .btn-primary:hover { background: var(--color-accent-teal-bright); color: var(--color-bg); }
 .btn-secondary { color: var(--color-text); border-color: var(--color-border-soft); }
 .btn-secondary:hover { border-color: var(--color-text); color: var(--color-text); }
+.btn-disabled { color: var(--color-text-muted); border-color: var(--color-border-soft); cursor: default; }
+.btn-disabled:hover { color: var(--color-text-muted); border-color: var(--color-border-soft); }
 
 .reveal { opacity: 0; }
 .reveal.is-visible { animation: vamIn 560ms ease both; }
