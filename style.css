@@ -203,20 +203,38 @@ a.pill:hover { color: var(--color-text); border-color: rgba(245, 247, 250, 0.4);
 .category-tab:hover { border-color: var(--color-border-soft); color: var(--color-text); }
 .category-tab.is-active { background: #fff; color: var(--color-bg); border-color: #fff; }
 
-.product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
+.product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 36px; }
 .product-card {
   border-radius: var(--radius-card); background: var(--color-surface); border: 1px solid var(--color-border);
   display: flex; flex-direction: column; overflow: hidden;
-  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+  transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
 }
-.product-card:hover { border-color: var(--color-border-soft); box-shadow: 0 0 28px rgba(37, 201, 176, 0.08); transform: translateY(-2px); }
+.product-card:hover { border-color: var(--color-border-soft); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35), 0 0 32px rgba(37, 201, 176, 0.12); transform: translateY(-4px); }
 .product-card.is-filtered-out { display: none; }
 
 .product-card-media {
-  position: relative; height: 190px; display: grid; place-items: center;
-  background: repeating-linear-gradient(135deg, rgba(245, 247, 250, 0.05) 0 13px, rgba(245, 247, 250, 0.015) 13px 26px);
+  position: relative; height: 190px; display: grid; place-items: center; overflow: hidden;
+  background: radial-gradient(circle at 30% 20%, rgba(20, 80, 200, 0.16), transparent 55%), var(--color-bg-alt);
 }
-.product-card-media span:first-child { font-family: var(--font-mono); font-size: 11px; color: var(--color-text-muted); text-align: center; padding: 0 16px; }
+/* Each category leans the shared brand gradient a different direction, so the
+   grid reads as one family with individual character instead of ten identical
+   stamps - no colors outside the existing teal/blue brand pair. */
+.product-card-monogram {
+  width: 76px; height: 76px; border-radius: 50%; display: grid; place-items: center;
+  font-family: var(--font-body); font-size: 30px; font-weight: 700; color: #fff;
+  background: linear-gradient(135deg, var(--color-accent-blue), var(--color-accent-teal-bright));
+  box-shadow: 0 0 0 rgba(37, 201, 176, 0); transition: transform 260ms ease, box-shadow 260ms ease;
+}
+.product-card:hover .product-card-monogram { transform: scale(1.08) rotate(-4deg); box-shadow: 0 0 34px rgba(37, 201, 176, 0.35); }
+.product-card[data-category="core"] .product-card-monogram { background: linear-gradient(135deg, var(--color-accent-teal-bright), var(--color-accent-teal)); }
+.product-card[data-category="economy"] .product-card-monogram { background: linear-gradient(135deg, var(--color-accent-blue), var(--color-accent-teal-bright)); }
+.product-card[data-category="safety"] .product-card-monogram { background: linear-gradient(135deg, var(--color-accent-blue), #2c6fe0); }
+.product-card[data-category="utility"] .product-card-monogram { background: linear-gradient(150deg, var(--color-accent-teal), var(--color-accent-blue)); }
+.product-card[data-category="admin"] .product-card-monogram { background: linear-gradient(120deg, #2c6fe0, var(--color-accent-teal-bright)); }
+.product-card-media-caption {
+  position: absolute; bottom: 10px; left: 0; right: 0; text-align: center;
+  font-family: var(--font-mono); font-size: 9.5px; color: var(--color-text-muted);
+}
 .product-card-status {
   position: absolute; top: 10px; right: 10px; font-family: var(--font-mono); font-size: 9.5px;
   padding: 5px 9px; border-radius: var(--radius-pill); border: 1px solid var(--color-border-soft);

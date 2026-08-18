@@ -123,7 +123,8 @@ function productCardHtml(s) {
   return `
     <div class="product-card reveal" data-category="${s.category}">
       <div class="product-card-media">
-        <span>${s.slug} · product shot [Work In Progress]</span>
+        <span class="product-card-monogram">${s.name.charAt(0)}</span>
+        <span class="product-card-media-caption">Artwork coming soon</span>
         <span class="product-card-status ${available ? 'is-available' : 'is-soon'}">${available ? 'Available Now' : 'Coming Soon'}</span>
       </div>
       <div class="product-card-body">
