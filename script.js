@@ -5,27 +5,38 @@
 // in the Tebex Control Panel). Only set for scripts that are actually for
 // sale - undefined renders a disabled "Coming Soon" state instead of a Buy
 // button, matching the [Work In Progress] labels above.
+//
+// category: which products-page filter tab the script sits under. Scripts
+// are sold individually, not as a suite - this is purely a browsing aid.
+const CATEGORIES = [
+  { id: 'core', label: 'Core' },
+  { id: 'economy', label: 'Economy' },
+  { id: 'safety', label: 'Public Safety' },
+  { id: 'utility', label: 'Utility' },
+  { id: 'admin', label: 'Admin' },
+];
+
 const SYSTEMS = [
-  { slug: 'va-inventory', name: 'Inventory', price: '€35', fw: ['ESX', 'QBCore', 'Qbox'],
+  { slug: 'va-inventory', name: 'Inventory', price: '€35', fw: ['ESX', 'QBCore', 'Qbox'], category: 'core',
     body: 'Grid-slot inventory with real weight, stashes, shops and trunks. [Work In Progress]' },
-  { slug: 'va-phone', name: 'Phone', price: '€45', fw: ['ESX', 'QBCore', 'Qbox'],
+  { slug: 'va-phone', name: 'Phone', price: '€45', fw: ['ESX', 'QBCore', 'Qbox'], category: 'core',
     body: 'Multi-app phone sharing accounts and inventory with the rest of the suite. [Work In Progress]' },
-  { slug: 'va-housing', name: 'Housing', price: '€40', fw: ['QBCore', 'Qbox'],
+  { slug: 'va-housing', name: 'Housing', price: '€40', fw: ['QBCore', 'Qbox'], category: 'core',
     body: 'Buy, rent, furnish, hand over keys, persistent interiors. [Work In Progress]' },
-  { slug: 'va-banking', name: 'Banking', price: '€30', fw: ['ESX', 'QBCore'],
+  { slug: 'va-banking', name: 'Banking', price: '€30', fw: ['ESX', 'QBCore'], category: 'economy',
     body: 'Accounts, transfers, business ledgers and ATMs. [Work In Progress]',
     tebexPackageId: '7627622' },
-  { slug: 'va-dispatch', name: 'Dispatch', price: '€32', fw: ['ESX', 'QBCore'],
+  { slug: 'va-dispatch', name: 'Dispatch', price: '€32', fw: ['ESX', 'QBCore'], category: 'safety',
     body: 'MDT, unit status and a live map for police and EMS. [Work In Progress]' },
-  { slug: 'va-jobs', name: 'Jobs', price: '€28', fw: ['ESX', 'QBCore'],
+  { slug: 'va-jobs', name: 'Jobs', price: '€28', fw: ['ESX', 'QBCore'], category: 'economy',
     body: 'Shifts, payroll and per-grade permissions shared across the suite. [Work In Progress]' },
-  { slug: 'va-garage', name: 'Garage', price: '€25', fw: ['ESX', 'QBCore'],
+  { slug: 'va-garage', name: 'Garage', price: '€25', fw: ['ESX', 'QBCore'], category: 'utility',
     body: 'Persistent vehicle storage with insurance and impound. [Work In Progress]' },
-  { slug: 'va-admin', name: 'Admin', price: '€22', fw: ['ESX', 'QBCore', 'Standalone'],
+  { slug: 'va-admin', name: 'Admin', price: '€22', fw: ['ESX', 'QBCore', 'Standalone'], category: 'admin',
     body: 'One menu across the whole suite: inventory, properties, accounts, tickets. [Work In Progress]' },
-  { slug: 'va-crafting', name: 'Crafting', price: '€18', fw: ['ESX', 'QBCore', 'Standalone'],
+  { slug: 'va-crafting', name: 'Crafting', price: '€18', fw: ['ESX', 'QBCore', 'Standalone'], category: 'economy',
     body: 'Blueprint crafting with skill levels, benches and durability. [Work In Progress]' },
-  { slug: 'va-fuel', name: 'Fuel', price: '€12', fw: ['Standalone'],
+  { slug: 'va-fuel', name: 'Fuel', price: '€12', fw: ['Standalone'], category: 'utility',
     body: 'Stations, jerrycans, electric charging and per-vehicle consumption. [Work In Progress]' }
 ];
 
@@ -100,22 +111,62 @@ function renderFlagshipPanels() {
   }).join('');
 }
 
+// The [Work In Progress] tag stays in the raw body text (used on the
+// homepage flagship panels too) - the product grid has its own status
+// badge instead, so it's stripped here only to avoid saying it twice.
+function stripWipTag(text) {
+  return text.replace(/\s*\[Work In Progress\]$/, '');
+}
+
+function productCardHtml(s) {
+  const available = !!s.tebexPackageId;
+  return `
+    <div class="product-card reveal" data-category="${s.category}">
+      <div class="product-card-media">
+        <span>${s.slug} · product shot [Work In Progress]</span>
+        <span class="product-card-status ${available ? 'is-available' : 'is-soon'}">${available ? 'Available Now' : 'Coming Soon'}</span>
+      </div>
+      <div class="product-card-body">
+        <div class="product-card-head">
+          <h3>${s.name}</h3>
+          <span class="product-card-price">${s.price}</span>
+        </div>
+        <p>${stripWipTag(s.body)}</p>
+        <div class="product-card-fw">
+          ${s.fw.map((f) => `<span class="pill">${f}</span>`).join('')}
+        </div>
+      </div>
+      <div class="product-card-foot">
+        ${buyButtonHtml(s)}
+      </div>
+    </div>`;
+}
+
+function renderCategoryTabs() {
+  const wrap = document.getElementById('category-tabs');
+  if (!wrap) return;
+  wrap.innerHTML = [
+    '<button type="button" class="category-tab is-active" data-category="all">All</button>',
+    ...CATEGORIES.map((c) => `<button type="button" class="category-tab" data-category="${c.id}">${c.label}</button>`),
+  ].join('');
+
+  wrap.addEventListener('click', (event) => {
+    const btn = event.target.closest('.category-tab');
+    if (!btn) return;
+    wrap.querySelectorAll('.category-tab').forEach((b) => b.classList.remove('is-active'));
+    btn.classList.add('is-active');
+
+    const category = btn.dataset.category;
+    document.querySelectorAll('#product-grid .product-card').forEach((card) => {
+      card.classList.toggle('is-filtered-out', category !== 'all' && card.dataset.category !== category);
+    });
+  });
+}
+
 function renderProductGrid() {
   const wrap = document.getElementById('product-grid');
   if (!wrap) return;
-  wrap.innerHTML = SYSTEMS.map((s) => `
-    <div class="product-card reveal">
-      <div class="product-card-head">
-        <span class="product-card-slug">${s.slug}</span>
-        <span class="product-card-price">${s.price}</span>
-      </div>
-      <h3>${s.name}</h3>
-      <p>${s.body}</p>
-      <div class="product-card-fw">
-        ${s.fw.map((f) => `<span class="pill">${f}</span>`).join('')}
-      </div>
-      ${buyButtonHtml(s)}
-    </div>`).join('');
+  wrap.innerHTML = SYSTEMS.map(productCardHtml).join('');
 }
 
 // NOTE: "2400×1240" in the label below is a placeholder resolution, not a real recording — see the <!-- TODO --> above the demo section in index.html.
@@ -204,6 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initHeroTypewriter();
   initNavScroll();
   renderProductGrid();
+  renderCategoryTabs();
   renderFlagshipPanels();
   initDemoChapters();
   initScrollReveal();
