@@ -4,19 +4,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Config Manager — VAmore Systems</title>
+<meta name="description" content="VAmore Config Manager for FiveM: one ACE-gated in-game panel with a tab per registered script. Settings apply live, no config.lua editing, one export to integrate.">
 <link rel="icon" href="../assets/vamore-favicon-32.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Martian+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Azeret+Mono:wght@400;500;600&family=Martian+Mono:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../style.css">
 <script defer src="https://js.tebex.io/v/1.js"></script>
 </head>
 <body>
 
-<header class="nav" id="nav">
-  <div class="container nav-inner">
-    <a href="../index.html" class="nav-logo">
-      <svg width="26" height="26" viewBox="0 0 128 128" fill="none" aria-hidden="true">
+<header class="bar">
+  <div class="wrap bar-inner">
+    <a href="../index.html" class="brand">
+      <svg width="22" height="22" viewBox="0 0 128 128" fill="none" aria-hidden="true">
         <defs><linearGradient id="vamMark" gradientUnits="userSpaceOnUse" x1="14" y1="104" x2="110" y2="20"><stop offset="0%" stop-color="#1450c8"></stop><stop offset="55%" stop-color="#1b8fc4"></stop><stop offset="100%" stop-color="#25c9b0"></stop></linearGradient></defs>
         <path d="M14 24 L27 54" stroke="url(#vamMark)" stroke-width="15"></path>
         <path d="M30.5 62 L46 98 L78 24 L110 98" stroke="url(#vamMark)" stroke-width="15" stroke-linejoin="miter"></path>
@@ -24,125 +25,134 @@
       </svg>
       <span>VAmore Systems</span>
     </a>
-    <nav class="nav-links">
-      <a href="../index.html#suite">Suite</a>
-      <a href="../index.html#demo">Demo</a>
-      <a href="../index.html#compare">Compare</a>
-      <a href="../products.html">All Scripts</a>
+    <nav class="bar-nav" aria-label="Main">
+      <a href="../index.html">./home</a>
+      <a href="../products.html">./scripts</a>
+      <a href="configpanel.html" aria-current="page" class="optional">./config-manager</a>
+      <a href="banking.html" class="optional">./banking</a>
     </nav>
-    <div class="nav-actions">
-      <a href="#" class="pill" data-placeholder="true">discord</a>
-      <a href="#" class="btn btn-primary" data-placeholder="true">Buy on Tebex</a>
-    </div>
+    <button type="button" class="cmd cmd-run bar-cta" data-buy-package="7627638"><span class="caret">&gt;</span>claim free</button>
   </div>
 </header>
 
-<main id="top">
-  <section class="section product-detail-hero">
-    <div class="container">
-      <a href="../products.html" class="mono-label product-back">&larr; All scripts</a>
-      <div class="flagship-panel">
-        <div class="flagship-image">
-          <span class="product-detail-monogram">C</span>
-        </div>
-        <div class="flagship-copy">
-          <span class="mono-label">core · esx · qbcore · qbox · standalone</span>
+<main>
+  <section class="band">
+    <div class="wrap">
+      <a href="../products.html" class="back-link">
+        <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3.5 5.5 8l4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        all scripts
+      </a>
+
+      <div class="detail-head" style="margin-top:22px">
+        <div class="detail-title">
           <h1>Config Manager</h1>
-          <p>One in-game panel to configure every script on your server — no more editing `.lua`
-            files by hand. Any script can register its settings with one export call; Config
-            Manager builds the UI, storage, and live updates for free.</p>
-          <div class="flagship-meta">
-            <span class="flagship-price">€0</span>
-            <button type="button" class="btn btn-primary" data-buy-package="7627638">Claim for Free</button>
-          </div>
-          <span class="product-detail-note">Free — requires owning at least one other VAmore script.</span>
-          <div class="product-card-fw">
-            <span class="pill">ESX</span>
-            <span class="pill">QBCore</span>
-            <span class="pill">Qbox</span>
-            <span class="pill">Standalone</span>
-          </div>
+          <span class="mono" style="color:var(--ok);align-self:center">[ running ]</span>
+        </div>
+        <p class="lede">One in-game panel to configure every VAmore script on your server. Any script
+          registers its settings with a single export call; Config Manager builds the interface,
+          the storage and the live updates around it.</p>
+
+        <div class="detail-buy">
+          <span class="detail-price">free</span>
+          <span class="note">requires owning at least one other VAmore script · ESX · QBCore · Qbox · standalone</span>
+          <button type="button" class="cmd cmd-run" data-buy-package="7627638"><span class="caret">&gt;</span>claim on Tebex</button>
+        </div>
+
+        <div class="detail-media">
+          <video src="../assets/vid/admin-panel-demo.mp4" data-start="6" autoplay muted loop playsinline aria-label="The Config Manager panel being used in game" style="width:100%"></video>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section features">
-    <div class="container features-grid">
-      <div class="feature reveal">
-        <span class="feature-icon">◆</span>
-        <h3>One panel, every script</h3>
-        <p>`/vamoreconfig` opens a single ACE-gated panel with one tab per registered script,
-          settings grouped into clearly labeled sections.</p>
+  <section class="band band-rule">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>What it replaces.</h2>
+        <span class="section-path">vamore_configpanel — /vamoreconfig</span>
       </div>
-      <div class="feature reveal">
-        <span class="feature-icon">✎</span>
-        <h3>Change settings, not code</h3>
-        <p>Sliders and inputs replace manually editing `config.lua`. Every change applies live —
-          no restart, no resource reload.</p>
-      </div>
-      <div class="feature reveal">
-        <span class="feature-icon">⚑</span>
-        <h3>Location management built in</h3>
-        <p>"Add here" places a point at your exact position. "Delete here" removes whichever point
-          is nearest, with a clear error if nothing's in range.</p>
-      </div>
-      <div class="feature reveal">
-        <span class="feature-icon">⚙</span>
-        <h3>Built for developers</h3>
-        <p>Any script registers its schema with one export call — no core changes needed, and
-          fully backward compatible if a script doesn't integrate at all.</p>
+      <ul class="ledger">
+        <li><span class="k">one panel</span><span class="v"><span class="mono">/vamoreconfig</span> opens a single ACE-gated panel with one tab per registered
+          script, settings grouped into clearly labelled sections.</span></li>
+        <li><span class="k">settings, not code</span><span class="v">Sliders and inputs replace hand-editing <span class="mono">config.lua</span>. Every change applies
+          <strong>live</strong>: no restart, no resource reload.</span></li>
+        <li><span class="k">locations</span><span class="v"><em>Add here</em> places a point at your exact position. <em>Delete here</em> removes the
+          nearest one, with a clear error when nothing is in range.</span></li>
+        <li><span class="k">for developers</span><span class="v">A script registers its schema with one export call, with no core changes, and stays
+          backward compatible when a script does not integrate at all.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="band band-rule">
+    <div class="wrap">
+      <div class="split">
+        <div class="split-copy">
+          <h2>Why it is free.</h2>
+          <p>Config Manager is the surface the rest of the catalogue plugs into. Charging for it would
+            mean charging twice for the same script's settings, so it costs nothing. It just needs at
+            least one other VAmore script installed to have something to configure.</p>
+        </div>
+        <div>
+          <ul class="specs" style="margin-top:0">
+            <li><span class="k">command</span><span class="v"><strong>/vamoreconfig</strong></span></li>
+            <li><span class="k">access</span><span class="v">ACE permission, server-side gated</span></li>
+            <li><span class="k">applies</span><span class="v"><strong>live</strong>, no restart</span></li>
+            <li><span class="k">integration</span><span class="v">one export call per script</span></li>
+            <li><span class="k">frameworks</span><span class="v">ESX · QBCore · Qbox · standalone</span></li>
+            <li><span class="k">price</span><span class="v"><strong>free</strong></span></li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
 </main>
 
-<footer class="footer">
-  <div class="container footer-grid">
-    <div class="footer-brand">
-      <div class="nav-logo">
-        <svg width="24" height="24" viewBox="0 0 128 128" fill="none" aria-hidden="true">
-          <defs><linearGradient id="vamMarkF" gradientUnits="userSpaceOnUse" x1="14" y1="104" x2="110" y2="20"><stop offset="0%" stop-color="#1450c8"></stop><stop offset="100%" stop-color="#25c9b0"></stop></linearGradient></defs>
-          <path d="M14 24 L27 54" stroke="url(#vamMarkF)" stroke-width="15"></path>
-          <path d="M30.5 62 L46 98 L78 24 L110 98" stroke="url(#vamMarkF)" stroke-width="15" stroke-linejoin="miter"></path>
-          <path d="M50 74 H107" stroke="url(#vamMarkF)" stroke-width="15"></path>
-        </svg>
-        <span>VAmore Systems</span>
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="../index.html" class="brand">
+          <svg width="20" height="20" viewBox="0 0 128 128" fill="none" aria-hidden="true">
+            <defs><linearGradient id="vamMarkF" gradientUnits="userSpaceOnUse" x1="14" y1="104" x2="110" y2="20"><stop offset="0%" stop-color="#1450c8"></stop><stop offset="100%" stop-color="#25c9b0"></stop></linearGradient></defs>
+            <path d="M14 24 L27 54" stroke="url(#vamMarkF)" stroke-width="15"></path>
+            <path d="M30.5 62 L46 98 L78 24 L110 98" stroke="url(#vamMarkF)" stroke-width="15" stroke-linejoin="miter"></path>
+            <path d="M50 74 H107" stroke="url(#vamMarkF)" stroke-width="15"></path>
+          </svg>
+          <span>VAmore Systems</span>
+        </a>
+        <p>FiveM server scripts for ESX, QBCore and Qbox, configured from one in-game panel.</p>
       </div>
-      <p>The whole server layer from one place, maintained by the people who run a server on it.</p>
-      <div class="footer-socials">
-        <a href="#" class="pill" data-placeholder="true">discord</a>
-        <a href="#" class="pill" data-placeholder="true">youtube</a>
+      <div class="foot-col">
+        <span class="title">scripts</span>
+        <a href="configpanel.html">Config Manager</a>
+        <a href="banking.html">Banking</a>
+        <a href="invoices.html">Invoices</a>
+        <a href="../products.html">All scripts</a>
+      </div>
+      <div class="foot-col">
+        <span class="title">resources</span>
+        <!-- TODO: replace with real URLs once they exist (docs, changelog, status). -->
+        <span class="pending">Documentation</span>
+        <span class="pending">Changelog</span>
+        <span class="pending">Status</span>
+      </div>
+      <div class="foot-col">
+        <span class="title">contact</span>
+        <!-- TODO: replace with the real Discord invite and Tebex storefront URL. -->
+        <span class="pending">Discord</span>
+        <span class="pending">Tebex store</span>
+        <span class="pending">Support</span>
       </div>
     </div>
-    <div class="footer-col">
-      <span class="footer-col-title">suite</span>
-      <a href="../index.html#suite">Inventory</a>
-      <a href="../index.html#suite">Phone</a>
-      <a href="banking.html">Banking</a>
-      <a href="../products.html">All scripts</a>
+    <div class="foot-legal">
+      <span>© <span data-year>2026</span> VAmore Systems</span>
+      <span>not affiliated with Rockstar Games or Cfx.re</span>
+      <!-- TODO: legal pages required before commercial launch in Germany (Impressum, privacy, terms). -->
+      <span class="pending">Impressum</span>
+      <span class="pending">Privacy</span>
+      <span class="pending">Terms</span>
     </div>
-    <div class="footer-col">
-      <span class="footer-col-title">resources</span>
-      <a href="#" data-placeholder="true">Documentation</a>
-      <a href="#" data-placeholder="true">Changelog</a>
-      <a href="#" data-placeholder="true">Framework bridges</a>
-      <a href="#" data-placeholder="true">Status</a>
-    </div>
-    <div class="footer-col">
-      <span class="footer-col-title">company</span>
-      <a href="#" data-placeholder="true">Support</a>
-      <a href="#" data-placeholder="true">Tebex store</a>
-      <a href="#" data-placeholder="true">Discord</a>
-      <a href="#" data-placeholder="true">Report misuse</a>
-    </div>
-  </div>
-  <div class="container footer-legal">
-    <span>© 2026 vamore systems</span>
-    <span>not affiliated with rockstar games or cfx.re</span>
-    <a href="#" data-placeholder="true">impressum</a>
-    <a href="#" data-placeholder="true">privacy</a>
-    <a href="#" data-placeholder="true">terms</a>
   </div>
 </footer>
 

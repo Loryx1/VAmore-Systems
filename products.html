@@ -3,20 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>VAmore Systems — All scripts</title>
+<title>All scripts — VAmore Systems</title>
+<meta name="description" content="Every VAmore Systems resource with its current state: what is running and purchasable today, and what is still building.">
 <link rel="icon" href="assets/vamore-favicon-32.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Martian+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Azeret+Mono:wght@400;500;600&family=Martian+Mono:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <script defer src="https://js.tebex.io/v/1.js"></script>
 </head>
 <body>
 
-<header class="nav" id="nav">
-  <div class="container nav-inner">
-    <a href="index.html" class="nav-logo">
-      <svg width="26" height="26" viewBox="0 0 128 128" fill="none" aria-hidden="true">
+<header class="bar">
+  <div class="wrap bar-inner">
+    <a href="index.html" class="brand">
+      <svg width="22" height="22" viewBox="0 0 128 128" fill="none" aria-hidden="true">
         <defs><linearGradient id="vamMark" gradientUnits="userSpaceOnUse" x1="14" y1="104" x2="110" y2="20"><stop offset="0%" stop-color="#1450c8"></stop><stop offset="55%" stop-color="#1b8fc4"></stop><stop offset="100%" stop-color="#25c9b0"></stop></linearGradient></defs>
         <path d="M14 24 L27 54" stroke="url(#vamMark)" stroke-width="15"></path>
         <path d="M30.5 62 L46 98 L78 24 L110 98" stroke="url(#vamMark)" stroke-width="15" stroke-linejoin="miter"></path>
@@ -24,91 +25,88 @@
       </svg>
       <span>VAmore Systems</span>
     </a>
-    <nav class="nav-links">
-      <a href="index.html#suite">Suite</a>
-      <a href="index.html#demo">Demo</a>
-      <a href="index.html#compare">Compare</a>
-      <a href="products.html">All Scripts</a>
+    <nav class="bar-nav" aria-label="Main">
+      <a href="index.html">./home</a>
+      <a href="products.html" aria-current="page">./scripts</a>
+      <a href="index.html#config" class="optional">./config-manager</a>
+      <a href="products/banking.html" class="optional">./banking</a>
     </nav>
-    <div class="nav-actions">
-      <a href="#" class="pill" data-placeholder="true">discord</a>
-      <a href="#" class="btn btn-primary" data-placeholder="true">Buy on Tebex</a>
-    </div>
+    <a href="products/banking.html" class="cmd cmd-run bar-cta"><span class="caret">&gt;</span>buy banking</a>
   </div>
 </header>
 
-<main id="top">
-  <section class="section products-head">
-    <div class="container">
-      <span class="mono-label">sold individually · built to work together</span>
-      <h1>Every script. One ecosystem.</h1>
-      <!-- TODO: the shared item table/permissions/notifications claim below is a roadmap claim - only Banking is a real, shipped script today. Revisit once more of the lineup is real. -->
-      <p>Every script here stands on its own — buy exactly what your server needs. Add more later
-        and they already speak the same language: one item table, one permission model, one
-        Config Manager for every setting.</p>
-    </div>
-  </section>
+<main>
+  <section class="band">
+    <div class="wrap">
+      <h1>Every script. One config surface.</h1>
+      <p class="lede" style="margin-top:20px">Each resource stands on its own: buy exactly the one your
+        server needs. Add another later and it registers into the same Config Manager, with the same
+        permission model and the same support inbox. Two are purchasable today; the rest say so plainly.</p>
 
-  <section class="section products-filter">
-    <div class="container">
-      <div class="category-tabs" id="category-tabs"></div>
-    </div>
-  </section>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:center;margin:34px 0 18px">
+        <div class="filters" id="filters">
+          <button type="button" class="filter is-on" data-filter="all">all</button>
+          <button type="button" class="filter" data-filter="running">--running</button>
+          <button type="button" class="filter" data-filter="building">--building</button>
+        </div>
+        <button type="button" class="verbose" id="verbose-toggle" aria-pressed="false"
+                aria-label="Toggle verbose resource details" style="margin-left:auto"></button>
+      </div>
 
-  <section class="section products-list">
-    <div class="container">
-      <div class="product-grid" id="product-grid"></div>
+      <div class="resources" id="resource-table"></div>
+
+      <p class="lede" style="margin-top:24px">Prices are one-time, per server, through Tebex. Anything
+        marked <span class="mono">building</span> has no package and no release date. When it ships,
+        this table changes and nothing else has to.</p>
     </div>
   </section>
 </main>
 
-<footer class="footer">
-  <div class="container footer-grid">
-    <div class="footer-brand">
-      <div class="nav-logo">
-        <svg width="24" height="24" viewBox="0 0 128 128" fill="none" aria-hidden="true">
-          <defs><linearGradient id="vamMarkF" gradientUnits="userSpaceOnUse" x1="14" y1="104" x2="110" y2="20"><stop offset="0%" stop-color="#1450c8"></stop><stop offset="100%" stop-color="#25c9b0"></stop></linearGradient></defs>
-          <path d="M14 24 L27 54" stroke="url(#vamMarkF)" stroke-width="15"></path>
-          <path d="M30.5 62 L46 98 L78 24 L110 98" stroke="url(#vamMarkF)" stroke-width="15" stroke-linejoin="miter"></path>
-          <path d="M50 74 H107" stroke="url(#vamMarkF)" stroke-width="15"></path>
-        </svg>
-        <span>VAmore Systems</span>
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="index.html" class="brand">
+          <svg width="20" height="20" viewBox="0 0 128 128" fill="none" aria-hidden="true">
+            <defs><linearGradient id="vamMarkF" gradientUnits="userSpaceOnUse" x1="14" y1="104" x2="110" y2="20"><stop offset="0%" stop-color="#1450c8"></stop><stop offset="100%" stop-color="#25c9b0"></stop></linearGradient></defs>
+            <path d="M14 24 L27 54" stroke="url(#vamMarkF)" stroke-width="15"></path>
+            <path d="M30.5 62 L46 98 L78 24 L110 98" stroke="url(#vamMarkF)" stroke-width="15" stroke-linejoin="miter"></path>
+            <path d="M50 74 H107" stroke="url(#vamMarkF)" stroke-width="15"></path>
+          </svg>
+          <span>VAmore Systems</span>
+        </a>
+        <p>FiveM server scripts for ESX, QBCore and Qbox, configured from one in-game panel.</p>
       </div>
-      <!-- TODO: placeholder claim — "maintained by the people who run a server on it" implies an existing operating server; confirm or rewrite before launch. -->
-      <p>The whole server layer from one place, maintained by the people who run a server on it.</p>
-      <div class="footer-socials">
-        <a href="#" class="pill" data-placeholder="true">discord</a>
-        <a href="#" class="pill" data-placeholder="true">youtube</a>
+      <div class="foot-col">
+        <span class="title">scripts</span>
+        <a href="products/configpanel.html">Config Manager</a>
+        <a href="products/banking.html">Banking</a>
+        <a href="products/invoices.html">Invoices</a>
+        <a href="products.html">All scripts</a>
+      </div>
+      <div class="foot-col">
+        <span class="title">resources</span>
+        <!-- TODO: replace with real URLs once they exist (docs, changelog, status). -->
+        <span class="pending">Documentation</span>
+        <span class="pending">Changelog</span>
+        <span class="pending">Status</span>
+      </div>
+      <div class="foot-col">
+        <span class="title">contact</span>
+        <!-- TODO: replace with the real Discord invite and Tebex storefront URL. -->
+        <span class="pending">Discord</span>
+        <span class="pending">Tebex store</span>
+        <span class="pending">Support</span>
       </div>
     </div>
-    <div class="footer-col">
-      <span class="footer-col-title">suite</span>
-      <a href="index.html#suite">Inventory</a>
-      <a href="index.html#suite">Phone</a>
-      <a href="index.html#suite">Housing</a>
-      <a href="products.html">All scripts</a>
+    <div class="foot-legal">
+      <span>© <span data-year>2026</span> VAmore Systems</span>
+      <span>not affiliated with Rockstar Games or Cfx.re</span>
+      <!-- TODO: legal pages required before commercial launch in Germany (Impressum, privacy, terms). -->
+      <span class="pending">Impressum</span>
+      <span class="pending">Privacy</span>
+      <span class="pending">Terms</span>
     </div>
-    <div class="footer-col">
-      <span class="footer-col-title">resources</span>
-      <a href="#" data-placeholder="true">Documentation</a>
-      <a href="#" data-placeholder="true">Changelog</a>
-      <a href="#" data-placeholder="true">Framework bridges</a>
-      <a href="#" data-placeholder="true">Status</a>
-    </div>
-    <div class="footer-col">
-      <span class="footer-col-title">company</span>
-      <a href="#" data-placeholder="true">Support</a>
-      <a href="#" data-placeholder="true">Tebex store</a>
-      <a href="#" data-placeholder="true">Discord</a>
-      <a href="#" data-placeholder="true">Report misuse</a>
-    </div>
-  </div>
-  <div class="container footer-legal">
-    <span>© 2026 vamore systems</span>
-    <span>not affiliated with rockstar games or cfx.re</span>
-    <a href="#" data-placeholder="true">impressum</a>
-    <a href="#" data-placeholder="true">privacy</a>
-    <a href="#" data-placeholder="true">terms</a>
   </div>
 </footer>
 

@@ -3,21 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>VAmore Systems — FiveM scripts that talk to each other</title>
+<title>VAmore Systems — FiveM scripts that share one config panel</title>
+<meta name="description" content="FiveM server scripts for ESX, QBCore and Qbox. Every VAmore script registers into one in-game Config Manager, so you configure by panel instead of editing config.lua.">
 <link rel="icon" href="assets/vamore-favicon-32.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Martian+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Azeret+Mono:wght@400;500;600&family=Martian+Mono:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-<script type="module" src="https://unpkg.com/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
 <script defer src="https://js.tebex.io/v/1.js"></script>
 </head>
 <body>
 
-<header class="nav" id="nav">
-  <div class="container nav-inner">
-    <a href="#top" class="nav-logo">
-      <svg width="26" height="26" viewBox="0 0 128 128" fill="none" aria-hidden="true">
+<header class="bar">
+  <div class="wrap bar-inner">
+    <a href="index.html" class="brand">
+      <svg width="22" height="22" viewBox="0 0 128 128" fill="none" aria-hidden="true">
         <defs><linearGradient id="vamMark" gradientUnits="userSpaceOnUse" x1="14" y1="104" x2="110" y2="20"><stop offset="0%" stop-color="#1450c8"></stop><stop offset="55%" stop-color="#1b8fc4"></stop><stop offset="100%" stop-color="#25c9b0"></stop></linearGradient></defs>
         <path d="M14 24 L27 54" stroke="url(#vamMark)" stroke-width="15"></path>
         <path d="M30.5 62 L46 98 L78 24 L110 98" stroke="url(#vamMark)" stroke-width="15" stroke-linejoin="miter"></path>
@@ -25,207 +25,205 @@
       </svg>
       <span>VAmore Systems</span>
     </a>
-    <nav class="nav-links">
-      <a href="#suite">Suite</a>
-      <a href="#demo">Demo</a>
-      <a href="#compare">Compare</a>
-      <a href="products.html">All Scripts</a>
+    <nav class="bar-nav" aria-label="Main">
+      <a href="index.html" aria-current="page">./home</a>
+      <a href="products.html">./scripts</a>
+      <a href="#config" class="optional">./config-manager</a>
+      <a href="products/banking.html" class="optional">./banking</a>
     </nav>
-    <div class="nav-actions">
-      <a href="#" class="pill" data-placeholder="true">discord</a>
-      <a href="#" class="btn btn-primary" data-placeholder="true">Buy on Tebex</a>
-    </div>
+    <a href="products/banking.html" class="cmd bar-cta"><span class="caret">&gt;</span>buy banking</a>
   </div>
 </header>
 
-<main id="top">
-  <section class="section hero">
-    <div class="container hero-inner">
-      <h1 id="hero-headline"><span id="hero-type-text">VAmore Systems</span><span class="type-cursor" id="hero-cursor-1" aria-hidden="true"></span></h1>
-      <p class="hero-sub"><span id="hero-type-subtext">One panel to rule them all</span><span class="type-cursor" id="hero-cursor-2" aria-hidden="true"></span></p>
-      <p>Most servers stitch a phone from one vendor onto an inventory from another and spend
-        the season fixing the seam. VAmore is growing into that one suite — every script wired
-        to a single Config Manager, no config.lua editing required.</p>
-      <div class="hero-cta">
-        <a href="#suite" class="btn btn-primary">View the suite</a>
-        <a href="#demo" class="btn btn-secondary">See how it runs</a>
+<main>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="console">
+        <div class="console-bar">
+          <span class="path">vamore@systems</span>
+          <span>~/server/resources</span>
+          <span class="spacer">esx · qbcore · qbox</span>
+        </div>
+        <div class="console-body hero-grid">
+          <div>
+          <div class="log" id="boot-log">
+            <h1 class="log-line hero-line"><span id="boot-headline">VAmore Systems</span><span class="type-cursor" id="boot-cursor" aria-hidden="true"></span></h1>
+            <div class="log-line"><span class="dim" id="boot-sub">One panel to rule them all.</span></div>
+            <div class="log-line is-blank"><span></span></div>
+            <div class="log-line" data-print><span><span class="flag">[ ok ]</span> <span class="lit">vamore_configpanel</span> <span class="dim">registered · free</span></span></div>
+            <div class="log-line" data-print><span><span class="flag">[ ok ]</span> <span class="lit">vamore_banking</span> <span class="dim">registered · €40</span></span></div>
+            <div class="log-line" data-print><span><span class="flag-build">[ .. ]</span> <span class="lit">vamore_invoices</span> <span class="dim">building</span></span></div>
+            <div class="log-line" data-print><span><span class="flag-build">[ .. ]</span> <span class="lit">vamore_restaurants</span> <span class="dim">building</span></span></div>
+            <div class="log-line is-blank" data-print><span></span></div>
+            <div class="log-line log-action" data-print><span><a href="products/banking.html" class="cmd cmd-run"><span class="caret">&gt;</span>buy banking</a> <span class="dim">€40, one-time</span></span></div>
+            <div class="log-line log-action" data-print><span><a href="products.html" class="cmd"><span class="caret">&gt;</span>list scripts</a> <a href="#config" class="cmd"><span class="caret">&gt;</span>see the panel</a></span></div>
+          </div>
+
+          <p class="hero-claim">Two scripts you can run tonight, two more in the workshop. Each one is
+            standalone, and each one registers its settings into the same in-game Config Manager,
+            so a server owner changes behaviour with inputs and sliders instead of opening
+            <span class="mono">config.lua</span>.</p>
+          </div>
+
+          <aside class="hero-side">
+            <ul class="specs">
+              <li><span class="k">running</span><span class="v"><strong>2</strong> purchasable today</span></li>
+              <li><span class="k">building</span><span class="v"><strong>2</strong> in development</span></li>
+              <li><span class="k">frameworks</span><span class="v">ESX · QBCore · Qbox</span></li>
+              <li><span class="k">config</span><span class="v"><strong>/vamoreconfig</strong>, one panel</span></li>
+              <li><span class="k">licence</span><span class="v">one-time, per server</span></li>
+              <li><span class="k">checkout</span><span class="v">Tebex</span></li>
+            </ul>
+          </aside>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- TODO: this Admin Panel section markets a feature that doesn't exist yet — confirm real ship status/timeline before launch. -->
-  <section class="section admin-panel">
-    <div class="container admin-panel-inner">
-      <div class="admin-panel-copy">
-        <span class="mono-label">no config.lua required · in development</span>
-        <h2>Every setting, one panel.</h2>
-        <p>Every script in the suite gets its own tab in a shared Config Manager. Change settings
-          with buttons and input fields instead of editing Lua files by hand — no coding
-          knowledge needed.</p>
-        <div class="admin-panel-facts">
-          <span class="pill">one panel, every script</span>
-          <span class="pill">buttons and forms, not code</span>
-          <span class="pill">no restart required</span>
-        </div>
+  <section class="band band-rule" id="scripts">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Every resource, and what state it is in.</h2>
+        <span class="section-path">~/resources — 2 running, 2 building</span>
       </div>
-      <div class="admin-panel-image reveal">
-        <video src="assets/vid/admin-panel-demo.mp4" autoplay muted loop playsinline></video>
+      <div style="display:flex;justify-content:flex-end;margin:-14px 0 16px">
+        <button type="button" class="verbose" id="verbose-toggle" aria-pressed="false"
+                aria-label="Toggle verbose resource details"></button>
+      </div>
+      <div class="resources" id="resource-table"></div>
+      <p class="lede" style="margin-top:20px">Scripts are sold individually through Tebex. Buying one
+        does not commit you to the next; it just means the next one already knows how to configure itself.</p>
+    </div>
+  </section>
+
+  <section class="band band-rule" id="config">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Configuration is a panel, not a file.</h2>
+        <span class="section-path">vamore_configpanel — free</span>
+      </div>
+      <div class="split">
+        <div class="split-media">
+          <video src="assets/vid/admin-panel-demo.mp4" data-start="6" autoplay muted loop playsinline aria-label="The Config Manager panel being used in game"></video>
+        </div>
+        <div class="split-copy">
+          <p><span class="mono">/vamoreconfig</span> opens one ACE-gated panel with a tab per registered
+            script. Sliders and inputs replace hand-editing Lua, and changes apply live: no restart,
+            no syntax error at 2am because a comma went missing.</p>
+          <p>Location settings work the same way: <em>Add here</em> drops a point at your exact position,
+            <em>Delete here</em> removes the nearest one. No coordinate hunting.</p>
+          <ul class="specs">
+            <li><span class="k">access</span><span class="v">ACE permission, <strong>server-side gated</strong></span></li>
+            <li><span class="k">registration</span><span class="v">one export call, <strong>no core edits</strong></span></li>
+            <li><span class="k">applies</span><span class="v"><strong>live</strong>, without a resource restart</span></li>
+            <li><span class="k">frameworks</span><span class="v">ESX · QBCore · Qbox</span></li>
+            <li><span class="k">price</span><span class="v"><strong>free</strong>. It is what the rest plugs into</span></li>
+          </ul>
+          <div class="hero-actions" style="padding-left:0;margin-top:24px">
+            <a href="products/configpanel.html" class="cmd"><span class="caret">&gt;</span>open configpanel</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="section features">
-    <div class="container features-grid">
-      <div class="feature reveal">
-        <span class="feature-icon">↻</span>
-        <h3>Regular updates</h3>
-        <!-- TODO: placeholder service claim — confirm real update cadence before launch -->
-        <p>Continuous improvements across the suite.</p>
+  <section class="band band-rule" id="banking">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Banking, in six modules.</h2>
+        <span class="section-path">vamore_banking — €40 · running</span>
       </div>
-      <div class="feature reveal">
-        <span class="feature-icon">◆</span>
-        <h3>Active support</h3>
-        <!-- TODO: placeholder service claim — confirm real support commitment before launch -->
-        <p>We're here when something breaks.</p>
-      </div>
-      <div class="feature reveal">
-        <span class="feature-icon">X</span>
-        <h3>Systems, one codebase</h3>
-        <!-- TODO: placeholder architecture claim — the shared item table/permissions/notifications integration doesn't exist yet since the lineup itself is still placeholder. Confirm before launch. -->
-        <p>Every system in the suite shares the same item table, permissions and notifications.</p>
+      <ul class="ledger">
+        <li><span class="k">accounts</span><span class="v">Automatic IBANs, 4-digit PIN protection, ATM and branch deposits and withdrawals.</span></li>
+        <li><span class="k">savings + credit</span><span class="v">Tiered compounding interest with trackable goals, plus an event-based credit system.</span></li>
+        <li><span class="k">markets</span><span class="v"><strong>10</strong> stocks and <strong>5</strong> coins on server-driven pricing engines, with price history charts.</span></li>
+        <li><span class="k">faction accounts</span><span class="v">Job-bound accounts with grade-gated access and automatic per-grade salary payouts.</span></li>
+        <li><span class="k">fraud dashboard</span><span class="v">Flagged high-value transactions, a suspicious-activity filter, Discord webhook alerts.</span></li>
+        <li><span class="k">configuration</span><span class="v">PIN lockouts, daily limits, which modules run at all: every one of them is a panel setting.</span></li>
+      </ul>
+      <div class="hero-actions" style="padding-left:0">
+        <a href="products/banking.html" class="cmd cmd-run"><span class="caret">&gt;</span>open banking</a>
       </div>
     </div>
   </section>
 
-  <section id="suite" class="section suite">
-    <div class="container suite-inner">
-      <div class="suite-head">
-        <h2>What's in the suite.</h2>
-        <span class="mono-label">four systems, up close</span>
+  <section class="band band-rule">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>What one vendor actually buys you.</h2>
+        <span class="section-path">honest version</span>
       </div>
-      <div class="flagship-list" id="flagship-list"></div>
-      <a href="products.html" class="btn btn-secondary suite-view-all">View all scripts</a>
-    </div>
-  </section>
-
-  <section id="demo" class="section demo">
-    <div class="container demo-inner">
-      <!-- TODO: this whole demo block (headline, subcopy, video resolution, chapter timestamps) describes a specific recording that doesn't exist yet — replace once a real demo video is recorded -->
-      <div class="demo-head">
-        <h2>Eleven minutes, one server, nothing cut.</h2>
-        <p>Recorded on a Saturday night with 61 players online. Jump to whichever system you were
-          going to ask about anyway. [Work In Progress]</p>
-      </div>
-      <div class="demo-video reveal">
-        <span id="demo-video-label">demo video · 2400×1240 · 00:00 boot</span>
-      </div>
-      <div class="demo-chapters" id="demo-chapters">
-        <button class="chapter-btn is-active" data-chapter="00:00 boot">00:00 boot</button>
-        <button class="chapter-btn" data-chapter="01:12 inventory">01:12 inventory</button>
-        <button class="chapter-btn" data-chapter="03:40 phone">03:40 phone</button>
-        <button class="chapter-btn" data-chapter="05:55 housing">05:55 housing</button>
-        <button class="chapter-btn" data-chapter="08:02 dispatch">08:02 dispatch</button>
-        <button class="chapter-btn" data-chapter="09:48 admin">09:48 admin</button>
+      <div class="split split-flip">
+        <div class="split-copy">
+          <p>Nothing here is a knock on single-script developers; plenty are excellent. The difference
+            shows up in the seams. Scripts from one vendor share a settings surface, a permission model
+            and a support inbox, so a bug between two of them is one ticket rather than two vendors
+            pointing at each other.</p>
+          <p>What that does <em>not</em> mean: there is no bundle price, no lock-in, and no claim that
+            the suite is finished. Two resources are shipping today. The rest is in the log above,
+            marked <span class="mono">building</span>, and will say so until it is not.</p>
+        </div>
+        <div class="split-media" style="padding:26px">
+          <ul class="specs" style="margin:0;border-top:0">
+            <li><span class="k">shipping now</span><span class="v"><strong>2</strong> resources</span></li>
+            <li><span class="k">in development</span><span class="v"><strong>2</strong> resources</span></li>
+            <li><span class="k">frameworks</span><span class="v">ESX · QBCore · Qbox, <strong>one build</strong></span></li>
+            <li><span class="k">config surface</span><span class="v"><strong>1</strong> panel, all scripts</span></li>
+            <li><span class="k">sold</span><span class="v">individually, via Tebex</span></li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
 
-  <section id="compare" class="section compare">
-    <div class="container compare-inner">
-      <div class="compare-head">
-        <h2>One vendor, or five.</h2>
-        <p>Nothing here is a dig at single-script developers — plenty are excellent. It's just a
-          different shape of problem once you run ten of them side by side.</p>
-      </div>
-      <div class="compare-table">
-        <div class="compare-row compare-row-head">
-          <span></span>
-          <span class="compare-col-ours">vamore suite</span>
-          <span>mixed vendors</span>
-        </div>
-        <div class="compare-row">
-          <span class="compare-label">Item metadata across systems</span>
-          <span class="compare-ours">one table</span>
-          <span class="compare-theirs">bridge per pair</span>
-        </div>
-        <div class="compare-row">
-          <span class="compare-label">Permissions and job grades</span>
-          <span class="compare-ours">inherited</span>
-          <span class="compare-theirs">redefined per script</span>
-        </div>
-        <div class="compare-row">
-          <span class="compare-label">Notification style</span>
-          <span class="compare-ours">one stack</span>
-          <span class="compare-theirs">three or four</span>
-        </div>
-        <div class="compare-row">
-          <span class="compare-label">A bug between two systems</span>
-          <span class="compare-ours">one ticket</span>
-          <span class="compare-theirs">two vendors pointing at each other</span>
-        </div>
-        <div class="compare-row">
-          <span class="compare-label">Framework migration</span>
-          <span class="compare-ours">suite-wide, one release</span>
-          <span class="compare-theirs">whenever each vendor gets to it</span>
-        </div>
-        <!-- TODO: "0.19 ms" / "0.6–1.4 ms" are placeholder perf claims tied to the placeholder script lineup — replace with real measurements before launch -->
-        <div class="compare-row">
-          <span class="compare-label">Total idle cost</span>
-          <span class="compare-ours">0.19 ms</span>
-          <span class="compare-theirs">typically 0.6–1.4 ms</span>
-        </div>
-      </div>
-    </div>
-  </section>
 </main>
 
-<footer class="footer">
-  <div class="container footer-grid">
-    <div class="footer-brand">
-      <div class="nav-logo">
-        <svg width="24" height="24" viewBox="0 0 128 128" fill="none" aria-hidden="true">
-          <defs><linearGradient id="vamMarkF" gradientUnits="userSpaceOnUse" x1="14" y1="104" x2="110" y2="20"><stop offset="0%" stop-color="#1450c8"></stop><stop offset="100%" stop-color="#25c9b0"></stop></linearGradient></defs>
-          <path d="M14 24 L27 54" stroke="url(#vamMarkF)" stroke-width="15"></path>
-          <path d="M30.5 62 L46 98 L78 24 L110 98" stroke="url(#vamMarkF)" stroke-width="15" stroke-linejoin="miter"></path>
-          <path d="M50 74 H107" stroke="url(#vamMarkF)" stroke-width="15"></path>
-        </svg>
-        <span>VAmore Systems</span>
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="index.html" class="brand">
+          <svg width="20" height="20" viewBox="0 0 128 128" fill="none" aria-hidden="true">
+            <defs><linearGradient id="vamMarkF" gradientUnits="userSpaceOnUse" x1="14" y1="104" x2="110" y2="20"><stop offset="0%" stop-color="#1450c8"></stop><stop offset="100%" stop-color="#25c9b0"></stop></linearGradient></defs>
+            <path d="M14 24 L27 54" stroke="url(#vamMarkF)" stroke-width="15"></path>
+            <path d="M30.5 62 L46 98 L78 24 L110 98" stroke="url(#vamMarkF)" stroke-width="15" stroke-linejoin="miter"></path>
+            <path d="M50 74 H107" stroke="url(#vamMarkF)" stroke-width="15"></path>
+          </svg>
+          <span>VAmore Systems</span>
+        </a>
+        <p>FiveM server scripts for ESX, QBCore and Qbox, configured from one in-game panel.</p>
       </div>
-      <!-- TODO: placeholder claim — "maintained by the people who run a server on it" implies an existing operating server; confirm or rewrite before launch. -->
-      <p>The whole server layer from one place, maintained by the people who run a server on it.</p>
-      <div class="footer-socials">
-        <a href="#" class="pill" data-placeholder="true">discord</a>
-        <a href="#" class="pill" data-placeholder="true">youtube</a>
+      <div class="foot-col">
+        <span class="title">scripts</span>
+        <a href="products/configpanel.html">Config Manager</a>
+        <a href="products/banking.html">Banking</a>
+        <a href="products/invoices.html">Invoices</a>
+        <a href="products.html">All scripts</a>
+      </div>
+      <div class="foot-col">
+        <span class="title">resources</span>
+        <!-- TODO: replace with real URLs once they exist (docs, changelog, status). -->
+        <span class="pending">Documentation</span>
+        <span class="pending">Changelog</span>
+        <span class="pending">Status</span>
+      </div>
+      <div class="foot-col">
+        <span class="title">contact</span>
+        <!-- TODO: replace with the real Discord invite and Tebex storefront URL. -->
+        <span class="pending">Discord</span>
+        <span class="pending">Tebex store</span>
+        <span class="pending">Support</span>
       </div>
     </div>
-    <div class="footer-col">
-      <span class="footer-col-title">suite</span>
-      <a href="#suite">Inventory</a>
-      <a href="#suite">Phone</a>
-      <a href="#suite">Housing</a>
-      <a href="products.html">All scripts</a>
+    <div class="foot-legal">
+      <span>© <span data-year>2026</span> VAmore Systems</span>
+      <span>not affiliated with Rockstar Games or Cfx.re</span>
+      <!-- TODO: legal pages required before commercial launch in Germany (Impressum, privacy, terms). -->
+      <span class="pending">Impressum</span>
+      <span class="pending">Privacy</span>
+      <span class="pending">Terms</span>
     </div>
-    <div class="footer-col">
-      <span class="footer-col-title">resources</span>
-      <a href="#" data-placeholder="true">Documentation</a>
-      <a href="#" data-placeholder="true">Changelog</a>
-      <a href="#" data-placeholder="true">Framework bridges</a>
-      <a href="#" data-placeholder="true">Status</a>
-    </div>
-    <div class="footer-col">
-      <span class="footer-col-title">company</span>
-      <a href="#" data-placeholder="true">Support</a>
-      <a href="#" data-placeholder="true">Tebex store</a>
-      <a href="#" data-placeholder="true">Discord</a>
-      <a href="#" data-placeholder="true">Report misuse</a>
-    </div>
-  </div>
-  <div class="container footer-legal">
-    <span>© 2026 vamore systems</span>
-    <span>not affiliated with rockstar games or cfx.re</span>
-    <a href="#" data-placeholder="true">impressum</a>
-    <a href="#" data-placeholder="true">privacy</a>
-    <a href="#" data-placeholder="true">terms</a>
   </div>
 </footer>
 

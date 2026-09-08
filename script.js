@@ -1,266 +1,255 @@
-// TODO: slugs, names, prices and bodies below are placeholder content for a
-// still-fictional lineup — replace every entry with the real suite before launch.
-//
-// tebexPackageId: the package's numeric ID in the Tebex store (Packages list
-// in the Tebex Control Panel). Only set for scripts that are actually for
-// sale - undefined renders a disabled "Coming Soon" state instead of a Buy
-// button, matching the [Work In Progress] labels above.
-//
-// category: which products-page filter tab the script sits under. Scripts
-// are sold individually, not as a suite - this is purely a browsing aid.
-const CATEGORIES = [
-  { id: 'core', label: 'Core' },
-  { id: 'economy', label: 'Economy' },
-  { id: 'safety', label: 'Public Safety' },
-  { id: 'utility', label: 'Utility' },
-  { id: 'admin', label: 'Admin' },
+/* VAmore Systems — console behaviour
+   Data below is the real lineup. Two resources are purchasable, two are in
+   development; nothing here may claim otherwise. */
+
+const RESOURCES = [
+  {
+    slug: 'vamore_configpanel',
+    name: 'Config Manager',
+    price: 'free',
+    priceNote: '€0',
+    status: 'running',
+    category: 'core',
+    frameworks: ['ESX', 'QBCore', 'Qbox'],
+    line: 'One ACE-gated panel, one tab per registered script.',
+    verbose: 'Sliders and inputs replace config.lua. Changes apply live. Any script registers its schema with a single export.',
+    tebexPackageId: '7627638',
+    detailUrl: 'products/configpanel.html',
+  },
+  {
+    slug: 'vamore_banking',
+    name: 'Banking',
+    price: '€40',
+    status: 'running',
+    category: 'economy',
+    frameworks: ['ESX', 'QBCore', 'Qbox'],
+    line: 'IBAN accounts, savings, credit, markets, faction payroll.',
+    verbose: 'PIN-protected accounts, ATM and branch handling, compounding savings with goals, event-based credit, 10 stocks and 5 coins on live pricing engines, grade-gated faction accounts, fraud dashboard with Discord alerts.',
+    tebexPackageId: '7627622',
+    detailUrl: 'products/banking.html',
+  },
+  {
+    slug: 'vamore_invoices',
+    name: 'Invoices',
+    price: '€25',
+    status: 'building',
+    category: 'economy',
+    frameworks: ['ESX', 'QBCore', 'Qbox'],
+    line: 'Standalone billing, split out of Banking.',
+    verbose: 'Issue, pay and chase invoices without running the full Banking resource.',
+    detailUrl: 'products/invoices.html',
+  },
+  {
+    slug: 'vamore_restaurants',
+    name: 'Restaurants',
+    price: 'tbd',
+    status: 'building',
+    category: 'economy',
+    frameworks: ['ESX', 'QBCore', 'Qbox'],
+    line: 'Recipes, prep stations, staff roles, supplier stock.',
+    verbose: 'Owner terminal for recipes, staffing, stock ordering and station placement; cooking runs as timed prep minigames.',
+  },
 ];
 
-const SYSTEMS = [
-  { slug: 'va-inventory', name: 'Inventory', price: '€35', fw: ['ESX', 'QBCore', 'Qbox'], category: 'core',
-    body: 'Grid-slot inventory with real weight, stashes, shops and trunks. [Work In Progress]' },
-  { slug: 'va-phone', name: 'Phone', price: '€45', fw: ['ESX', 'QBCore', 'Qbox'], category: 'core',
-    body: 'Multi-app phone sharing accounts and inventory with the rest of the suite. [Work In Progress]' },
-  { slug: 'va-banking', name: 'Banking', price: '€40', fw: ['ESX', 'QBCore', 'Qbox'], category: 'economy',
-    body: 'Accounts, transfers, business ledgers and ATMs. [Work In Progress]',
-    tebexPackageId: '7627622', detailUrl: 'products/banking.html' },
-  { slug: 'va-config', name: 'ConfigManager', price: '€0', fw: ['ESX', 'QBCore', 'Qbox'], category: 'core',
-    body: 'Configuration management for the every script.',
-    tebexPackageId: '7627638', detailUrl: 'products/configpanel.html' },
-  { slug: 'va-jobs', name: 'Jobs', price: '€28', fw: ['ESX', 'QBCore', 'Qbox'], category: 'economy',
-    body: 'Shifts, payroll and per-grade permissions shared across the suite. [Work In Progress]' },
-  { slug: 'va-invoices', name: 'Invoices', price: '€25', fw: ['ESX', 'QBCore', 'Qbox'], category: 'economy',
-    body: 'Invoices and billing for services rendered. [Work In Progress]',
-    detailUrl: 'products/invoices.html' },
-  { slug: 'va-garage', name: 'Garage', price: '€25', fw: ['ESX', 'QBCore', 'Qbox'], category: 'utility',
-    body: 'Persistent vehicle storage with insurance and impound. [Work In Progress]' },
-  { slug: 'va-admin', name: 'Admin', price: '€22', fw: ['ESX', 'QBCore', 'Qbox', 'Standalone'], category: 'admin',
-    body: 'One menu across the whole suite: inventory, properties, accounts, tickets. [Work In Progress]' },
-  { slug: 'va-fuel', name: 'Fuel', price: '€12', fw: ['ESX', 'QBCore', 'Qbox', 'Standalone'], category: 'utility',
-    body: 'Stations, jerrycans, electric charging and per-vehicle consumption. [Work In Progress]' }
-];
+const STATUS_LABEL = { running: 'running', building: 'building' };
 
-const FLAGSHIP_SLUGS = ['va-banking', 'va-phone', 'va-invoices', 'va-jobs'];
-
-// Tebex Headless API: our storefront is this page, Tebex only handles the
-// actual checkout/payment. The public token identifies the store and is
-// safe to ship client-side (unlike the store's private key, which never
-// belongs in frontend code). See https://creator.tebex.io/developers/api-keys.
+/* --- Tebex --------------------------------------------------------------- */
+// The public token identifies the store and is safe client-side; the store's
+// private key never belongs in frontend code.
 const TEBEX_PUBLIC_TOKEN = '148lv-00fe39bf66eebb4de4bd960cef52ad1936dc0167';
 const TEBEX_API_BASE = `https://headless.tebex.io/api/accounts/${TEBEX_PUBLIC_TOKEN}`;
 
-async function buyOnTebex(packageId) {
-  const basketRes = await fetch(`${TEBEX_API_BASE}/baskets`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      complete_url: window.location.href,
-      cancel_url: window.location.href,
-    }),
-  });
-  if (!basketRes.ok) return;
-  const basket = (await basketRes.json()).data;
-
-  const addRes = await fetch(`${TEBEX_API_BASE}/baskets/${basket.ident}/packages`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ package_id: packageId, quantity: 1 }),
-  });
-  if (!addRes.ok) return;
-
-  Tebex.checkout.init({ ident: basket.ident, theme: 'auto' });
-  Tebex.checkout.launch();
-}
-
-// The grid/flagship cards only ever link to a product's detail page - the
-// actual Tebex purchase button (data-buy-package, wired below) lives only
-// on that detail page, not on every card.
-function detailButtonHtml(system) {
-  if (!system.detailUrl) {
-    return '<span class="btn btn-secondary btn-disabled">Coming Soon</span>';
+async function buyOnTebex(packageId, button) {
+  const original = button ? button.textContent : '';
+  if (button) {
+    button.disabled = true;
+    button.textContent = 'opening checkout…';
   }
-  return `<a href="${system.detailUrl}" class="btn btn-secondary">View Details</a>`;
+  try {
+    const basketRes = await fetch(`${TEBEX_API_BASE}/baskets`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ complete_url: window.location.href, cancel_url: window.location.href }),
+    });
+    if (!basketRes.ok) throw new Error('basket');
+    const basket = (await basketRes.json()).data;
+
+    const addRes = await fetch(`${TEBEX_API_BASE}/baskets/${basket.ident}/packages`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ package_id: packageId, quantity: 1 }),
+    });
+    if (!addRes.ok) throw new Error('package');
+
+    Tebex.checkout.init({ ident: basket.ident, theme: 'auto' });
+    Tebex.checkout.launch();
+    if (button) { button.disabled = false; button.textContent = original; }
+  } catch (err) {
+    if (button) {
+      button.disabled = false;
+      button.textContent = 'checkout unavailable — retry';
+    }
+  }
 }
 
 document.addEventListener('click', (event) => {
   const btn = event.target.closest('[data-buy-package]');
   if (!btn) return;
-  buyOnTebex(btn.dataset.buyPackage);
+  buyOnTebex(btn.dataset.buyPackage, btn);
 });
 
-// NOTE: "product shot placeholder" labels below stand in for real PNG screenshots — replace before launch.
-function renderFlagshipPanels() {
-  const wrap = document.getElementById('flagship-list');
-  if (!wrap) return;
-  wrap.innerHTML = FLAGSHIP_SLUGS.map((slug, i) => {
-    const s = SYSTEMS.find((sys) => sys.slug === slug);
-    if (!s) return '';
-    const reversed = i % 2 === 1;
-    const image = s.slug === 'va-banking'
-      ? `<model-viewer src="assets/glb/creditcard.glb" alt="${s.name} 3D model" orientation="90deg 30deg 0deg" auto-rotate rotation-per-second="8deg" auto-rotate-delay="0" camera-controls disable-zoom interaction-prompt="none" shadow-intensity="1"></model-viewer>`
-      : `<span>${s.slug} · product shot [Work In Progress]</span>`;
-    return `
-    <div class="flagship-panel${reversed ? ' flagship-panel-reverse' : ''} reveal">
-      <div class="flagship-image">${image}</div>
-      <div class="flagship-copy">
-        <h3>${s.name}</h3>
-        <p>${s.body}</p>
-        <div class="flagship-meta">
-          <span class="flagship-price">${s.price}</span>
-          ${detailButtonHtml(s)}
-        </div>
-      </div>
-    </div>`;
-  }).join('');
-}
+/* --- resource table ------------------------------------------------------ */
 
-// The [Work In Progress] tag stays in the raw body text (used on the
-// homepage flagship panels too) - the product grid has its own status
-// badge instead, so it's stripped here only to avoid saying it twice.
-function stripWipTag(text) {
-  return text.replace(/\s*\[Work In Progress\]$/, '');
-}
+const dotSvg = (color) =>
+  `<svg class="dot" width="8" height="8" viewBox="0 0 8 8" aria-hidden="true"><circle cx="4" cy="4" r="3.25" fill="${color}"/></svg>`;
 
-function productCardHtml(s) {
-  const available = !!s.tebexPackageId;
+function resourceRow(r) {
+  const running = r.status === 'running';
+  const action = r.detailUrl
+    ? `<a class="cmd cmd-ghost" href="${r.detailUrl}"><span class="caret">&gt;</span>open</a>`
+    : `<span class="cmd is-pending"><span class="caret">&gt;</span>no page yet</span>`;
   return `
-    <div class="product-card reveal" data-category="${s.category}">
-      <div class="product-card-media">
-        <span class="product-card-monogram">${s.name.charAt(0)}</span>
-        <span class="product-card-media-caption">Artwork coming soon</span>
-        <span class="product-card-status ${available ? 'is-available' : 'is-soon'}">${available ? 'Available Now' : 'Coming Soon'}</span>
-      </div>
-      <div class="product-card-body">
-        <div class="product-card-head">
-          <h3>${s.name}</h3>
-          <span class="product-card-price">${s.price}</span>
-        </div>
-        <p>${stripWipTag(s.body)}</p>
-        <div class="product-card-fw">
-          ${s.fw.map((f) => `<span class="pill">${f}</span>`).join('')}
-        </div>
-      </div>
-      <div class="product-card-foot">
-        ${detailButtonHtml(s)}
-      </div>
-    </div>`;
+  <div class="res-row ${running ? 'is-running' : 'is-building'}" data-status="${r.status}">
+    <a class="res-name" href="${r.detailUrl || '#'}"${r.detailUrl ? '' : ' aria-disabled="true" tabindex="-1"'}>
+      ${dotSvg(running ? 'var(--ok)' : 'var(--build)')}${r.slug}
+    </a>
+    <span class="res-status">[ ${STATUS_LABEL[r.status]} ]</span>
+    <span class="res-desc">${r.line}</span>
+    <span class="res-price">${r.price}</span>
+    ${action}
+    <span class="res-desc verbose-only" style="grid-column:1/-1">${r.verbose} · ${r.frameworks.join(' / ')}</span>
+  </div>`;
 }
 
-function renderCategoryTabs() {
-  const wrap = document.getElementById('category-tabs');
+function renderResources() {
+  const wrap = document.getElementById('resource-table');
   if (!wrap) return;
-  wrap.innerHTML = [
-    '<button type="button" class="category-tab is-active" data-category="all">All</button>',
-    ...CATEGORIES.map((c) => `<button type="button" class="category-tab" data-category="${c.id}">${c.label}</button>`),
-  ].join('');
+  wrap.innerHTML = `
+    <div class="res-head">
+      <span>resource</span><span>status</span><span>summary</span><span>price</span><span></span>
+    </div>
+    ${RESOURCES.map(resourceRow).join('')}`;
+}
 
+function initFilters() {
+  const wrap = document.getElementById('filters');
+  if (!wrap) return;
   wrap.addEventListener('click', (event) => {
-    const btn = event.target.closest('.category-tab');
+    const btn = event.target.closest('.filter');
     if (!btn) return;
-    wrap.querySelectorAll('.category-tab').forEach((b) => b.classList.remove('is-active'));
-    btn.classList.add('is-active');
-
-    const category = btn.dataset.category;
-    document.querySelectorAll('#product-grid .product-card').forEach((card) => {
-      card.classList.toggle('is-filtered-out', category !== 'all' && card.dataset.category !== category);
+    wrap.querySelectorAll('.filter').forEach((b) => b.classList.toggle('is-on', b === btn));
+    const want = btn.dataset.filter;
+    document.querySelectorAll('#resource-table .res-row').forEach((row) => {
+      row.classList.toggle('is-filtered-out', want !== 'all' && row.dataset.status !== want);
     });
   });
 }
 
-function renderProductGrid() {
-  const wrap = document.getElementById('product-grid');
-  if (!wrap) return;
-  wrap.innerHTML = SYSTEMS.map(productCardHtml).join('');
-}
+/* --- verbose ------------------------------------------------------------- */
 
-// NOTE: "2400×1240" in the label below is a placeholder resolution, not a real recording — see the <!-- TODO --> above the demo section in index.html.
-function initDemoChapters() {
-  const wrap = document.getElementById('demo-chapters');
-  const label = document.getElementById('demo-video-label');
-  if (!wrap || !label) return;
-  wrap.addEventListener('click', (event) => {
-    const btn = event.target.closest('.chapter-btn');
-    if (!btn) return;
-    wrap.querySelectorAll('.chapter-btn').forEach((b) => b.classList.remove('is-active'));
-    btn.classList.add('is-active');
-    label.textContent = `demo video · 2400×1240 · ${btn.dataset.chapter}`;
+function initVerbose() {
+  const button = document.getElementById('verbose-toggle');
+  if (!button) return;
+
+  const apply = (on) => {
+    document.body.classList.toggle('is-verbose', on);
+    button.setAttribute('aria-pressed', on ? 'true' : 'false');
+  };
+
+  apply(localStorage.getItem('vamore-verbose') === '1');
+
+  button.addEventListener('click', () => {
+    const on = button.getAttribute('aria-pressed') !== 'true';
+    apply(on);
+    localStorage.setItem('vamore-verbose', on ? '1' : '0');
   });
 }
 
-function initHeroTypewriter() {
-  const h1El = document.getElementById('hero-type-text');
-  const subEl = document.getElementById('hero-type-subtext');
-  const cursor1 = document.getElementById('hero-cursor-1');
-  const cursor2 = document.getElementById('hero-cursor-2');
-  if (!h1El) return;
-  const fullH1 = h1El.textContent;
-  const fullSub = subEl ? subEl.textContent : '';
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    if (cursor1) cursor1.style.display = 'none';
+/* --- video start frame ---------------------------------------------------- */
+// The demo clip opens on an ATM exterior; the panel itself is a few seconds in,
+// so every use of it starts (and loops back) at the frame that proves the claim.
+
+function initVideoStart() {
+  document.querySelectorAll('video[data-start]').forEach((video) => {
+    const start = parseFloat(video.dataset.start);
+    if (!Number.isFinite(start)) return;
+
+    const seek = () => {
+      if (video.duration && start < video.duration) video.currentTime = start;
+    };
+
+    if (video.readyState >= 1) seek();
+    else video.addEventListener('loadedmetadata', seek, { once: true });
+
+    video.addEventListener('timeupdate', () => {
+      if (video.currentTime < start - 0.3) seek();
+    });
+  });
+}
+
+/* --- boot log ------------------------------------------------------------ */
+// The one authored motion moment on the site: the first viewport prints
+// itself the way a resource start does.
+
+function initBootLog() {
+  const headline = document.getElementById('boot-headline');
+  const sub = document.getElementById('boot-sub');
+  const lines = Array.from(document.querySelectorAll('#boot-log .log-line[data-print]'));
+  const cursor = document.getElementById('boot-cursor');
+  if (!headline) return;
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const headlineText = headline.textContent.trim();
+  const subText = sub ? sub.textContent.trim() : '';
+
+  if (reduce) {
+    lines.forEach((l) => { l.style.visibility = 'visible'; });
     return;
   }
-  h1El.textContent = '';
-  if (subEl) subEl.textContent = '';
-  if (cursor2) cursor2.style.display = 'none';
 
-  const typeSub = () => {
-    let j = 0;
+  headline.textContent = '';
+  if (sub) sub.textContent = '';
+  lines.forEach((l) => { l.style.visibility = 'hidden'; });
+
+  const type = (el, text, speed, done) => {
+    let i = 0;
     const step = () => {
-      j += 1;
-      subEl.textContent = fullSub.slice(0, j);
-      if (j < fullSub.length) window.setTimeout(step, 38);
+      i += 1;
+      el.textContent = text.slice(0, i);
+      if (i < text.length) window.setTimeout(step, speed);
+      else if (done) window.setTimeout(done, 220);
     };
     step();
   };
 
-  const startSub = () => {
-    if (cursor1) cursor1.style.display = 'none';
-    if (cursor2) cursor2.style.display = '';
-    if (subEl) typeSub();
-  };
-
-  let i = 0;
-  const typeH1 = () => {
-    i += 1;
-    h1El.textContent = fullH1.slice(0, i);
-    if (i < fullH1.length) { window.setTimeout(typeH1, 38); return; }
-    window.setTimeout(startSub, 250);
-  };
-  window.setTimeout(typeH1, 300);
-}
-
-function initNavScroll() {
-  const nav = document.getElementById('nav');
-  if (!nav) return;
-  const update = () => nav.classList.toggle('is-scrolled', window.scrollY > 30);
-  window.addEventListener('scroll', update, { passive: true });
-  update();
-}
-
-function initScrollReveal() {
-  const targets = document.querySelectorAll('.reveal');
-  if (!targets.length) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    targets.forEach((el) => el.classList.add('is-visible'));
-    return;
-  }
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
-      }
+  const printLines = () => {
+    if (cursor) cursor.remove();
+    lines.forEach((line, i) => {
+      window.setTimeout(() => { line.style.visibility = 'visible'; }, i * 90);
     });
-  }, { threshold: 0.2 });
-  targets.forEach((el) => observer.observe(el));
+  };
+
+  const startSub = () => {
+    if (!sub) return printLines();
+    type(sub, subText, 26, printLines);
+  };
+
+  window.setTimeout(() => type(headline, headlineText, 42, startSub), 260);
+}
+
+/* --- misc ---------------------------------------------------------------- */
+
+function initYear() {
+  document.querySelectorAll('[data-year]').forEach((el) => {
+    el.textContent = String(new Date().getFullYear());
+  });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  initHeroTypewriter();
-  initNavScroll();
-  renderProductGrid();
-  renderCategoryTabs();
-  renderFlagshipPanels();
-  initDemoChapters();
-  initScrollReveal();
+  renderResources();
+  initFilters();
+  initVerbose();
+  initBootLog();
+  initVideoStart();
+  initYear();
 });

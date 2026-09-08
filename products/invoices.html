@@ -4,18 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Invoices — VAmore Systems</title>
+<meta name="description" content="VAmore Invoices for FiveM: standalone billing between IBANs with overdue tracking and optional auto-deduction. In development, not yet purchasable.">
 <link rel="icon" href="../assets/vamore-favicon-32.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Martian+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Azeret+Mono:wght@400;500;600&family=Martian+Mono:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../style.css">
 </head>
 <body>
 
-<header class="nav" id="nav">
-  <div class="container nav-inner">
-    <a href="../index.html" class="nav-logo">
-      <svg width="26" height="26" viewBox="0 0 128 128" fill="none" aria-hidden="true">
+<header class="bar">
+  <div class="wrap bar-inner">
+    <a href="../index.html" class="brand">
+      <svg width="22" height="22" viewBox="0 0 128 128" fill="none" aria-hidden="true">
         <defs><linearGradient id="vamMark" gradientUnits="userSpaceOnUse" x1="14" y1="104" x2="110" y2="20"><stop offset="0%" stop-color="#1450c8"></stop><stop offset="55%" stop-color="#1b8fc4"></stop><stop offset="100%" stop-color="#25c9b0"></stop></linearGradient></defs>
         <path d="M14 24 L27 54" stroke="url(#vamMark)" stroke-width="15"></path>
         <path d="M30.5 62 L46 98 L78 24 L110 98" stroke="url(#vamMark)" stroke-width="15" stroke-linejoin="miter"></path>
@@ -23,95 +24,111 @@
       </svg>
       <span>VAmore Systems</span>
     </a>
-    <nav class="nav-links">
-      <a href="../index.html#suite">Suite</a>
-      <a href="../index.html#demo">Demo</a>
-      <a href="../index.html#compare">Compare</a>
-      <a href="../products.html">All Scripts</a>
+    <nav class="bar-nav" aria-label="Main">
+      <a href="../index.html">./home</a>
+      <a href="../products.html">./scripts</a>
+      <a href="configpanel.html" class="optional">./config-manager</a>
+      <a href="banking.html" class="optional">./banking</a>
     </nav>
-    <div class="nav-actions">
-      <a href="#" class="pill" data-placeholder="true">discord</a>
-      <a href="#" class="btn btn-primary" data-placeholder="true">Buy on Tebex</a>
-    </div>
+    <a href="banking.html" class="cmd cmd-run bar-cta"><span class="caret">&gt;</span>buy banking</a>
   </div>
 </header>
 
-<main id="top">
-  <section class="section product-detail-hero">
-    <div class="container">
-      <a href="../products.html" class="mono-label product-back">&larr; All scripts</a>
-      <div class="flagship-panel">
-        <div class="flagship-image">
-          <span class="product-detail-monogram">I</span>
-        </div>
-        <div class="flagship-copy">
-          <span class="mono-label">economy · not yet available</span>
+<main>
+  <section class="band">
+    <div class="wrap">
+      <a href="../products.html" class="back-link">
+        <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3.5 5.5 8l4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        all scripts
+      </a>
+
+      <div class="detail-head" style="margin-top:22px">
+        <div class="detail-title">
           <h1>Invoices</h1>
-          <p>A standalone billing script, splitting VAmore Banking's invoicing feature out on its
-            own: create and pay invoices between any two IBANs, with automatic overdue tracking and
-            optional auto-deduction. Still in development — nothing here is purchasable yet.</p>
-          <div class="flagship-meta">
-            <span class="flagship-price">€25</span>
-            <span class="btn btn-secondary btn-disabled">Coming Soon</span>
-          </div>
-          <span class="product-detail-note">Price is a current estimate, not final.</span>
-          <div class="product-card-fw">
-            <span class="pill">ESX</span>
-            <span class="pill">QBCore</span>
-            <span class="pill">Qbox</span>
-          </div>
+          <span class="mono" style="color:var(--build);align-self:center">[ building ]</span>
+        </div>
+        <p class="lede">A standalone billing resource, splitting Banking's invoicing out on its own:
+          create and pay invoices between any two IBANs, with automatic overdue tracking and optional
+          auto-deduction. Still in development, so there is nothing to buy here yet.</p>
+
+        <div class="detail-buy is-building">
+          <span class="detail-price">€25</span>
+          <span class="note">estimated price, not final · no Tebex package yet · no release date announced</span>
+          <span class="cmd is-pending"><span class="caret">&gt;</span>not purchasable yet</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band-rule">
+    <div class="wrap">
+      <div class="split">
+        <div class="split-copy">
+          <h2>What it is meant to do.</h2>
+          <p>Billing between two IBANs, without running the full Banking resource: issue an invoice,
+            chase it when it goes overdue, and optionally let it deduct itself when the due date passes.</p>
+          <p>Everything here describes intended scope, not shipped behaviour. If you need invoicing
+            today, it already exists inside <a href="banking.html">Banking</a>.</p>
+        </div>
+        <div>
+          <ul class="specs" style="margin-top:0">
+            <li><span class="k">state</span><span class="v"><strong>building</strong>, not purchasable</span></li>
+            <li><span class="k">price</span><span class="v">€25 <strong>estimated</strong></span></li>
+            <li><span class="k">frameworks</span><span class="v">ESX · QBCore · Qbox (planned)</span></li>
+            <li><span class="k">available now in</span><span class="v"><a href="banking.html">Banking</a></span></li>
+            <li><span class="k">release</span><span class="v">not announced</span></li>
+          </ul>
         </div>
       </div>
     </div>
   </section>
 </main>
 
-<footer class="footer">
-  <div class="container footer-grid">
-    <div class="footer-brand">
-      <div class="nav-logo">
-        <svg width="24" height="24" viewBox="0 0 128 128" fill="none" aria-hidden="true">
-          <defs><linearGradient id="vamMarkF" gradientUnits="userSpaceOnUse" x1="14" y1="104" x2="110" y2="20"><stop offset="0%" stop-color="#1450c8"></stop><stop offset="100%" stop-color="#25c9b0"></stop></linearGradient></defs>
-          <path d="M14 24 L27 54" stroke="url(#vamMarkF)" stroke-width="15"></path>
-          <path d="M30.5 62 L46 98 L78 24 L110 98" stroke="url(#vamMarkF)" stroke-width="15" stroke-linejoin="miter"></path>
-          <path d="M50 74 H107" stroke="url(#vamMarkF)" stroke-width="15"></path>
-        </svg>
-        <span>VAmore Systems</span>
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="../index.html" class="brand">
+          <svg width="20" height="20" viewBox="0 0 128 128" fill="none" aria-hidden="true">
+            <defs><linearGradient id="vamMarkF" gradientUnits="userSpaceOnUse" x1="14" y1="104" x2="110" y2="20"><stop offset="0%" stop-color="#1450c8"></stop><stop offset="100%" stop-color="#25c9b0"></stop></linearGradient></defs>
+            <path d="M14 24 L27 54" stroke="url(#vamMarkF)" stroke-width="15"></path>
+            <path d="M30.5 62 L46 98 L78 24 L110 98" stroke="url(#vamMarkF)" stroke-width="15" stroke-linejoin="miter"></path>
+            <path d="M50 74 H107" stroke="url(#vamMarkF)" stroke-width="15"></path>
+          </svg>
+          <span>VAmore Systems</span>
+        </a>
+        <p>FiveM server scripts for ESX, QBCore and Qbox, configured from one in-game panel.</p>
       </div>
-      <p>The whole server layer from one place, maintained by the people who run a server on it.</p>
-      <div class="footer-socials">
-        <a href="#" class="pill" data-placeholder="true">discord</a>
-        <a href="#" class="pill" data-placeholder="true">youtube</a>
+      <div class="foot-col">
+        <span class="title">scripts</span>
+        <a href="configpanel.html">Config Manager</a>
+        <a href="banking.html">Banking</a>
+        <a href="invoices.html">Invoices</a>
+        <a href="../products.html">All scripts</a>
+      </div>
+      <div class="foot-col">
+        <span class="title">resources</span>
+        <!-- TODO: replace with real URLs once they exist (docs, changelog, status). -->
+        <span class="pending">Documentation</span>
+        <span class="pending">Changelog</span>
+        <span class="pending">Status</span>
+      </div>
+      <div class="foot-col">
+        <span class="title">contact</span>
+        <!-- TODO: replace with the real Discord invite and Tebex storefront URL. -->
+        <span class="pending">Discord</span>
+        <span class="pending">Tebex store</span>
+        <span class="pending">Support</span>
       </div>
     </div>
-    <div class="footer-col">
-      <span class="footer-col-title">suite</span>
-      <a href="../index.html#suite">Inventory</a>
-      <a href="../index.html#suite">Phone</a>
-      <a href="banking.html">Banking</a>
-      <a href="../products.html">All scripts</a>
+    <div class="foot-legal">
+      <span>© <span data-year>2026</span> VAmore Systems</span>
+      <span>not affiliated with Rockstar Games or Cfx.re</span>
+      <!-- TODO: legal pages required before commercial launch in Germany (Impressum, privacy, terms). -->
+      <span class="pending">Impressum</span>
+      <span class="pending">Privacy</span>
+      <span class="pending">Terms</span>
     </div>
-    <div class="footer-col">
-      <span class="footer-col-title">resources</span>
-      <a href="#" data-placeholder="true">Documentation</a>
-      <a href="#" data-placeholder="true">Changelog</a>
-      <a href="#" data-placeholder="true">Framework bridges</a>
-      <a href="#" data-placeholder="true">Status</a>
-    </div>
-    <div class="footer-col">
-      <span class="footer-col-title">company</span>
-      <a href="#" data-placeholder="true">Support</a>
-      <a href="#" data-placeholder="true">Tebex store</a>
-      <a href="#" data-placeholder="true">Discord</a>
-      <a href="#" data-placeholder="true">Report misuse</a>
-    </div>
-  </div>
-  <div class="container footer-legal">
-    <span>© 2026 vamore systems</span>
-    <span>not affiliated with rockstar games or cfx.re</span>
-    <a href="#" data-placeholder="true">impressum</a>
-    <a href="#" data-placeholder="true">privacy</a>
-    <a href="#" data-placeholder="true">terms</a>
   </div>
 </footer>
 
