@@ -8,17 +8,17 @@
 <link rel="icon" href="../assets/vamore-favicon-32.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Azeret+Mono:wght@400;500;600&family=Martian+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;500&family=Martian+Mono:wght@500;600&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../style.css">
 <script type="module" src="https://unpkg.com/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
 <script defer src="https://js.tebex.io/v/1.js"></script>
 </head>
 <body>
 
-<header class="bar">
-  <div class="wrap bar-inner">
+<header class="nav">
+  <div class="wrap-wide nav-inner">
     <a href="../index.html" class="brand">
-      <svg width="22" height="22" viewBox="0 0 128 128" fill="none" aria-hidden="true">
+      <svg width="24" height="24" viewBox="0 0 128 128" fill="none" aria-hidden="true">
         <defs><linearGradient id="vamMark" gradientUnits="userSpaceOnUse" x1="14" y1="104" x2="110" y2="20"><stop offset="0%" stop-color="#1450c8"></stop><stop offset="55%" stop-color="#1b8fc4"></stop><stop offset="100%" stop-color="#25c9b0"></stop></linearGradient></defs>
         <path d="M14 24 L27 54" stroke="url(#vamMark)" stroke-width="15"></path>
         <path d="M30.5 62 L46 98 L78 24 L110 98" stroke="url(#vamMark)" stroke-width="15" stroke-linejoin="miter"></path>
@@ -26,85 +26,110 @@
       </svg>
       <span>VAmore Systems</span>
     </a>
-    <nav class="bar-nav" aria-label="Main">
-      <a href="../index.html">./home</a>
-      <a href="../products.html">./scripts</a>
-      <a href="configpanel.html" class="optional">./config-manager</a>
-      <a href="banking.html" aria-current="page" class="optional">./banking</a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="../products.html">Scripts</a>
+      <a href="configpanel.html" class="optional">Config Manager</a>
+      <a href="banking.html" aria-current="page" class="optional">Banking</a>
     </nav>
-    <button type="button" class="cmd cmd-run bar-cta" data-buy-package="7627622"><span class="caret">&gt;</span>buy €40</button>
+    <button type="button" class="btn btn-primary" data-buy-package="7627622">Buy — €40</button>
   </div>
 </header>
 
 <main>
-  <section class="band">
-    <div class="wrap">
-      <a href="../products.html" class="back-link">
-        <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3.5 5.5 8l4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        all scripts
+  <section style="padding-bottom:0">
+    <div class="wrap-wide">
+      <a href="../products.html" class="back">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3.5 5.5 8l4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        All scripts
       </a>
 
-      <div class="detail-head" style="margin-top:22px">
+      <div class="detail-head">
         <div class="detail-title">
           <h1>Banking</h1>
-          <span class="mono" style="color:var(--ok);align-self:center">[ running ]</span>
+          <span class="status"><span class="dot"></span>Available now</span>
         </div>
         <p class="lede">A complete, standalone banking and economy resource: accounts and transfers,
           savings and credit, live stock and crypto markets, faction payroll, and a fraud-detection
           dashboard. One resource, no framework-specific forks.</p>
 
         <div class="detail-buy">
-          <span class="detail-price">€40</span>
-          <span class="note">one-time, per server · ESX · QBCore · Qbox · configured through Config Manager</span>
-          <button type="button" class="cmd cmd-run" data-buy-package="7627622"><span class="caret">&gt;</span>buy on Tebex</button>
+          <span class="price">€40</span>
+          <span class="note">One-time, per server. ESX, QBCore and Qbox. Configurable through Config Manager.</span>
+          <button type="button" class="btn btn-primary" data-buy-package="7627622">Buy on Tebex</button>
         </div>
 
-        <div class="detail-media">
-          <model-viewer src="../assets/glb/creditcard.glb" alt="Rotating 3D bank card" orientation="90deg 30deg 0deg" auto-rotate rotation-per-second="8deg" auto-rotate-delay="0" camera-controls disable-zoom interaction-prompt="none" shadow-intensity="1"></model-viewer>
+        <div class="detail-media reveal">
+          <model-viewer src="../assets/glb/creditcard.glb" alt="A rotating VAmore bank card"
+                        orientation="90deg 30deg 0deg" rotation-per-second="16deg"
+                        auto-rotate-delay="0" camera-controls disable-zoom interaction-prompt="none"
+                        shadow-intensity="1" exposure="1.05"></model-viewer>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="band band-rule">
-    <div class="wrap">
-      <div class="section-head">
+  <section>
+    <div class="wrap-wide">
+      <div class="head">
         <h2>What is in it.</h2>
-        <span class="section-path">vamore_banking — 6 modules</span>
+        <p class="lede">Six modules, all shipped in one resource. Every one of them can be switched off
+          and retuned from the panel instead of a file.</p>
       </div>
-      <ul class="ledger">
-        <li><span class="k">core banking</span><span class="v">Automatic IBAN accounts, 4-digit PIN protection, ATM and branch deposits and
-          withdrawals, IBAN-only transfers with contacts, and a fully filterable statement.</span></li>
-        <li><span class="k">savings + credit</span><span class="v">Tiered compounding savings interest with trackable goals, plus an event-based
-          credit score with score-tiered loan limits and interest.</span></li>
-        <li><span class="k">markets</span><span class="v"><strong>10</strong> stocks and <strong>5</strong> coins on live, server-driven pricing engines, with price
-          history charts and take-profit / stop-loss orders.</span></li>
-        <li><span class="k">faction accounts</span><span class="v">Job-bound accounts with grade-gated access, automatic per-grade salary payouts,
-          and a full accounting ledger, with no manual member management.</span></li>
-        <li><span class="k">fraud dashboard</span><span class="v">Flagged high-value transactions, a suspicious-activity filter, Discord webhook
-          alerts, per-player rate limiting, and configurable daily caps.</span></li>
-        <li><span class="k">configuration</span><span class="v">Every setting (PIN lockouts, daily limits, which modules run at all) is
-          controlled live through Config Manager. No restarts, no <span class="mono">config.lua</span>.</span></li>
+      <ul class="lines">
+        <li>
+          <h3>Core banking</h3>
+          <p>Automatic IBAN accounts, 4-digit PIN protection, ATM and branch deposits and withdrawals,
+            IBAN-only transfers with contacts, and a fully filterable statement.</p>
+        </li>
+        <li>
+          <h3>Savings and credit</h3>
+          <p>Tiered compounding savings interest with trackable goals, plus an event-based credit score
+            with score-tiered loan limits and interest.</p>
+        </li>
+        <li>
+          <h3>Markets</h3>
+          <p><span class="num">10</span> stocks and <span class="num">5</span> coins on live,
+            server-driven pricing engines, with price history charts and take-profit or stop-loss orders.</p>
+        </li>
+        <li>
+          <h3>Faction accounts</h3>
+          <p>Job-bound accounts with grade-gated access, automatic per-grade salary payouts, and a full
+            accounting ledger, with no manual member management.</p>
+        </li>
+        <li>
+          <h3>Fraud dashboard</h3>
+          <p>Flagged high-value transactions, a suspicious-activity filter, Discord webhook alerts,
+            per-player rate limiting, and configurable daily caps.</p>
+        </li>
+        <li>
+          <h3>Configuration</h3>
+          <p>Every setting, from PIN lockouts to daily limits to which modules run at all, is controlled
+            live through Config Manager. No restarts, no <code>config.lua</code>.</p>
+        </li>
       </ul>
     </div>
   </section>
 
-  <section class="band band-rule">
-    <div class="wrap">
-      <div class="split">
-        <div class="split-copy">
+  <section class="rule">
+    <div class="wrap-wide">
+      <div class="act flip">
+        <div class="act-copy">
           <h2>Before you buy.</h2>
-          <p>Banking runs on its own. Config Manager is free and optional: install it and every
-            Banking setting moves into an in-game panel instead of a file you have to edit and reload.</p>
+          <p>Banking runs on its own. Config Manager is free and optional: install it and every Banking
+            setting moves into an in-game panel instead of a file you have to edit and reload.</p>
+          <div class="btn-row">
+            <button type="button" class="btn btn-primary" data-buy-package="7627622">Buy on Tebex — €40</button>
+            <a href="configpanel.html" class="btn btn-quiet">Get Config Manager</a>
+          </div>
         </div>
         <div>
-          <ul class="specs" style="margin-top:0">
-            <li><span class="k">frameworks</span><span class="v"><strong>ESX · QBCore · Qbox</strong>, one build</span></li>
-            <li><span class="k">dependencies</span><span class="v">none required</span></li>
-            <li><span class="k">optional</span><span class="v">Config Manager <strong>(free)</strong></span></li>
-            <li><span class="k">licence</span><span class="v">one-time purchase, per server</span></li>
-            <li><span class="k">delivery</span><span class="v">Tebex checkout</span></li>
-            <li><span class="k">state</span><span class="v"><strong>running</strong>, available now</span></li>
+          <ul class="specs">
+            <li><span class="k">Frameworks</span><span class="v"><strong>ESX · QBCore · Qbox</strong>, one build</span></li>
+            <li><span class="k">Dependencies</span><span class="v">None required</span></li>
+            <li><span class="k">Optional</span><span class="v">Config Manager <strong>(free)</strong></span></li>
+            <li><span class="k">Licence</span><span class="v">One-time purchase, per server</span></li>
+            <li><span class="k">Delivery</span><span class="v">Tebex checkout</span></li>
+            <li><span class="k">State</span><span class="v"><strong>Available now</strong></span></li>
           </ul>
         </div>
       </div>
@@ -113,11 +138,11 @@
 </main>
 
 <footer class="foot">
-  <div class="wrap">
+  <div class="wrap-wide">
     <div class="foot-grid">
       <div class="foot-brand">
         <a href="../index.html" class="brand">
-          <svg width="20" height="20" viewBox="0 0 128 128" fill="none" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 128 128" fill="none" aria-hidden="true">
             <defs><linearGradient id="vamMarkF" gradientUnits="userSpaceOnUse" x1="14" y1="104" x2="110" y2="20"><stop offset="0%" stop-color="#1450c8"></stop><stop offset="100%" stop-color="#25c9b0"></stop></linearGradient></defs>
             <path d="M14 24 L27 54" stroke="url(#vamMarkF)" stroke-width="15"></path>
             <path d="M30.5 62 L46 98 L78 24 L110 98" stroke="url(#vamMarkF)" stroke-width="15" stroke-linejoin="miter"></path>
@@ -128,21 +153,21 @@
         <p>FiveM server scripts for ESX, QBCore and Qbox, configured from one in-game panel.</p>
       </div>
       <div class="foot-col">
-        <span class="title">scripts</span>
-        <a href="configpanel.html">Config Manager</a>
+        <span class="title">Scripts</span>
         <a href="banking.html">Banking</a>
+        <a href="configpanel.html">Config Manager</a>
         <a href="invoices.html">Invoices</a>
         <a href="../products.html">All scripts</a>
       </div>
       <div class="foot-col">
-        <span class="title">resources</span>
+        <span class="title">Resources</span>
         <!-- TODO: replace with real URLs once they exist (docs, changelog, status). -->
         <span class="pending">Documentation</span>
         <span class="pending">Changelog</span>
         <span class="pending">Status</span>
       </div>
       <div class="foot-col">
-        <span class="title">contact</span>
+        <span class="title">Contact</span>
         <!-- TODO: replace with the real Discord invite and Tebex storefront URL. -->
         <span class="pending">Discord</span>
         <span class="pending">Tebex store</span>
@@ -151,7 +176,7 @@
     </div>
     <div class="foot-legal">
       <span>© <span data-year>2026</span> VAmore Systems</span>
-      <span>not affiliated with Rockstar Games or Cfx.re</span>
+      <span>Not affiliated with Rockstar Games or Cfx.re</span>
       <!-- TODO: legal pages required before commercial launch in Germany (Impressum, privacy, terms). -->
       <span class="pending">Impressum</span>
       <span class="pending">Privacy</span>

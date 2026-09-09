@@ -2,62 +2,58 @@
 
 <!-- Derived from the shipped build: index.html, products.html, products/*.html, style.css, script.js -->
 
-The site is a **server console**. Every page is one session: log lines, status flags, spec tables and commands. The visitor is a FiveM server owner who reads resource logs daily, so the product argument is made in that language rather than in marketing-card language.
+The site is a **product showroom on a dark ground**. One object or one argument per screen, held in a lot of air, with large light type and a single accent spent on the action. It sells the way a hardware product page sells. It is deliberately not the FiveM-store default (a wall of glowing product tiles) and not the console world it replaced (log lines, status flags, monospace everywhere).
 
 ## World
 
-- Near-black navy ground, one raised console surface, hairline rules instead of shadows or glass.
-- Status is a **flooded field**: a running resource's row carries a teal wash across its full width, a building one an amber wash. The field never fades out before the price and action columns, and status never reduces to a small badge on a neutral row.
-- No cards-as-page-structure, no eyebrow labels above headings, no gradient text, no glow, no unicode icons (the two icons in the build are drawn SVG).
-- One authored motion moment: the home page's boot log types itself, then prints its resource lines. Everything else is instant. `prefers-reduced-motion` skips straight to the finished state.
+- Near-black navy ground with a slow vertical falloff, no bloom behind the hero. Sections are separated by air and one hairline, never by boxes.
+- Teal is the only saturated colour in the interface: the primary button, the available-now dot, the focus ring, the caret. The blue-to-teal brand gradient appears in the logo mark and in the short accent rule at the start of each section divider. There is no second status hue: in development is a hollow dot on neutral text.
+- No cards as page structure, no eyebrow labels, no gradient text, no glow shadows, no unicode icons (every icon is drawn SVG).
+- Motion: one authored moment — the wordmark types itself, the subline follows, then the 3D card takes up its rotation. Product media fades in once on first view. Under `prefers-reduced-motion` the page lands on the finished state: no model rotation anywhere, and both videos hold the frame that proves their claim with controls exposed.
 
 ## Tokens (`style.css` `:root`)
 
 | Token | Value | Role |
 |---|---|---|
-| `--void` | `#060a0e` | page ground |
-| `--panel` | `#0b1118` | console surface, tables, footer |
-| `--panel-2` | `#101a24` | console bar, table head, button rest |
-| `--panel-3` | `#16222e` | button hover |
-| `--rule` | `#1a2530` | hairline borders |
-| `--rule-bright` | `#2b3d4d` | button borders, scrollbar thumb |
-| `--ink` | `#dfe8f0` | primary text |
-| `--ink-2` | `#9db1c4` | secondary text, prose |
-| `--ink-3` | `#6b8296` | labels, line numbers, disabled |
-| `--ok` | `#25c9b0` | running / available / primary action |
-| `--ok-field` | `#0d2b29` | running row wash |
-| `--build` | `#f2a63c` | building / not purchasable |
-| `--build-field` | `#2b2211` | building row wash |
-| `--link` | `#59a0ff` | inline links |
-| `--link-deep` | `#1450c8` | logo gradient only |
+| `--bg` | `#070b10` | page ground |
+| `--bg-panel` | `#0e151e` | media frames, closing band |
+| `--line` / `--line-soft` | `rgba(190,214,238,.10)` / `.055` | hairlines, button borders |
+| `--ink` | `#f3f7fb` | headings, primary text |
+| `--ink-2` | `#a6b8ca` | prose |
+| `--ink-3` | `#8397ab` | labels, notes, pending items |
+| `--brand-a` → `--brand-b` | `#1450c8` → `#25c9b0` | logo mark, and the short accent rule that starts every section divider |
+| `--ok` | `#25c9b0` | primary action, available now |
+| `--link` | `#6aa8ff` | inline links |
 
-Radius `4px` (controls) / `6px` (surfaces). Content frame `1180px`. Line-number gutter `46px`, fixed rather than `ch`, so line 01 (set at headline size) shares a column with lines 02+.
+Radius: `999px` on buttons, `22px` on media frames. Content frame `1120px`, wide frame `1280px`. Section rhythm `96px` mobile / `132px` desktop.
 
 ## Type
 
-- `--font-brand` / `--font-legend` **Martian Mono** — the legend voice: wordmark, spec keys, footer column titles, the console path. Never headings; its width breaks the type scale.
-- `--font-display` / `--font-mono` **Azeret Mono** — the log voice: headings, log lines, tables, commands, figures. Monospace here carries data and commands, not decoration. It stands in for the contract's Geist Mono, which `impeccable detect` flags as overused; the substitution is cited in `.impeccable/surfaces/site.md`.
-- `--font-text` **Archivo** — prose, capped at 68ch.
-
-Headings are `500`/`600` weight with `-0.04em` tracking; `h1` tops out at 2.5rem so it reads as a printed log line, not a marketing hero.
+- **Schibsted Grotesk** carries display and text at weight 400: `h1` runs to 5.6rem in the hero and 4rem elsewhere, tracking `-0.035em`; body 17px/1.6. Prose is capped at 68ch.
+- **Martian Mono** is the wordmark lockup only.
+- **Azeret Mono** appears only inside `code` — real commands and file names (`/vamoreconfig`, `config.lua`). Never as decoration.
+- Figures that are compared carry `tabular-nums` (`.num`, prices, spec values).
 
 ## Components
 
-- **`.console`** — the framed session. `.console-bar` carries path and framework list; `.console-body` holds the log.
-- **`.log` / `.log-line`** — ch-based grid with a counter gutter; `.flag` (teal) and `.flag-build` (amber) mark state.
-- **`.resources` / `.res-row`** — the resource table. Columns: name, status, summary, price, action. Row state classes `is-running` / `is-building` apply the wash. Collapses to a stacked layout under 860px.
-- **`.cmd`** — command buttons. `.cmd-run` is the single accent action per view. On the home page it is printed inside the console as the last log line (`> buy banking`), not floated in a hero; the sticky bar carries the same destination as a secondary command. `.cmd.is-pending` is the disabled, never-clickable state used for unreleased scripts and unresolved links.
-- **`.specs`** — key/value spec list, monospace, tabular figures.
-- **`.ledger`** — the module listing, printed rather than carded: a numbered row per module, name in the mono legend column, description in prose. Used for Banking's six modules and Config Manager's four. There are no feature cards anywhere in the build.
-- **`.verbose`** — a command button (`--verbose`, `--verbose  [on]`) matching the filter row, present on both the home page and the catalogue. The one control that changes the whole page, mirroring Config Manager's role in the product; state persists in `localStorage` and applies on load.
-- **`.filters`** — `all` / `--running` / `--building`, written as CLI flags.
+- **`.hero`** — centred, calm: typing headline, subline, one filled action, one quiet action, then `.stage`.
+- **`.stage`** — the hero object: `creditcard.glb` in `model-viewer` at `field-of-view: 17deg` so the card owns the viewport, rotation started by the typewriter's completion, depth carried by the model's own shadow and nothing else.
+- **`.act`** — a product act: copy on one side, the real artifact on the other. `.flip` reverses the order. This is the page's main structure, in place of a card grid.
+- **`.act-media` / `.detail-media`** — the media surfaces: a panel gradient and a 22px radius, no border. Surfaces separate by air and by that step, never by a drawn box.
+- **`.lines`** — feature listings as full-width rows (name column, description column). No boxes, no equal-height tiles.
+- **`.specs`** — key/value rows with tabular figures, used wherever numbers or capabilities are compared.
+- **`.catalog` / `.item`** — the lineup: one row per script with name, status, one-line summary, price and an arrow. Rendered from `RESOURCES` in `script.js`, so home and catalogue can never disagree.
+- **`.status`** — a dot plus a word in neutral text: a filled teal dot for "Available now", a hollow ring for "In development". Never a filled badge.
+- **`.btn`** — `.btn-primary` (solid teal, dark label) is the single accent action per view and always reaches Tebex checkout; `.btn-quiet` is the outlined secondary, used for the persistent nav action and for navigation; `.btn.is-disabled` is the never-clickable state used for unreleased scripts. A button labelled "Buy" always buys.
+- **`.close-band`** — the one lifted surface on the page, closing the home page with the two real actions.
+- **`.pending`** — an unresolved link, rendered as dimmed text with a `· pending` suffix and `not-allowed`, never as a live link.
 
 ## Content rules
 
-- Two resources are purchasable (Banking €40, Config Manager free); two are building (Invoices, Restaurants). The build says exactly that everywhere and never dresses a building resource as buyable.
-- No invented metrics, testimonials, recordings, player counts or performance figures. The only real media are `assets/vid/admin-panel-demo.mp4` and `assets/glb/creditcard.glb`.
-- Links that do not exist yet (Discord, Tebex storefront, docs, changelog, status, Impressum, privacy, terms) render as `.pending` spans marked "pending", never as live `#` links. Each carries a `TODO` comment naming what to replace it with.
+- Two scripts are purchasable (Banking €40, Config Manager free); two are in development (Invoices, Restaurants). The build says exactly that and never dresses an unfinished script as buyable.
+- No invented metrics, testimonials, recordings, player counts or performance figures. The only real media are `assets/vid/admin-panel-demo.mp4`, `assets/glb/creditcard.glb` and the brand assets.
+- Links that do not exist yet (Discord, Tebex storefront, docs, changelog, status, Impressum, privacy, terms) render as `.pending`, each with a `TODO` comment naming its replacement.
 
 ## Browser surfaces
 
-Selection, caret, focus ring and scrollbar are themed from the palette; figures are tabular by default. These are part of the system, not defaults left in place.
+Selection, caret, `accent-color`, focus ring and scrollbars are themed from the palette. These are part of the system, not defaults left in place.

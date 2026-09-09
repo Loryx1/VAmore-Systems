@@ -4,20 +4,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>All scripts — VAmore Systems</title>
-<meta name="description" content="Every VAmore Systems resource with its current state: what is running and purchasable today, and what is still building.">
+<meta name="description" content="Every VAmore Systems script with its real state: what is available today, what is still in development, and what each one costs.">
 <link rel="icon" href="assets/vamore-favicon-32.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Azeret+Mono:wght@400;500;600&family=Martian+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;500&family=Martian+Mono:wght@500;600&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <script defer src="https://js.tebex.io/v/1.js"></script>
 </head>
 <body>
 
-<header class="bar">
-  <div class="wrap bar-inner">
+<header class="nav">
+  <div class="wrap-wide nav-inner">
     <a href="index.html" class="brand">
-      <svg width="22" height="22" viewBox="0 0 128 128" fill="none" aria-hidden="true">
+      <svg width="24" height="24" viewBox="0 0 128 128" fill="none" aria-hidden="true">
         <defs><linearGradient id="vamMark" gradientUnits="userSpaceOnUse" x1="14" y1="104" x2="110" y2="20"><stop offset="0%" stop-color="#1450c8"></stop><stop offset="55%" stop-color="#1b8fc4"></stop><stop offset="100%" stop-color="#25c9b0"></stop></linearGradient></defs>
         <path d="M14 24 L27 54" stroke="url(#vamMark)" stroke-width="15"></path>
         <path d="M30.5 62 L46 98 L78 24 L110 98" stroke="url(#vamMark)" stroke-width="15" stroke-linejoin="miter"></path>
@@ -25,49 +25,40 @@
       </svg>
       <span>VAmore Systems</span>
     </a>
-    <nav class="bar-nav" aria-label="Main">
-      <a href="index.html">./home</a>
-      <a href="products.html" aria-current="page">./scripts</a>
-      <a href="index.html#config" class="optional">./config-manager</a>
-      <a href="products/banking.html" class="optional">./banking</a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="products.html" aria-current="page">Scripts</a>
+      <a href="products/configpanel.html" class="optional">Config Manager</a>
+      <a href="products/banking.html" class="optional">Banking</a>
     </nav>
-    <a href="products/banking.html" class="cmd cmd-run bar-cta"><span class="caret">&gt;</span>buy banking</a>
+    <button type="button" class="btn btn-quiet" data-buy-package="7627622">Buy Banking</button>
   </div>
 </header>
 
 <main>
-  <section class="band">
-    <div class="wrap">
-      <h1>Every script. One config surface.</h1>
-      <p class="lede" style="margin-top:20px">Each resource stands on its own: buy exactly the one your
-        server needs. Add another later and it registers into the same Config Manager, with the same
-        permission model and the same support inbox. Two are purchasable today; the rest say so plainly.</p>
-
-      <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:center;margin:34px 0 18px">
-        <div class="filters" id="filters">
-          <button type="button" class="filter is-on" data-filter="all">all</button>
-          <button type="button" class="filter" data-filter="running">--running</button>
-          <button type="button" class="filter" data-filter="building">--building</button>
-        </div>
-        <button type="button" class="verbose" id="verbose-toggle" aria-pressed="false"
-                aria-label="Toggle verbose resource details" style="margin-left:auto"></button>
+  <section>
+    <div class="wrap-wide">
+      <div class="head">
+        <h1>Every script. One config surface.</h1>
+        <p class="lede">Each script stands on its own, so buy exactly the one your server needs. Add
+          another later and it registers into the same Config Manager, with the same permission model
+          and the same support inbox.</p>
       </div>
 
-      <div class="resources" id="resource-table"></div>
+      <div class="catalog" id="catalog"></div>
 
-      <p class="lede" style="margin-top:24px">Prices are one-time, per server, through Tebex. Anything
-        marked <span class="mono">building</span> has no package and no release date. When it ships,
-        this table changes and nothing else has to.</p>
+      <p class="small" style="margin-top:28px">Prices are one-time, per server, through Tebex. Anything
+        marked in development has no package and no release date. When it ships, this list changes and
+        nothing else has to.</p>
     </div>
   </section>
 </main>
 
 <footer class="foot">
-  <div class="wrap">
+  <div class="wrap-wide">
     <div class="foot-grid">
       <div class="foot-brand">
         <a href="index.html" class="brand">
-          <svg width="20" height="20" viewBox="0 0 128 128" fill="none" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 128 128" fill="none" aria-hidden="true">
             <defs><linearGradient id="vamMarkF" gradientUnits="userSpaceOnUse" x1="14" y1="104" x2="110" y2="20"><stop offset="0%" stop-color="#1450c8"></stop><stop offset="100%" stop-color="#25c9b0"></stop></linearGradient></defs>
             <path d="M14 24 L27 54" stroke="url(#vamMarkF)" stroke-width="15"></path>
             <path d="M30.5 62 L46 98 L78 24 L110 98" stroke="url(#vamMarkF)" stroke-width="15" stroke-linejoin="miter"></path>
@@ -78,21 +69,21 @@
         <p>FiveM server scripts for ESX, QBCore and Qbox, configured from one in-game panel.</p>
       </div>
       <div class="foot-col">
-        <span class="title">scripts</span>
-        <a href="products/configpanel.html">Config Manager</a>
+        <span class="title">Scripts</span>
         <a href="products/banking.html">Banking</a>
+        <a href="products/configpanel.html">Config Manager</a>
         <a href="products/invoices.html">Invoices</a>
         <a href="products.html">All scripts</a>
       </div>
       <div class="foot-col">
-        <span class="title">resources</span>
+        <span class="title">Resources</span>
         <!-- TODO: replace with real URLs once they exist (docs, changelog, status). -->
         <span class="pending">Documentation</span>
         <span class="pending">Changelog</span>
         <span class="pending">Status</span>
       </div>
       <div class="foot-col">
-        <span class="title">contact</span>
+        <span class="title">Contact</span>
         <!-- TODO: replace with the real Discord invite and Tebex storefront URL. -->
         <span class="pending">Discord</span>
         <span class="pending">Tebex store</span>
@@ -101,7 +92,7 @@
     </div>
     <div class="foot-legal">
       <span>© <span data-year>2026</span> VAmore Systems</span>
-      <span>not affiliated with Rockstar Games or Cfx.re</span>
+      <span>Not affiliated with Rockstar Games or Cfx.re</span>
       <!-- TODO: legal pages required before commercial launch in Germany (Impressum, privacy, terms). -->
       <span class="pending">Impressum</span>
       <span class="pending">Privacy</span>

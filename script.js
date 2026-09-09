@@ -1,59 +1,44 @@
-/* VAmore Systems — console behaviour
-   Data below is the real lineup. Two resources are purchasable, two are in
+/* VAmore Systems — site behaviour
+   The data below is the real lineup. Two scripts are purchasable, two are in
    development; nothing here may claim otherwise. */
 
 const RESOURCES = [
   {
-    slug: 'vamore_configpanel',
-    name: 'Config Manager',
-    price: 'free',
-    priceNote: '€0',
-    status: 'running',
-    category: 'core',
-    frameworks: ['ESX', 'QBCore', 'Qbox'],
-    line: 'One ACE-gated panel, one tab per registered script.',
-    verbose: 'Sliders and inputs replace config.lua. Changes apply live. Any script registers its schema with a single export.',
-    tebexPackageId: '7627638',
-    detailUrl: 'products/configpanel.html',
-  },
-  {
     slug: 'vamore_banking',
     name: 'Banking',
     price: '€40',
-    status: 'running',
-    category: 'economy',
-    frameworks: ['ESX', 'QBCore', 'Qbox'],
-    line: 'IBAN accounts, savings, credit, markets, faction payroll.',
-    verbose: 'PIN-protected accounts, ATM and branch handling, compounding savings with goals, event-based credit, 10 stocks and 5 coins on live pricing engines, grade-gated faction accounts, fraud dashboard with Discord alerts.',
+    status: 'available',
+    line: 'IBAN accounts, savings and credit, live markets, faction payroll, fraud dashboard.',
     tebexPackageId: '7627622',
     detailUrl: 'products/banking.html',
+  },
+  {
+    slug: 'vamore_configpanel',
+    name: 'Config Manager',
+    price: 'Free',
+    status: 'available',
+    line: 'One in-game panel with a tab per script. Settings apply live, no config.lua editing.',
+    tebexPackageId: '7627638',
+    detailUrl: 'products/configpanel.html',
   },
   {
     slug: 'vamore_invoices',
     name: 'Invoices',
     price: '€25',
-    status: 'building',
-    category: 'economy',
-    frameworks: ['ESX', 'QBCore', 'Qbox'],
-    line: 'Standalone billing, split out of Banking.',
-    verbose: 'Issue, pay and chase invoices without running the full Banking resource.',
+    status: 'development',
+    line: 'Standalone billing, split out of Banking for servers that do not need the full economy.',
     detailUrl: 'products/invoices.html',
   },
   {
     slug: 'vamore_restaurants',
     name: 'Restaurants',
-    price: 'tbd',
-    status: 'building',
-    category: 'economy',
-    frameworks: ['ESX', 'QBCore', 'Qbox'],
-    line: 'Recipes, prep stations, staff roles, supplier stock.',
-    verbose: 'Owner terminal for recipes, staffing, stock ordering and station placement; cooking runs as timed prep minigames.',
+    price: 'Price to be announced',
+    status: 'development',
+    line: 'Recipes, prep stations, staff roles, supplier stock and an in-game owner terminal.',
   },
 ];
 
-const STATUS_LABEL = { running: 'running', building: 'building' };
-
-/* --- Tebex --------------------------------------------------------------- */
+/* --- Tebex ---------------------------------------------------------------- */
 // The public token identifies the store and is safe client-side; the store's
 // private key never belongs in frontend code.
 const TEBEX_PUBLIC_TOKEN = '148lv-00fe39bf66eebb4de4bd960cef52ad1936dc0167';
@@ -63,7 +48,7 @@ async function buyOnTebex(packageId, button) {
   const original = button ? button.textContent : '';
   if (button) {
     button.disabled = true;
-    button.textContent = 'opening checkout…';
+    button.textContent = 'Opening checkout…';
   }
   try {
     const basketRes = await fetch(`${TEBEX_API_BASE}/baskets`, {
@@ -87,7 +72,7 @@ async function buyOnTebex(packageId, button) {
   } catch (err) {
     if (button) {
       button.disabled = false;
-      button.textContent = 'checkout unavailable — retry';
+      button.textContent = 'Checkout unavailable, try again';
     }
   }
 }
@@ -98,71 +83,127 @@ document.addEventListener('click', (event) => {
   buyOnTebex(btn.dataset.buyPackage, btn);
 });
 
-/* --- resource table ------------------------------------------------------ */
+/* --- catalogue ------------------------------------------------------------ */
 
-const dotSvg = (color) =>
-  `<svg class="dot" width="8" height="8" viewBox="0 0 8 8" aria-hidden="true"><circle cx="4" cy="4" r="3.25" fill="${color}"/></svg>`;
+const arrowSvg =
+  '<svg class="arrow" width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">' +
+  '<path d="M4 10h11M11 5.5 15.5 10 11 14.5" stroke="currentColor" stroke-width="1.5" ' +
+  'stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
-function resourceRow(r) {
-  const running = r.status === 'running';
-  const action = r.detailUrl
-    ? `<a class="cmd cmd-ghost" href="${r.detailUrl}"><span class="caret">&gt;</span>open</a>`
-    : `<span class="cmd is-pending"><span class="caret">&gt;</span>no page yet</span>`;
-  return `
-  <div class="res-row ${running ? 'is-running' : 'is-building'}" data-status="${r.status}">
-    <a class="res-name" href="${r.detailUrl || '#'}"${r.detailUrl ? '' : ' aria-disabled="true" tabindex="-1"'}>
-      ${dotSvg(running ? 'var(--ok)' : 'var(--build)')}${r.slug}
-    </a>
-    <span class="res-status">[ ${STATUS_LABEL[r.status]} ]</span>
-    <span class="res-desc">${r.line}</span>
-    <span class="res-price">${r.price}</span>
-    ${action}
-    <span class="res-desc verbose-only" style="grid-column:1/-1">${r.verbose} · ${r.frameworks.join(' / ')}</span>
-  </div>`;
-}
-
-function renderResources() {
-  const wrap = document.getElementById('resource-table');
-  if (!wrap) return;
-  wrap.innerHTML = `
-    <div class="res-head">
-      <span>resource</span><span>status</span><span>summary</span><span>price</span><span></span>
+function itemMarkup(r) {
+  const available = r.status === 'available';
+  const status = available
+    ? '<span class="status"><span class="dot"></span>Available now</span>'
+    : '<span class="status is-soon"><span class="dot"></span>In development</span>';
+  const inner = `
+    <div class="item-title">
+      <h3>${r.name}</h3>
+      ${status}
     </div>
-    ${RESOURCES.map(resourceRow).join('')}`;
+    <p class="item-desc">${r.line}</p>
+    <div class="item-side">
+      <span class="item-price${available ? '' : ' is-soon'}">${r.price}</span>
+      ${r.detailUrl ? arrowSvg : ''}
+    </div>`;
+
+  return r.detailUrl
+    ? `<a class="item" href="${r.detailUrl}">${inner}</a>`
+    : `<div class="item">${inner}</div>`;
 }
 
-function initFilters() {
-  const wrap = document.getElementById('filters');
+function renderCatalog() {
+  const wrap = document.getElementById('catalog');
   if (!wrap) return;
-  wrap.addEventListener('click', (event) => {
-    const btn = event.target.closest('.filter');
-    if (!btn) return;
-    wrap.querySelectorAll('.filter').forEach((b) => b.classList.toggle('is-on', b === btn));
-    const want = btn.dataset.filter;
-    document.querySelectorAll('#resource-table .res-row').forEach((row) => {
-      row.classList.toggle('is-filtered-out', want !== 'all' && row.dataset.status !== want);
-    });
-  });
+  wrap.innerHTML = RESOURCES.map(itemMarkup).join('');
 }
 
-/* --- verbose ------------------------------------------------------------- */
+/* --- hero typewriter ------------------------------------------------------ */
+// The one authored motion moment: the wordmark writes itself, the positioning
+// line follows, then the card takes up its rotation.
 
-function initVerbose() {
-  const button = document.getElementById('verbose-toggle');
-  if (!button) return;
+function initTypewriter() {
+  const headline = document.getElementById('type-headline');
+  const sub = document.getElementById('type-sub');
+  const cursor = document.getElementById('type-cursor');
+  const model = document.querySelector('.stage model-viewer');
+  if (!headline) return;
 
-  const apply = (on) => {
-    document.body.classList.toggle('is-verbose', on);
-    button.setAttribute('aria-pressed', on ? 'true' : 'false');
+  const startModel = () => {
+    if (cursor) cursor.remove();
+    if (model) model.setAttribute('auto-rotate', '');
   };
 
-  apply(localStorage.getItem('vamore-verbose') === '1');
+  // Reduced motion gets the finished headline and a card that holds still.
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (cursor) cursor.remove();
+    return;
+  }
 
-  button.addEventListener('click', () => {
-    const on = button.getAttribute('aria-pressed') !== 'true';
-    apply(on);
-    localStorage.setItem('vamore-verbose', on ? '1' : '0');
+  const headlineText = headline.textContent.trim();
+  const subText = sub ? sub.textContent.trim() : '';
+  headline.textContent = '';
+  if (sub) sub.style.visibility = 'hidden';
+
+  const type = (el, text, speed, done) => {
+    let i = 0;
+    const step = () => {
+      i += 1;
+      el.textContent = text.slice(0, i);
+      if (i < text.length) window.setTimeout(step, speed);
+      else if (done) window.setTimeout(done, 260);
+    };
+    step();
+  };
+
+  const startSub = () => {
+    if (!sub) return startModel();
+    sub.style.visibility = 'visible';
+    sub.textContent = '';
+    type(sub, subText, 22, startModel);
+  };
+
+  window.setTimeout(() => type(headline, headlineText, 58, startSub), 220);
+}
+
+/* --- 3D models ------------------------------------------------------------ */
+// On the home page the hero card starts turning when the typewriter hands over.
+// Everywhere else it starts on its own, and under reduced motion it holds still.
+
+function initModels() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.querySelectorAll('model-viewer').forEach((model) => {
+    if (model.closest('.stage')) return;
+    model.setAttribute('auto-rotate', '');
   });
+}
+
+/* --- media reveal --------------------------------------------------------- */
+
+function initReveal() {
+  const targets = document.querySelectorAll('.reveal');
+  if (!targets.length) return;
+
+  if (!('IntersectionObserver' in window) ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    targets.forEach((el) => el.classList.add('is-in'));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-in');
+      observer.unobserve(entry.target);
+    });
+  }, { rootMargin: '0px 0px -12% 0px', threshold: 0.15 });
+
+  targets.forEach((el) => observer.observe(el));
+
+  // Safety net: nothing on this site may stay invisible because an observer
+  // never fired (print, headless capture, a browser that throttles it).
+  window.setTimeout(() => {
+    targets.forEach((el) => el.classList.add('is-in'));
+  }, 2500);
 }
 
 /* --- video start frame ---------------------------------------------------- */
@@ -170,6 +211,8 @@ function initVerbose() {
 // so every use of it starts (and loops back) at the frame that proves the claim.
 
 function initVideoStart() {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   document.querySelectorAll('video[data-start]').forEach((video) => {
     const start = parseFloat(video.dataset.start);
     if (!Number.isFinite(start)) return;
@@ -177,6 +220,17 @@ function initVideoStart() {
     const seek = () => {
       if (video.duration && start < video.duration) video.currentTime = start;
     };
+
+    // Reduced motion gets the frame that makes the point, held still.
+    if (reduce) {
+      video.removeAttribute('autoplay');
+      video.removeAttribute('loop');
+      video.controls = true;
+      const hold = () => { seek(); video.pause(); };
+      if (video.readyState >= 1) hold();
+      else video.addEventListener('loadedmetadata', hold, { once: true });
+      return;
+    }
 
     if (video.readyState >= 1) seek();
     else video.addEventListener('loadedmetadata', seek, { once: true });
@@ -187,57 +241,7 @@ function initVideoStart() {
   });
 }
 
-/* --- boot log ------------------------------------------------------------ */
-// The one authored motion moment on the site: the first viewport prints
-// itself the way a resource start does.
-
-function initBootLog() {
-  const headline = document.getElementById('boot-headline');
-  const sub = document.getElementById('boot-sub');
-  const lines = Array.from(document.querySelectorAll('#boot-log .log-line[data-print]'));
-  const cursor = document.getElementById('boot-cursor');
-  if (!headline) return;
-
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const headlineText = headline.textContent.trim();
-  const subText = sub ? sub.textContent.trim() : '';
-
-  if (reduce) {
-    lines.forEach((l) => { l.style.visibility = 'visible'; });
-    return;
-  }
-
-  headline.textContent = '';
-  if (sub) sub.textContent = '';
-  lines.forEach((l) => { l.style.visibility = 'hidden'; });
-
-  const type = (el, text, speed, done) => {
-    let i = 0;
-    const step = () => {
-      i += 1;
-      el.textContent = text.slice(0, i);
-      if (i < text.length) window.setTimeout(step, speed);
-      else if (done) window.setTimeout(done, 220);
-    };
-    step();
-  };
-
-  const printLines = () => {
-    if (cursor) cursor.remove();
-    lines.forEach((line, i) => {
-      window.setTimeout(() => { line.style.visibility = 'visible'; }, i * 90);
-    });
-  };
-
-  const startSub = () => {
-    if (!sub) return printLines();
-    type(sub, subText, 26, printLines);
-  };
-
-  window.setTimeout(() => type(headline, headlineText, 42, startSub), 260);
-}
-
-/* --- misc ---------------------------------------------------------------- */
+/* --- misc ----------------------------------------------------------------- */
 
 function initYear() {
   document.querySelectorAll('[data-year]').forEach((el) => {
@@ -246,10 +250,10 @@ function initYear() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  renderResources();
-  initFilters();
-  initVerbose();
-  initBootLog();
+  renderCatalog();
+  initTypewriter();
+  initModels();
+  initReveal();
   initVideoStart();
   initYear();
 });
