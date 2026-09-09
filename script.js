@@ -387,6 +387,48 @@ function initPlayers() {
   });
 }
 
+/* --- object parallax ------------------------------------------------------ */
+// The showcase objects drift a little slower than the page, so scrolling has
+// depth instead of sliding as one flat sheet.
+
+function initParallax() {
+  const objects = Array.from(document.querySelectorAll('.is-object'));
+  if (!objects.length || reduceMotion()) return;
+
+  let visible = [];
+  const watcher = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        if (!visible.includes(entry.target)) visible.push(entry.target);
+      } else {
+        visible = visible.filter((el) => el !== entry.target);
+        entry.target.style.removeProperty('--shift');
+      }
+    });
+  }, { rootMargin: '20% 0px' });
+
+  objects.forEach((el) => watcher.observe(el));
+
+  let ticking = false;
+  const update = () => {
+    const middle = window.innerHeight / 2;
+    visible.forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      const offset = (rect.top + rect.height / 2 - middle) / middle;
+      el.style.setProperty('--shift', `${(offset * -22).toFixed(1)}px`);
+    });
+    ticking = false;
+  };
+
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  }, { passive: true });
+
+  update();
+}
+
 /* --- scroll progress ------------------------------------------------------ */
 
 function initProgress() {
@@ -426,6 +468,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initGlyphs();
   initReveal();
   initPlayers();
+  initParallax();
   initProgress();
   initYear();
 });

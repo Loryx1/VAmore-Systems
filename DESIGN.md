@@ -25,6 +25,7 @@ One authored moment plus two quiet supports.
 1. **Hero.** The wordmark types itself, the line follows, then the 3D card takes up its rotation. Behind it a WebGL curtain field drifts (custom shader, ~60 lines, no library): domain-warped fbm noise in the brand axis, drawn at half resolution, CSS-blurred, faded in over 1.4s. It stops when the hero leaves the viewport or the tab is hidden, and never starts under reduced motion.
 2. **Reveal.** Media and feature blocks arrive once with opacity, a 20px rise and a 6px blur clearing, on an exponential ease-out. A 3s timer guarantees nothing stays hidden if the observer never fires.
 3. **Glyphs.** Each feature icon draws its strokes once, staggered by 110ms, when its block arrives.
+4. **Objects.** Models and preview plates float on a 7.5s cycle over a breathing bloom, drift with a small scroll parallax, and lean in on hover.
 
 Under `prefers-reduced-motion` the page lands on the finished state: no shader, no rotation, no reveal, no typing, and the recording holds its poster frame with controls exposed.
 
@@ -45,7 +46,7 @@ Under `prefers-reduced-motion` the page lands on the finished state: no shader, 
 | `--link` | `#6aa8ff` | inline links |
 | `--ease` | `cubic-bezier(.16,1,.3,1)` | every transition |
 
-Radius `999px` on buttons, `24px` on media surfaces. Frames `1120px` / `1280px`. Section rhythm 96px mobile, 136px desktop.
+Radius `999px` on buttons, `24px` on framed media and preview plates. Frames `1120px` / `1280px`. Section rhythm 116px mobile, 176px desktop; showcase acts sit 104-200px apart.
 
 ## Type
 
@@ -60,6 +61,8 @@ Radius `999px` on buttons, `24px` on media surfaces. Frames `1120px` / `1280px`.
 - **`.hero` / `.aurora` / `.stage`** — the first viewport: shader field, typing headline, one filled action, the rotating `vamore_logo.glb`, and a `.scroll-cue` that names the next move.
 - **`.trust`** — four factual signals under the hero (frameworks, one-time purchase, in-game configuration, live apply), each with a drawn icon.
 - **`.act`** — a product act: copy on one side, the real artifact on the other. `.flip` reverses it, and the home page alternates sides down the showcase.
+- **`.is-object`** — how a 3D model or a preview plate is presented: no panel behind it, a brand-light bloom that breathes on an 11s cycle, a soft contact shadow beneath, a 7.5s float, and a small scroll parallax so the object drifts slower than the page.
+- **`.show-blank`** — the preview plate for anything without a shipped visual: a dashed frame, the brand mark and an honest line. Config Manager uses it too until its model exists; the real recording stays on its detail page.
 - **`.act.show`** — the home showcase: one act per script with a status and price line, the name, two sentences, and a single View details action. Depth lives on the detail page, never here.
 - **`.player`** — poster image, real `<video>` behind it, an explicit play control, and lazy loading. Playback starts when the block is 40% on screen.
 - **`.features` / `.feature`** — the module grid: hairline-separated cells with a self-drawing glyph, a heading and two lines. Not cards; no shadows, no rounded floating boxes.

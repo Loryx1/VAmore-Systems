@@ -92,8 +92,8 @@ a:hover { color: #9cc6ff; }
 .wrap { max-width: var(--frame); margin: 0 auto; padding: 0 24px; }
 .wrap-wide { max-width: var(--frame-wide); margin: 0 auto; padding: 0 24px; }
 
-section { padding: 96px 0; }
-@media (min-width: 900px) { section { padding: 136px 0; } }
+section { padding: 116px 0; }
+@media (min-width: 900px) { section { padding: 176px 0; } }
 
 .rule { position: relative; border-top: 1px solid var(--line-soft); }
 .rule::before {
@@ -695,7 +695,7 @@ a.item:hover .arrow { transform: translateX(4px); color: var(--teal); }
 
 /* --- home showcase -------------------------------------------------------- */
 
-.act.show + .act.show { margin-top: clamp(72px, 9vw, 128px); }
+.act.show + .act.show { margin-top: clamp(104px, 13vw, 200px); }
 
 .show-meta {
   display: flex;
@@ -716,9 +716,6 @@ a.item:hover .arrow { transform: translateX(4px); color: var(--teal); }
 .act.show .lede { margin-bottom: 0; max-width: 46ch; }
 .act.show .btn-row { margin-top: 28px; }
 
-.show-shot { display: block; border-radius: inherit; overflow: hidden; }
-.show-shot img { width: 100%; transition: transform 600ms var(--ease); }
-.show-shot:hover img { transform: scale(1.02); }
 
 .show-blank {
   display: grid;
@@ -735,3 +732,100 @@ a.item:hover .arrow { transform: translateX(4px); color: var(--teal); }
 @media (min-width: 1000px) {
   .features.is-four { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* --- floating objects ----------------------------------------------------- */
+/* Models and preview plates sit on the page itself: no panel behind them, a
+   brand-light bloom for depth, and a real contact shadow underneath. */
+
+.act-media.is-object,
+.detail-media.is-object {
+  background: none;
+  border-radius: 0;
+  overflow: visible;
+}
+
+.is-object { position: relative; isolation: isolate; }
+
+.is-object::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  z-index: -1;
+  width: min(680px, 104%);
+  aspect-ratio: 1.32;
+  translate: -50% -50%;
+  background: radial-gradient(50% 50% at 50% 50%,
+    rgba(23, 162, 201, 0.46) 0%,
+    rgba(20, 80, 200, 0.26) 44%,
+    transparent 74%);
+  filter: blur(52px);
+  animation: breathe 11s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.is-object::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 4%;
+  z-index: -1;
+  width: min(380px, 64%);
+  height: 30px;
+  translate: -50% 0;
+  background: radial-gradient(50% 50% at 50% 50%, rgba(0, 0, 0, 0.8) 0%, transparent 72%);
+  filter: blur(14px);
+  animation: settle 7.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes breathe {
+  0%, 100% { opacity: 0.78; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.07); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+
+@keyframes settle {
+  0%, 100% { opacity: 0.85; transform: scaleX(1); }
+  50% { opacity: 0.6; transform: scaleX(0.9); }
+}
+
+.is-object model-viewer,
+.is-object .show-blank {
+  translate: 0 var(--shift, 0px);
+  transition: translate 300ms linear;
+  animation: float 7.5s ease-in-out infinite;
+}
+
+/* --- preview plate -------------------------------------------------------- */
+
+.show-blank {
+  display: grid;
+  place-items: center;
+  gap: 20px;
+  min-height: clamp(260px, 32vw, 400px);
+  padding: 40px;
+  text-align: center;
+  border: 1px dashed var(--line);
+  border-radius: var(--r-lg);
+  background: linear-gradient(168deg, rgba(17, 25, 37, 0.5) 0%, rgba(7, 11, 17, 0.5) 100%);
+}
+.show-blank svg { opacity: 0.4; }
+.show-blank span { font-size: 0.86rem; color: var(--ink-3); }
+
+/* Objects answer the pointer: the light swells, the object leans in. */
+.act.show .act-media { transition: transform 500ms var(--ease); }
+.act.show:hover .act-media { transform: scale(1.02); }
+.act.show:hover .act-media::before { opacity: 1; transform: scale(1.12); }
+
+.trust-item { transition: background 260ms var(--ease); }
+.trust-item:hover { background: var(--bg-lift); }
+.trust-item svg { transition: transform 320ms var(--ease); }
+.trust-item:hover svg { transform: translateY(-2px); }
+
+.show-blank { transition: border-color 320ms var(--ease); }
+.act.show:hover .show-blank { border-color: rgba(37, 201, 176, 0.35); }

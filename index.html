@@ -10,7 +10,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;500&family=Martian+Mono:wght@500;600&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-<link rel="preload" as="image" href="assets/img/panel-poster.jpg">
 <meta property="og:title" content="VAmore Systems — FiveM scripts that share one config panel">
 <meta property="og:description" content="Banking, Config Manager and more for ESX, QBCore and Qbox. One in-game panel instead of config.lua.">
 <meta property="og:image" content="https://vamore.shop/assets/vamore-icon-tile-gradient.png">
@@ -117,7 +116,7 @@
             <a href="products/banking.html" class="btn btn-primary">View details</a>
           </div>
         </div>
-        <div class="act-media reveal">
+        <div class="act-media is-object reveal">
           <model-viewer src="assets/glb/creditcard.glb" alt="A rotating VAmore bank card"
                         orientation="90deg 30deg 0deg" rotation-per-second="16deg" auto-rotate-delay="0"
                         camera-controls disable-zoom interaction-prompt="none" shadow-intensity="1"
@@ -138,11 +137,16 @@
             <a href="products/configpanel.html" class="btn btn-primary">View details</a>
           </div>
         </div>
-        <div class="act-media reveal">
-          <a href="products/configpanel.html" class="show-shot">
-            <img src="assets/img/panel-poster.jpg" width="1218" height="718" loading="lazy"
-                 alt="The Config Manager panel open on the Banking tab, showing daily limits, invoice settings and ATM locations">
-          </a>
+        <div class="act-media is-object reveal">
+          <div class="show-blank">
+            <svg width="64" height="64" viewBox="0 0 128 128" fill="none" aria-hidden="true">
+              <defs><linearGradient id="vamBlank0" gradientUnits="userSpaceOnUse" x1="14" y1="104" x2="110" y2="20"><stop offset="0%" stop-color="#1450c8"></stop><stop offset="100%" stop-color="#25c9b0"></stop></linearGradient></defs>
+              <path d="M14 24 L27 54" stroke="url(#vamBlank0)" stroke-width="15"></path>
+              <path d="M30.5 62 L46 98 L78 24 L110 98" stroke="url(#vamBlank0)" stroke-width="15" stroke-linejoin="miter"></path>
+              <path d="M50 74 H107" stroke="url(#vamBlank0)" stroke-width="15"></path>
+            </svg>
+            <span>Preview coming soon &middot; see it running on the details page</span>
+          </div>
         </div>
       </article>
 
@@ -159,7 +163,7 @@
             <a href="products/invoices.html" class="btn btn-quiet">View details</a>
           </div>
         </div>
-        <div class="act-media reveal">
+        <div class="act-media is-object reveal">
           <div class="show-blank">
             <svg width="64" height="64" viewBox="0 0 128 128" fill="none" aria-hidden="true">
               <defs><linearGradient id="vamBlank1" gradientUnits="userSpaceOnUse" x1="14" y1="104" x2="110" y2="20"><stop offset="0%" stop-color="#1450c8"></stop><stop offset="100%" stop-color="#25c9b0"></stop></linearGradient></defs>
@@ -185,7 +189,7 @@
             <span class="btn is-disabled">Details coming soon</span>
           </div>
         </div>
-        <div class="act-media reveal">
+        <div class="act-media is-object reveal">
           <div class="show-blank">
             <svg width="64" height="64" viewBox="0 0 128 128" fill="none" aria-hidden="true">
               <defs><linearGradient id="vamBlank2" gradientUnits="userSpaceOnUse" x1="14" y1="104" x2="110" y2="20"><stop offset="0%" stop-color="#1450c8"></stop><stop offset="100%" stop-color="#25c9b0"></stop></linearGradient></defs>
