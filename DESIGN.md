@@ -3,13 +3,13 @@
 <!-- Derived from the shipped build: index.html, products.html, products/*.html,
      legal/*.html, style.css, script.js -->
 
-The site is a **product showroom on a dark ground with one moment of brand weather**. Content sits in a lot of air with large light type; the saturated colour appears three times only — the aurora field behind the hero, the primary action, and the hairlines that open each section. Apple-grade calm, not template gloss.
+The site is a **product showroom on a dark ground with one moment of brand weather**. The home page is a showcase and nothing else: hero, four trust signals, one act per script, one closing action. Every feature list, module grid and explanation lives on the script's own page. Content sits in a lot of air with large light type; the saturated colour appears three times only — the aurora field behind the hero, the primary action, and the hairlines that open each section. Apple-grade calm, not template gloss.
 
 ## Stack
 
 Vanilla HTML, CSS and JavaScript. No build step, no framework, no bundler: GitHub Pages serves the repository as it stands, which is why the choice is deliberate rather than lazy. External runtime dependencies are `model-viewer` (unpkg, 3D card), the Tebex checkout script, and Google Fonts.
 
-First load of the home page is roughly **170 KB** of local assets across 7 requests. The 11.6 MB panel recording is not one of them: it sits behind a 35 KB poster frame and `preload="none"`.
+First load of the home page is roughly **370 KB** of local assets across 7 requests, most of it the hero model. The 11.6 MB panel recording is not one of them: it sits behind a 35 KB poster frame and `preload="none"`.
 
 ## World
 
@@ -57,12 +57,13 @@ Radius `999px` on buttons, `24px` on media surfaces. Frames `1120px` / `1280px`.
 ## Components
 
 - **`.nav`** — sticky, blurred, with `.nav-progress`: a 1px scroll-progress line in the brand axis.
-- **`.hero` / `.aurora` / `.stage`** — the first viewport: shader field, typing headline, one filled action, the rotating `creditcard.glb`, and a `.scroll-cue` that names the next move.
+- **`.hero` / `.aurora` / `.stage`** — the first viewport: shader field, typing headline, one filled action, the rotating `vamore_logo.glb`, and a `.scroll-cue` that names the next move.
 - **`.trust`** — four factual signals under the hero (frameworks, one-time purchase, in-game configuration, live apply), each with a drawn icon.
-- **`.act`** — a product act: copy on one side, the real artifact on the other. `.flip` reverses it.
+- **`.act`** — a product act: copy on one side, the real artifact on the other. `.flip` reverses it, and the home page alternates sides down the showcase.
+- **`.act.show`** — the home showcase: one act per script with a status and price line, the name, two sentences, and a single View details action. Depth lives on the detail page, never here.
 - **`.player`** — poster image, real `<video>` behind it, an explicit play control, and lazy loading. Playback starts when the block is 40% on screen.
 - **`.features` / `.feature`** — the module grid: hairline-separated cells with a self-drawing glyph, a heading and two lines. Not cards; no shadows, no rounded floating boxes.
-- **`.schematic`** — the registration diagram: four scripts wired into one panel, the two shipping scripts on live wires.
+- **`.schematic`** — the registration diagram: four scripts wired into one panel, the two shipping scripts on live wires. It lives on the Config Manager page, where the claim it illustrates is made.
 - **`.catalog` / `.item`** — the lineup, rendered from `RESOURCES` in `script.js` so home and catalogue can never disagree. Hover slides the row text and lights a brand-axis edge.
 - **`.specs` / `.lines`** — key/value and name/description rows with tabular figures.
 - **`.close-band`** — the one lifted surface, closing home and catalogue with the two real actions.
@@ -76,5 +77,5 @@ Skip link on every page; `:focus-visible` ring in teal at 3px offset; nav marks 
 ## Content rules
 
 - Two scripts are purchasable (Banking €40, Config Manager free); two are in development (Invoices, Restaurants). The build says exactly that and never dresses an unfinished script as buyable.
-- No invented metrics, testimonials, recordings, player counts or performance figures. The only real media are `assets/admin-panel-demo.mp4`, its extracted poster `assets/img/panel-poster.jpg`, `assets/glb/creditcard.glb` and the brand assets.
+- No invented metrics, testimonials, recordings, player counts or performance figures. The only real media are `assets/admin-panel-demo.mp4`, its extracted poster `assets/img/panel-poster.jpg`, `assets/glb/vamore_logo.glb` (hero), `assets/glb/creditcard.glb` (Banking) and the brand assets.
 - Links that do not exist yet (Discord, Tebex storefront, docs, changelog, status) render as `.pending` with a `TODO` naming the replacement. Legal pages exist but state plainly that their content is not published yet.

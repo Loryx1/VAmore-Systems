@@ -83,7 +83,7 @@
       </div>
     </div>
 
-    <div class="features">
+    <div class="features is-four">
       <article class="feature">
         <svg class="glyph" viewBox="0 0 48 48" fill="none" aria-hidden="true">
           <rect data-draw x="6" y="10" width="36" height="28" rx="4" stroke="currentColor" stroke-width="1.6"/>
@@ -124,6 +124,41 @@
         <p>A script registers its schema with one export call, with no core changes, and stays backward
           compatible when a script does not integrate at all.</p>
       </article>
+    </div>
+  </section>
+
+  <section class="rule">
+    <div class="wrap-wide">
+      <div class="act">
+        <div class="act-copy">
+          <h2>Buy one script. The next one already fits.</h2>
+          <p class="lede">Every VAmore script registers its settings with one export call. Config
+            Manager builds the tab, the storage and the live updates around it.</p>
+          <p>That is the whole integration. A script that never registers keeps working exactly as it
+            did, and nothing in the panel depends on a script you have not bought.</p>
+        </div>
+        <div class="reveal">
+          <svg class="schematic" viewBox="0 0 420 260" role="img" aria-label="Diagram: four scripts each register into one Config Manager panel">
+            <rect class="node" x="8" y="18" width="132" height="38" rx="10"/>
+            <text x="26" y="42">vamore_banking</text>
+            <rect class="node" x="8" y="76" width="132" height="38" rx="10"/>
+            <text x="26" y="100">vamore_invoices</text>
+            <rect class="node" x="8" y="134" width="132" height="38" rx="10"/>
+            <text x="26" y="158">vamore_restaurants</text>
+            <rect class="node" x="8" y="192" width="132" height="38" rx="10"/>
+            <text x="26" y="216">your_own_script</text>
+
+            <path class="wire live" d="M140 37 C 200 37, 200 124, 262 124" fill="none" stroke-width="1.4"/>
+            <path class="wire live" d="M140 95 C 200 95, 200 124, 262 124" fill="none" stroke-width="1.4"/>
+            <path class="wire" d="M140 153 C 200 153, 200 124, 262 124" fill="none" stroke-width="1.4"/>
+            <path class="wire" d="M140 211 C 200 211, 200 124, 262 124" fill="none" stroke-width="1.4"/>
+
+            <rect class="hub" x="262" y="86" width="146" height="76" rx="14"/>
+            <text x="284" y="120" style="fill:var(--ink)">Config Manager</text>
+            <text x="284" y="140">/vamoreconfig</text>
+          </svg>
+        </div>
+      </div>
     </div>
   </section>
 

@@ -692,3 +692,46 @@ a.item:hover .arrow { transform: translateX(4px); color: var(--teal); }
   .type-cursor, .scroll-cue .track::after { display: none; }
   .feature .glyph [data-draw] { stroke-dashoffset: 0; }
 }
+
+/* --- home showcase -------------------------------------------------------- */
+
+.act.show + .act.show { margin-top: clamp(72px, 9vw, 128px); }
+
+.show-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+.show-price {
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+.show-price.is-soon { color: var(--ink-3); font-weight: 500; }
+
+.act.show h2 { margin-bottom: 16px; }
+.act.show .lede { margin-bottom: 0; max-width: 46ch; }
+.act.show .btn-row { margin-top: 28px; }
+
+.show-shot { display: block; border-radius: inherit; overflow: hidden; }
+.show-shot img { width: 100%; transition: transform 600ms var(--ease); }
+.show-shot:hover img { transform: scale(1.02); }
+
+.show-blank {
+  display: grid;
+  place-items: center;
+  gap: 18px;
+  min-height: clamp(240px, 30vw, 360px);
+  padding: 32px;
+  text-align: center;
+}
+.show-blank svg { opacity: 0.34; }
+.show-blank span { font-size: 0.86rem; color: var(--ink-3); }
+
+/* Four modules read as two even rows; three columns would leave a hole. */
+@media (min-width: 1000px) {
+  .features.is-four { grid-template-columns: repeat(2, 1fr); }
+}
