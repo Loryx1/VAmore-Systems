@@ -13,12 +13,13 @@
 <script defer src="https://js.tebex.io/v/1.js"></script>
 </head>
 <body>
+<a href="#main" class="skip">Skip to content</a>
 
 <header class="nav">
   <div class="wrap-wide nav-inner">
     <a href="../index.html" class="brand">
       <svg width="24" height="24" viewBox="0 0 128 128" fill="none" aria-hidden="true">
-        <defs><linearGradient id="vamMark" gradientUnits="userSpaceOnUse" x1="14" y1="104" x2="110" y2="20"><stop offset="0%" stop-color="#1450c8"></stop><stop offset="55%" stop-color="#1b8fc4"></stop><stop offset="100%" stop-color="#25c9b0"></stop></linearGradient></defs>
+        <defs><linearGradient id="vamMark" gradientUnits="userSpaceOnUse" x1="14" y1="104" x2="110" y2="20"><stop offset="0%" stop-color="#1450c8"></stop><stop offset="55%" stop-color="#17a2c9"></stop><stop offset="100%" stop-color="#25c9b0"></stop></linearGradient></defs>
         <path d="M14 24 L27 54" stroke="url(#vamMark)" stroke-width="15"></path>
         <path d="M30.5 62 L46 98 L78 24 L110 98" stroke="url(#vamMark)" stroke-width="15" stroke-linejoin="miter"></path>
         <path d="M50 74 H107" stroke="url(#vamMark)" stroke-width="15"></path>
@@ -27,14 +28,15 @@
     </a>
     <nav class="nav-links" aria-label="Main">
       <a href="../products.html">Scripts</a>
-      <a href="configpanel.html" aria-current="page" class="optional">Config Manager</a>
-      <a href="banking.html" class="optional">Banking</a>
+      <a href="../products/configpanel.html" class="optional" aria-current="page">Config Manager</a>
+      <a href="../products/banking.html" class="optional">Banking</a>
     </nav>
-    <button type="button" class="btn btn-primary" data-buy-package="7627638">Get it free</button>
+    <button type="button" class="btn btn-quiet" data-buy-package="7627622">Buy Banking</button>
+    <div class="nav-progress" aria-hidden="true"></div>
   </div>
 </header>
 
-<main>
+<main id="main">
   <section style="padding-bottom:0">
     <div class="wrap-wide">
       <a href="../products.html" class="back">
@@ -58,8 +60,15 @@
         </div>
 
         <div class="detail-media reveal">
-          <video src="../assets/vid/admin-panel-demo.mp4" data-start="6" autoplay muted loop playsinline
-                 aria-label="The Config Manager panel being used in game" style="width:100%"></video>
+          <div class="player">
+            <video src="../assets/admin-panel-demo.mp4" poster="../assets/img/panel-poster.jpg"
+                   preload="none" muted loop playsinline
+                   aria-label="Screen recording of the Config Manager panel being used in game"></video>
+            <img class="poster" src="../assets/img/panel-poster.jpg" alt="The Config Manager panel open on the Banking tab, showing daily limits, invoice settings and ATM locations" width="1218" height="718">
+            <button type="button" class="play" aria-label="Play the Config Manager recording">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M7 4.5 15 10l-8 5.5V4.5Z" fill="currentColor"/></svg>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -72,28 +81,49 @@
         <p class="lede">The command is <code>/vamoreconfig</code>. Everything behind it is gated by an
           ACE permission and checked server-side.</p>
       </div>
-      <ul class="lines">
-        <li>
-          <h3>One panel, every script</h3>
-          <p>A single ACE-gated panel with one tab per registered script, settings grouped into clearly
-            labelled sections.</p>
-        </li>
-        <li>
-          <h3>Settings, not code</h3>
-          <p>Sliders and inputs replace hand-editing <code>config.lua</code>. Every change applies live:
-            no restart, no resource reload.</p>
-        </li>
-        <li>
-          <h3>Location management</h3>
-          <p><em>Add here</em> places a point at your exact position. <em>Delete here</em> removes the
-            nearest one, with a clear error when nothing is in range.</p>
-        </li>
-        <li>
-          <h3>Built for developers</h3>
-          <p>A script registers its schema with one export call, with no core changes, and stays
-            backward compatible when a script does not integrate at all.</p>
-        </li>
-      </ul>
+    </div>
+
+    <div class="features">
+      <article class="feature">
+        <svg class="glyph" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <rect data-draw x="6" y="10" width="36" height="28" rx="4" stroke="currentColor" stroke-width="1.6"/>
+          <path data-draw d="M17 10v28" stroke="currentColor" stroke-width="1.6"/>
+          <path data-draw d="M23 19h13M23 26h9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        <h3>One panel, every script</h3>
+        <p>A single ACE-gated panel with one tab per registered script, settings grouped into clearly
+          labelled sections.</p>
+      </article>
+      <article class="feature">
+        <svg class="glyph" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <path data-draw d="M10 15h28M10 24h28M10 33h28" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <circle data-draw cx="19" cy="15" r="3.6" stroke="currentColor" stroke-width="1.6"/>
+          <circle data-draw cx="31" cy="24" r="3.6" stroke="currentColor" stroke-width="1.6"/>
+          <circle data-draw cx="22" cy="33" r="3.6" stroke="currentColor" stroke-width="1.6"/>
+        </svg>
+        <h3>Settings, not code</h3>
+        <p>Sliders and inputs replace hand-editing <code>config.lua</code>. Every change applies live:
+          no restart, no resource reload.</p>
+      </article>
+      <article class="feature">
+        <svg class="glyph" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <path data-draw d="M24 41c7-8 11-13.6 11-18.4A11 11 0 0 0 13 22.6C13 27.4 17 33 24 41Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+          <circle data-draw cx="24" cy="22" r="4" stroke="currentColor" stroke-width="1.6"/>
+        </svg>
+        <h3>Location management</h3>
+        <p><em>Add here</em> places a point at your exact position. <em>Delete here</em> removes the
+          nearest one, with a clear error when nothing is in range.</p>
+      </article>
+      <article class="feature">
+        <svg class="glyph" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <path data-draw d="M18 16 9 24l9 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <path data-draw d="m30 16 9 8-9 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <path data-draw d="m26 12-4 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        <h3>Built for developers</h3>
+        <p>A script registers its schema with one export call, with no core changes, and stays backward
+          compatible when a script does not integrate at all.</p>
+      </article>
     </div>
   </section>
 
@@ -116,7 +146,7 @@
             <li><span class="k">Access</span><span class="v">ACE permission, server-side gated</span></li>
             <li><span class="k">Applies</span><span class="v"><strong>Live</strong>, no restart</span></li>
             <li><span class="k">Integration</span><span class="v">One export call per script</span></li>
-            <li><span class="k">Frameworks</span><span class="v">ESX · QBCore · Qbox · standalone</span></li>
+            <li><span class="k">Frameworks</span><span class="v">ESX &middot; QBCore &middot; Qbox &middot; standalone</span></li>
             <li><span class="k">Price</span><span class="v"><strong>Free</strong></span></li>
           </ul>
         </div>
@@ -124,7 +154,6 @@
     </div>
   </section>
 </main>
-
 <footer class="foot">
   <div class="wrap-wide">
     <div class="foot-grid">
@@ -142,9 +171,9 @@
       </div>
       <div class="foot-col">
         <span class="title">Scripts</span>
-        <a href="banking.html">Banking</a>
-        <a href="configpanel.html">Config Manager</a>
-        <a href="invoices.html">Invoices</a>
+        <a href="../products/banking.html">Banking</a>
+        <a href="../products/configpanel.html">Config Manager</a>
+        <a href="../products/invoices.html">Invoices</a>
         <a href="../products.html">All scripts</a>
       </div>
       <div class="foot-col">
@@ -163,12 +192,11 @@
       </div>
     </div>
     <div class="foot-legal">
-      <span>© <span data-year>2026</span> VAmore Systems</span>
+      <span>&copy; <span data-year>2026</span> VAmore Systems</span>
       <span>Not affiliated with Rockstar Games or Cfx.re</span>
-      <!-- TODO: legal pages required before commercial launch in Germany (Impressum, privacy, terms). -->
-      <span class="pending">Impressum</span>
-      <span class="pending">Privacy</span>
-      <span class="pending">Terms</span>
+      <a href="../legal/impressum.html">Impressum</a>
+      <a href="../legal/privacy.html">Privacy</a>
+      <a href="../legal/terms.html">Terms</a>
     </div>
   </div>
 </footer>

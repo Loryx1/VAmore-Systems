@@ -2,7 +2,18 @@
 
 Mode: Persuade.
 
-## Direction contract (revision 2 — replaces the Server Console world)
+## Direction contract (revision 3 — Aurora Deck)
+
+Revision 2 (product showroom) was kept as the structure and re-briefed for impact: the user asked for a site that beats lbscripts.com on first impression while staying Apple-premium rather than kitsch. Revision 3 keeps every content rule and adds the wow layer: an animated brand-light field in the hero, drawn feature glyphs, a scroll-progress hairline, and legal pages inside the same system. The Server Console world (revision 1) stays the anti-reference.
+
+ADDED IN REVISION 3:
+- HERO LIGHT: a custom WebGL curtain field in the brand axis (blue #1450c8 → cyan #17a2c9 → teal #25c9b0), half-resolution, blurred, paused when off screen or hidden, and absent entirely under prefers-reduced-motion. No library, no third-party shader.
+- FEATURE GLYPHS: a drawn SVG icon set at one stroke weight, each icon drawing itself once when its block arrives. No stock icons, no emoji, no fabricated chart decor.
+- SCHEMATIC: the registration story told as a real diagram (four scripts into one panel) instead of another paragraph.
+- MEDIA: the heavy panel recording is lazy, behind a real poster frame extracted from the recording itself, with an explicit play control.
+- LEGAL: impressum, privacy and terms exist as pages in the same system, each carrying an honest placeholder notice instead of invented legal text.
+
+## Direction contract (revision 2 — the showroom structure, still in force)
 
 The Server Console build shipped and the user rejected it: it read as a script's own log output instead of a place to buy scripts. That world is the anti-reference now. Nothing carries over from it except the product truth and the content rules at the bottom of this file. User's brief for this revision: simple and clean like Apple, as appealing as lbscripts.com, dark, and the rotating 3D card kept as a real object on the page.
 

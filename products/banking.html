@@ -14,12 +14,13 @@
 <script defer src="https://js.tebex.io/v/1.js"></script>
 </head>
 <body>
+<a href="#main" class="skip">Skip to content</a>
 
 <header class="nav">
   <div class="wrap-wide nav-inner">
     <a href="../index.html" class="brand">
       <svg width="24" height="24" viewBox="0 0 128 128" fill="none" aria-hidden="true">
-        <defs><linearGradient id="vamMark" gradientUnits="userSpaceOnUse" x1="14" y1="104" x2="110" y2="20"><stop offset="0%" stop-color="#1450c8"></stop><stop offset="55%" stop-color="#1b8fc4"></stop><stop offset="100%" stop-color="#25c9b0"></stop></linearGradient></defs>
+        <defs><linearGradient id="vamMark" gradientUnits="userSpaceOnUse" x1="14" y1="104" x2="110" y2="20"><stop offset="0%" stop-color="#1450c8"></stop><stop offset="55%" stop-color="#17a2c9"></stop><stop offset="100%" stop-color="#25c9b0"></stop></linearGradient></defs>
         <path d="M14 24 L27 54" stroke="url(#vamMark)" stroke-width="15"></path>
         <path d="M30.5 62 L46 98 L78 24 L110 98" stroke="url(#vamMark)" stroke-width="15" stroke-linejoin="miter"></path>
         <path d="M50 74 H107" stroke="url(#vamMark)" stroke-width="15"></path>
@@ -28,14 +29,15 @@
     </a>
     <nav class="nav-links" aria-label="Main">
       <a href="../products.html">Scripts</a>
-      <a href="configpanel.html" class="optional">Config Manager</a>
-      <a href="banking.html" aria-current="page" class="optional">Banking</a>
+      <a href="../products/configpanel.html" class="optional">Config Manager</a>
+      <a href="../products/banking.html" class="optional" aria-current="page">Banking</a>
     </nav>
-    <button type="button" class="btn btn-primary" data-buy-package="7627622">Buy — €40</button>
+    <button type="button" class="btn btn-quiet" data-buy-package="7627622">Buy Banking</button>
+    <div class="nav-progress" aria-hidden="true"></div>
   </div>
 </header>
 
-<main>
+<main id="main">
   <section style="padding-bottom:0">
     <div class="wrap-wide">
       <a href="../products.html" class="back">
@@ -53,16 +55,16 @@
           dashboard. One resource, no framework-specific forks.</p>
 
         <div class="detail-buy">
-          <span class="price">€40</span>
+          <span class="price">&euro;40</span>
           <span class="note">One-time, per server. ESX, QBCore and Qbox. Configurable through Config Manager.</span>
           <button type="button" class="btn btn-primary" data-buy-package="7627622">Buy on Tebex</button>
         </div>
 
         <div class="detail-media reveal">
           <model-viewer src="../assets/glb/creditcard.glb" alt="A rotating VAmore bank card"
-                        orientation="90deg 30deg 0deg" rotation-per-second="16deg"
-                        auto-rotate-delay="0" camera-controls disable-zoom interaction-prompt="none"
-                        shadow-intensity="1" exposure="1.05"></model-viewer>
+                        orientation="90deg 30deg 0deg" rotation-per-second="16deg" auto-rotate-delay="0"
+                        camera-controls disable-zoom interaction-prompt="none" shadow-intensity="1"
+                        field-of-view="20deg" exposure="1.05"></model-viewer>
         </div>
       </div>
     </div>
@@ -71,42 +73,74 @@
   <section>
     <div class="wrap-wide">
       <div class="head">
-        <h2>What is in it.</h2>
-        <p class="lede">Six modules, all shipped in one resource. Every one of them can be switched off
-          and retuned from the panel instead of a file.</p>
+        <h2>Six modules, one resource.</h2>
+        <p class="lede">Every one of them can be retuned or switched off from the panel instead of a file.</p>
       </div>
-      <ul class="lines">
-        <li>
-          <h3>Core banking</h3>
-          <p>Automatic IBAN accounts, 4-digit PIN protection, ATM and branch deposits and withdrawals,
-            IBAN-only transfers with contacts, and a fully filterable statement.</p>
-        </li>
-        <li>
-          <h3>Savings and credit</h3>
-          <p>Tiered compounding savings interest with trackable goals, plus an event-based credit score
-            with score-tiered loan limits and interest.</p>
-        </li>
-        <li>
-          <h3>Markets</h3>
-          <p><span class="num">10</span> stocks and <span class="num">5</span> coins on live,
-            server-driven pricing engines, with price history charts and take-profit or stop-loss orders.</p>
-        </li>
-        <li>
-          <h3>Faction accounts</h3>
-          <p>Job-bound accounts with grade-gated access, automatic per-grade salary payouts, and a full
-            accounting ledger, with no manual member management.</p>
-        </li>
-        <li>
-          <h3>Fraud dashboard</h3>
-          <p>Flagged high-value transactions, a suspicious-activity filter, Discord webhook alerts,
-            per-player rate limiting, and configurable daily caps.</p>
-        </li>
-        <li>
-          <h3>Configuration</h3>
-          <p>Every setting, from PIN lockouts to daily limits to which modules run at all, is controlled
-            live through Config Manager. No restarts, no <code>config.lua</code>.</p>
-        </li>
-      </ul>
+    </div>
+
+    <div class="features">
+      <article class="feature">
+        <svg class="glyph" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <rect data-draw x="6" y="12" width="36" height="24" rx="4" stroke="currentColor" stroke-width="1.6"/>
+          <path data-draw d="M6 20h36" stroke="currentColor" stroke-width="1.6"/>
+          <rect data-draw x="12" y="25" width="8" height="6" rx="1.6" stroke="currentColor" stroke-width="1.6"/>
+        </svg>
+        <h3>Core banking</h3>
+        <p>Automatic IBAN accounts, 4-digit PIN protection, ATM and branch deposits and withdrawals,
+          IBAN-only transfers with contacts, and a fully filterable statement.</p>
+      </article>
+      <article class="feature">
+        <svg class="glyph" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <path data-draw d="M8 34c6 0 8-4 12-10s6-10 12-10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <path data-draw d="M32 14h6v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <path data-draw d="M8 40h32" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        <h3>Savings and credit</h3>
+        <p>Tiered compounding savings interest with trackable goals, plus an event-based credit score
+          with score-tiered loan limits and interest.</p>
+      </article>
+      <article class="feature">
+        <svg class="glyph" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <path data-draw d="M12 32V20M22 34V14M32 30V24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <path data-draw d="M8 40h32" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <circle data-draw cx="32" cy="16" r="4" stroke="currentColor" stroke-width="1.6"/>
+        </svg>
+        <h3>Markets</h3>
+        <p><span class="num">10</span> stocks and <span class="num">5</span> coins on live,
+          server-driven pricing engines, with price history charts and take-profit or stop-loss orders.</p>
+      </article>
+      <article class="feature">
+        <svg class="glyph" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <circle data-draw cx="24" cy="14" r="5" stroke="currentColor" stroke-width="1.6"/>
+          <circle data-draw cx="12" cy="34" r="5" stroke="currentColor" stroke-width="1.6"/>
+          <circle data-draw cx="36" cy="34" r="5" stroke="currentColor" stroke-width="1.6"/>
+          <path data-draw d="M21 18 15 29M27 18l6 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        <h3>Faction accounts</h3>
+        <p>Job-bound accounts with grade-gated access, automatic per-grade salary payouts, and a full
+          accounting ledger, with no manual member management.</p>
+      </article>
+      <article class="feature">
+        <svg class="glyph" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <path data-draw d="M24 6 9 12v11c0 9 6.4 15.4 15 18 8.6-2.6 15-9 15-18V12L24 6Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+          <path data-draw d="M24 18v7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <path data-draw d="M24 30h.02" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+        </svg>
+        <h3>Fraud dashboard</h3>
+        <p>Flagged high-value transactions, a suspicious-activity filter, Discord webhook alerts,
+          per-player rate limiting, and configurable daily caps.</p>
+      </article>
+      <article class="feature">
+        <svg class="glyph" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <path data-draw d="M10 15h28M10 24h28M10 33h28" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <circle data-draw cx="19" cy="15" r="3.6" stroke="currentColor" stroke-width="1.6"/>
+          <circle data-draw cx="31" cy="24" r="3.6" stroke="currentColor" stroke-width="1.6"/>
+          <circle data-draw cx="22" cy="33" r="3.6" stroke="currentColor" stroke-width="1.6"/>
+        </svg>
+        <h3>Configuration</h3>
+        <p>Every setting, from PIN lockouts to daily limits to which modules run at all, is controlled
+          live through Config Manager. No restarts, no <code>config.lua</code>.</p>
+      </article>
     </div>
   </section>
 
@@ -118,13 +152,13 @@
           <p>Banking runs on its own. Config Manager is free and optional: install it and every Banking
             setting moves into an in-game panel instead of a file you have to edit and reload.</p>
           <div class="btn-row">
-            <button type="button" class="btn btn-primary" data-buy-package="7627622">Buy on Tebex — €40</button>
+            <button type="button" class="btn btn-primary" data-buy-package="7627622">Buy on Tebex &mdash; &euro;40</button>
             <a href="configpanel.html" class="btn btn-quiet">Get Config Manager</a>
           </div>
         </div>
         <div>
           <ul class="specs">
-            <li><span class="k">Frameworks</span><span class="v"><strong>ESX · QBCore · Qbox</strong>, one build</span></li>
+            <li><span class="k">Frameworks</span><span class="v"><strong>ESX &middot; QBCore &middot; Qbox</strong>, one build</span></li>
             <li><span class="k">Dependencies</span><span class="v">None required</span></li>
             <li><span class="k">Optional</span><span class="v">Config Manager <strong>(free)</strong></span></li>
             <li><span class="k">Licence</span><span class="v">One-time purchase, per server</span></li>
@@ -136,7 +170,6 @@
     </div>
   </section>
 </main>
-
 <footer class="foot">
   <div class="wrap-wide">
     <div class="foot-grid">
@@ -154,9 +187,9 @@
       </div>
       <div class="foot-col">
         <span class="title">Scripts</span>
-        <a href="banking.html">Banking</a>
-        <a href="configpanel.html">Config Manager</a>
-        <a href="invoices.html">Invoices</a>
+        <a href="../products/banking.html">Banking</a>
+        <a href="../products/configpanel.html">Config Manager</a>
+        <a href="../products/invoices.html">Invoices</a>
         <a href="../products.html">All scripts</a>
       </div>
       <div class="foot-col">
@@ -175,12 +208,11 @@
       </div>
     </div>
     <div class="foot-legal">
-      <span>© <span data-year>2026</span> VAmore Systems</span>
+      <span>&copy; <span data-year>2026</span> VAmore Systems</span>
       <span>Not affiliated with Rockstar Games or Cfx.re</span>
-      <!-- TODO: legal pages required before commercial launch in Germany (Impressum, privacy, terms). -->
-      <span class="pending">Impressum</span>
-      <span class="pending">Privacy</span>
-      <span class="pending">Terms</span>
+      <a href="../legal/impressum.html">Impressum</a>
+      <a href="../legal/privacy.html">Privacy</a>
+      <a href="../legal/terms.html">Terms</a>
     </div>
   </div>
 </footer>

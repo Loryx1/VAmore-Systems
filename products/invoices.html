@@ -10,14 +10,16 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;500&family=Martian+Mono:wght@500;600&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../style.css">
+<script defer src="https://js.tebex.io/v/1.js"></script>
 </head>
 <body>
+<a href="#main" class="skip">Skip to content</a>
 
 <header class="nav">
   <div class="wrap-wide nav-inner">
     <a href="../index.html" class="brand">
       <svg width="24" height="24" viewBox="0 0 128 128" fill="none" aria-hidden="true">
-        <defs><linearGradient id="vamMark" gradientUnits="userSpaceOnUse" x1="14" y1="104" x2="110" y2="20"><stop offset="0%" stop-color="#1450c8"></stop><stop offset="55%" stop-color="#1b8fc4"></stop><stop offset="100%" stop-color="#25c9b0"></stop></linearGradient></defs>
+        <defs><linearGradient id="vamMark" gradientUnits="userSpaceOnUse" x1="14" y1="104" x2="110" y2="20"><stop offset="0%" stop-color="#1450c8"></stop><stop offset="55%" stop-color="#17a2c9"></stop><stop offset="100%" stop-color="#25c9b0"></stop></linearGradient></defs>
         <path d="M14 24 L27 54" stroke="url(#vamMark)" stroke-width="15"></path>
         <path d="M30.5 62 L46 98 L78 24 L110 98" stroke="url(#vamMark)" stroke-width="15" stroke-linejoin="miter"></path>
         <path d="M50 74 H107" stroke="url(#vamMark)" stroke-width="15"></path>
@@ -26,14 +28,15 @@
     </a>
     <nav class="nav-links" aria-label="Main">
       <a href="../products.html">Scripts</a>
-      <a href="configpanel.html" class="optional">Config Manager</a>
-      <a href="banking.html" class="optional">Banking</a>
+      <a href="../products/configpanel.html" class="optional">Config Manager</a>
+      <a href="../products/banking.html" class="optional">Banking</a>
     </nav>
-    <a href="banking.html" class="btn btn-quiet">Banking</a>
+    <button type="button" class="btn btn-quiet" data-buy-package="7627622">Buy Banking</button>
+    <div class="nav-progress" aria-hidden="true"></div>
   </div>
 </header>
 
-<main>
+<main id="main">
   <section style="padding-bottom:0">
     <div class="wrap-wide">
       <a href="../products.html" class="back">
@@ -51,7 +54,7 @@
           its own resource and it is not finished.</p>
 
         <div class="detail-buy">
-          <span class="price">€25</span>
+          <span class="price">&euro;25</span>
           <span class="note">Estimated price, not final. No Tebex package yet and no release date announced.</span>
           <span class="btn is-disabled">Not purchasable yet</span>
         </div>
@@ -70,17 +73,17 @@
           <p>Nothing beyond that is decided. There is no feature list to promise, no screenshots to
             show, and no date. This page changes when that changes.</p>
           <div class="btn-row">
-            <a href="banking.html" class="btn btn-primary">See Banking — €40</a>
+            <a href="banking.html" class="btn btn-primary">See Banking &mdash; &euro;40</a>
             <a href="../products.html" class="btn btn-quiet">All scripts</a>
           </div>
         </div>
         <div>
           <ul class="specs">
             <li><span class="k">State</span><span class="v"><strong>In development</strong></span></li>
-            <li><span class="k">Estimated price</span><span class="v">€25, not final</span></li>
+            <li><span class="k">Estimated price</span><span class="v">&euro;25, not final</span></li>
             <li><span class="k">Tebex package</span><span class="v">None yet</span></li>
             <li><span class="k">Release date</span><span class="v">Not announced</span></li>
-            <li><span class="k">Planned frameworks</span><span class="v">ESX · QBCore · Qbox</span></li>
+            <li><span class="k">Planned frameworks</span><span class="v">ESX &middot; QBCore &middot; Qbox</span></li>
             <li><span class="k">Available today</span><span class="v"><a href="banking.html">Banking</a> covers invoicing</span></li>
           </ul>
         </div>
@@ -88,7 +91,6 @@
     </div>
   </section>
 </main>
-
 <footer class="foot">
   <div class="wrap-wide">
     <div class="foot-grid">
@@ -106,9 +108,9 @@
       </div>
       <div class="foot-col">
         <span class="title">Scripts</span>
-        <a href="banking.html">Banking</a>
-        <a href="configpanel.html">Config Manager</a>
-        <a href="invoices.html">Invoices</a>
+        <a href="../products/banking.html">Banking</a>
+        <a href="../products/configpanel.html">Config Manager</a>
+        <a href="../products/invoices.html">Invoices</a>
         <a href="../products.html">All scripts</a>
       </div>
       <div class="foot-col">
@@ -127,12 +129,11 @@
       </div>
     </div>
     <div class="foot-legal">
-      <span>© <span data-year>2026</span> VAmore Systems</span>
+      <span>&copy; <span data-year>2026</span> VAmore Systems</span>
       <span>Not affiliated with Rockstar Games or Cfx.re</span>
-      <!-- TODO: legal pages required before commercial launch in Germany (Impressum, privacy, terms). -->
-      <span class="pending">Impressum</span>
-      <span class="pending">Privacy</span>
-      <span class="pending">Terms</span>
+      <a href="../legal/impressum.html">Impressum</a>
+      <a href="../legal/privacy.html">Privacy</a>
+      <a href="../legal/terms.html">Terms</a>
     </div>
   </div>
 </footer>

@@ -1,59 +1,80 @@
 # Design system — VAmore Systems
 
-<!-- Derived from the shipped build: index.html, products.html, products/*.html, style.css, script.js -->
+<!-- Derived from the shipped build: index.html, products.html, products/*.html,
+     legal/*.html, style.css, script.js -->
 
-The site is a **product showroom on a dark ground**. One object or one argument per screen, held in a lot of air, with large light type and a single accent spent on the action. It sells the way a hardware product page sells. It is deliberately not the FiveM-store default (a wall of glowing product tiles) and not the console world it replaced (log lines, status flags, monospace everywhere).
+The site is a **product showroom on a dark ground with one moment of brand weather**. Content sits in a lot of air with large light type; the saturated colour appears three times only — the aurora field behind the hero, the primary action, and the hairlines that open each section. Apple-grade calm, not template gloss.
+
+## Stack
+
+Vanilla HTML, CSS and JavaScript. No build step, no framework, no bundler: GitHub Pages serves the repository as it stands, which is why the choice is deliberate rather than lazy. External runtime dependencies are `model-viewer` (unpkg, 3D card), the Tebex checkout script, and Google Fonts.
+
+First load of the home page is roughly **170 KB** of local assets across 7 requests. The 11.6 MB panel recording is not one of them: it sits behind a 35 KB poster frame and `preload="none"`.
 
 ## World
 
-- Near-black navy ground with a slow vertical falloff, no bloom behind the hero. Sections are separated by air and one hairline, never by boxes.
-- Teal is the only saturated colour in the interface: the primary button, the available-now dot, the focus ring, the caret. The blue-to-teal brand gradient appears in the logo mark and in the short accent rule at the start of each section divider. There is no second status hue: in development is a hollow dot on neutral text.
-- No cards as page structure, no eyebrow labels, no gradient text, no glow shadows, no unicode icons (every icon is drawn SVG).
-- Motion: one authored moment — the wordmark types itself, the subline follows, then the 3D card takes up its rotation. Product media fades in once on first view. Under `prefers-reduced-motion` the page lands on the finished state: no model rotation anywhere, and both videos hold the frame that proves their claim with controls exposed.
+- Near-black navy (`#05070c`) with a slow vertical falloff. Sections separate by air and one hairline, never by boxes.
+- The brand axis (blue → cyan → teal) is a gradient used as light: the hero field, the scroll-progress line, the short rule that opens each section. Flat teal carries the primary action. Nothing else is saturated.
+- Status is a dot plus neutral text: filled teal for available, hollow ring for in development. No badges, no second hue.
+- No cards as page structure, no eyebrow labels, no gradient text, no glow shadows, no stock or emoji icons.
+
+## Motion
+
+One authored moment plus two quiet supports.
+
+1. **Hero.** The wordmark types itself, the line follows, then the 3D card takes up its rotation. Behind it a WebGL curtain field drifts (custom shader, ~60 lines, no library): domain-warped fbm noise in the brand axis, drawn at half resolution, CSS-blurred, faded in over 1.4s. It stops when the hero leaves the viewport or the tab is hidden, and never starts under reduced motion.
+2. **Reveal.** Media and feature blocks arrive once with opacity, a 20px rise and a 6px blur clearing, on an exponential ease-out. A 3s timer guarantees nothing stays hidden if the observer never fires.
+3. **Glyphs.** Each feature icon draws its strokes once, staggered by 110ms, when its block arrives.
+
+Under `prefers-reduced-motion` the page lands on the finished state: no shader, no rotation, no reveal, no typing, and the recording holds its poster frame with controls exposed.
 
 ## Tokens (`style.css` `:root`)
 
 | Token | Value | Role |
 |---|---|---|
-| `--bg` | `#070b10` | page ground |
-| `--bg-panel` | `#0e151e` | media frames, closing band |
-| `--line` / `--line-soft` | `rgba(190,214,238,.10)` / `.055` | hairlines, button borders |
-| `--ink` | `#f3f7fb` | headings, primary text |
-| `--ink-2` | `#a6b8ca` | prose |
-| `--ink-3` | `#8397ab` | labels, notes, pending items |
-| `--brand-a` → `--brand-b` | `#1450c8` → `#25c9b0` | logo mark, and the short accent rule that starts every section divider |
+| `--bg` | `#05070c` | page ground |
+| `--bg-lift` | `#080c13` | footer |
+| `--bg-panel` / `--bg-panel-2` | `#0c121b` / `#111925` | media surfaces, closing band, skip link |
+| `--line` / `--line-soft` | `rgba(180,208,235,.12)` / `.06` | hairlines, button borders |
+| `--ink` | `#f4f8fc` | headings, primary text |
+| `--ink-2` | `#a9bbcd` | prose |
+| `--ink-3` | `#8598ac` | labels, notes, pending items |
+| `--blue` `--cyan` `--teal` | `#1450c8` `#17a2c9` `#25c9b0` | the brand axis |
+| `--brand-axis` | gradient of the three | hero field, progress line, section rules |
 | `--ok` | `#25c9b0` | primary action, available now |
 | `--link` | `#6aa8ff` | inline links |
+| `--ease` | `cubic-bezier(.16,1,.3,1)` | every transition |
 
-Radius: `999px` on buttons, `22px` on media frames. Content frame `1120px`, wide frame `1280px`. Section rhythm `96px` mobile / `132px` desktop.
+Radius `999px` on buttons, `24px` on media surfaces. Frames `1120px` / `1280px`. Section rhythm 96px mobile, 136px desktop.
 
 ## Type
 
-- **Schibsted Grotesk** carries display and text at weight 400: `h1` runs to 5.6rem in the hero and 4rem elsewhere, tracking `-0.035em`; body 17px/1.6. Prose is capped at 68ch.
-- **Martian Mono** is the wordmark lockup only.
-- **Azeret Mono** appears only inside `code` — real commands and file names (`/vamoreconfig`, `config.lua`). Never as decoration.
-- Figures that are compared carry `tabular-nums` (`.num`, prices, spec values).
+- **Schibsted Grotesk**, weight 400 for display: `h1` to 5.6rem in the hero, 4rem elsewhere, tracking `-0.035em`. Body 17px/1.6, prose capped at 68ch.
+- **Martian Mono** for the wordmark lockup only.
+- **Azeret Mono** inside `code` only — real commands and file names (`/vamoreconfig`, `config.lua`).
+- Compared figures carry `tabular-nums`.
 
 ## Components
 
-- **`.hero`** — centred, calm: typing headline, subline, one filled action, one quiet action, then `.stage`.
-- **`.stage`** — the hero object: `creditcard.glb` in `model-viewer` at `field-of-view: 17deg` so the card owns the viewport, rotation started by the typewriter's completion, depth carried by the model's own shadow and nothing else.
-- **`.act`** — a product act: copy on one side, the real artifact on the other. `.flip` reverses the order. This is the page's main structure, in place of a card grid.
-- **`.act-media` / `.detail-media`** — the media surfaces: a panel gradient and a 22px radius, no border. Surfaces separate by air and by that step, never by a drawn box.
-- **`.lines`** — feature listings as full-width rows (name column, description column). No boxes, no equal-height tiles.
-- **`.specs`** — key/value rows with tabular figures, used wherever numbers or capabilities are compared.
-- **`.catalog` / `.item`** — the lineup: one row per script with name, status, one-line summary, price and an arrow. Rendered from `RESOURCES` in `script.js`, so home and catalogue can never disagree.
-- **`.status`** — a dot plus a word in neutral text: a filled teal dot for "Available now", a hollow ring for "In development". Never a filled badge.
-- **`.btn`** — `.btn-primary` (solid teal, dark label) is the single accent action per view and always reaches Tebex checkout; `.btn-quiet` is the outlined secondary, used for the persistent nav action and for navigation; `.btn.is-disabled` is the never-clickable state used for unreleased scripts. A button labelled "Buy" always buys.
-- **`.close-band`** — the one lifted surface on the page, closing the home page with the two real actions.
-- **`.pending`** — an unresolved link, rendered as dimmed text with a `· pending` suffix and `not-allowed`, never as a live link.
+- **`.nav`** — sticky, blurred, with `.nav-progress`: a 1px scroll-progress line in the brand axis.
+- **`.hero` / `.aurora` / `.stage`** — the first viewport: shader field, typing headline, one filled action, the rotating `creditcard.glb`, and a `.scroll-cue` that names the next move.
+- **`.trust`** — four factual signals under the hero (frameworks, one-time purchase, in-game configuration, live apply), each with a drawn icon.
+- **`.act`** — a product act: copy on one side, the real artifact on the other. `.flip` reverses it.
+- **`.player`** — poster image, real `<video>` behind it, an explicit play control, and lazy loading. Playback starts when the block is 40% on screen.
+- **`.features` / `.feature`** — the module grid: hairline-separated cells with a self-drawing glyph, a heading and two lines. Not cards; no shadows, no rounded floating boxes.
+- **`.schematic`** — the registration diagram: four scripts wired into one panel, the two shipping scripts on live wires.
+- **`.catalog` / `.item`** — the lineup, rendered from `RESOURCES` in `script.js` so home and catalogue can never disagree. Hover slides the row text and lights a brand-axis edge.
+- **`.specs` / `.lines`** — key/value and name/description rows with tabular figures.
+- **`.close-band`** — the one lifted surface, closing home and catalogue with the two real actions.
+- **`.prose` / `.notice`** — the legal pages, in the same system, with the placeholder notice marked rather than dressed up.
+- **`.pending`** — an unresolved link: dimmed, `not-allowed`, suffixed `· pending`.
+
+## Accessibility
+
+Skip link on every page; `:focus-visible` ring in teal at 3px offset; nav marks the current page with `aria-current`; every icon is `aria-hidden` beside real text; the recording carries a described `alt` on its poster and an `aria-label` on the play control; the diagram is an `img` role with a text label. Contrast for body and label text clears WCAG AA on the ground.
 
 ## Content rules
 
 - Two scripts are purchasable (Banking €40, Config Manager free); two are in development (Invoices, Restaurants). The build says exactly that and never dresses an unfinished script as buyable.
-- No invented metrics, testimonials, recordings, player counts or performance figures. The only real media are `assets/vid/admin-panel-demo.mp4`, `assets/glb/creditcard.glb` and the brand assets.
-- Links that do not exist yet (Discord, Tebex storefront, docs, changelog, status, Impressum, privacy, terms) render as `.pending`, each with a `TODO` comment naming its replacement.
-
-## Browser surfaces
-
-Selection, caret, `accent-color`, focus ring and scrollbars are themed from the palette. These are part of the system, not defaults left in place.
+- No invented metrics, testimonials, recordings, player counts or performance figures. The only real media are `assets/admin-panel-demo.mp4`, its extracted poster `assets/img/panel-poster.jpg`, `assets/glb/creditcard.glb` and the brand assets.
+- Links that do not exist yet (Discord, Tebex storefront, docs, changelog, status) render as `.pending` with a `TODO` naming the replacement. Legal pages exist but state plainly that their content is not published yet.
