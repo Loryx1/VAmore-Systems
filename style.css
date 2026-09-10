@@ -4,8 +4,8 @@
    ========================================================================== */
 
 :root {
-  --font-display: 'Bricolage Grotesque', 'Schibsted Grotesk', system-ui, sans-serif;
-  --font-text: 'Schibsted Grotesk', system-ui, -apple-system, sans-serif;
+  --font-display: 'Archivo', system-ui, sans-serif;
+  --font-text: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
   --font-brand: 'Martian Mono', ui-monospace, monospace;
   --font-code: 'Azeret Mono', ui-monospace, 'SFMono-Regular', monospace;
 
@@ -874,12 +874,8 @@ code, .code {
 .gallery { display: grid; gap: 14px; }
 .gallery-main {
   position: relative;
-  padding: 12px;
   border-radius: var(--r-lg);
-  border: 1px solid var(--line-soft);
-  background:
-    radial-gradient(70% 70% at 50% 45%, rgba(23, 162, 201, 0.14), transparent 72%),
-    linear-gradient(168deg, #0d141d 0%, #070b11 100%);
+  background: #070b11;
   overflow: hidden;
   aspect-ratio: 16 / 10;
   display: grid;
@@ -889,7 +885,7 @@ code, .code {
 .gallery-main .player, .gallery-main .player video, .gallery-main .player img, .gallery-main img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
 }
 .gallery-main .show-blank { border: 0; background: none; min-height: 0; }
 
@@ -976,9 +972,9 @@ code, .code {
 
 /* --- gallery -------------------------------------------------------------- */
 
-.gallery-main .slide { position: absolute; inset: 12px; display: grid; place-items: center; opacity: 0; pointer-events: none; }
+.gallery-main .slide { position: absolute; inset: 0; display: grid; place-items: center; opacity: 0; pointer-events: none; }
 .gallery-main .slide[data-active] { opacity: 1; pointer-events: auto; }
-.gallery-main .slide img, .gallery-main .slide video { width: 100%; height: 100%; object-fit: contain; border-radius: 10px; }
+.gallery-main .slide img, .gallery-main .slide video { width: 100%; height: 100%; object-fit: cover; }
 .gallery-main .slide model-viewer { width: 100%; height: 100%; }
 
 .gal-nav {
@@ -1093,3 +1089,21 @@ code, .code {
 .tree ul { list-style: none; margin: 0; padding-left: 16px; }
 .tree .dir { color: var(--ink); }
 .tree .file { color: var(--ink-3); }
+
+/* A slot that has no screenshot yet: marked as empty, never dressed up. */
+.slide-empty {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 14px;
+  text-align: center;
+  background: #080d14;
+  outline: 1px dashed var(--line-soft);
+  outline-offset: -14px;
+}
+.slide-empty svg { opacity: 0.3; }
+.slide-empty span { font-size: 0.84rem; color: var(--ink-3); }
+.thumb.is-empty { display: grid; place-items: center; background: #080d14; }
+.thumb.is-empty svg { width: 22px; height: 22px; opacity: 0.34; }

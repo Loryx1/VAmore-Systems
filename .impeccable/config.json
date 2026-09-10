@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "products/*.html"
+        ],
+        "createdAt": "2026-09-10T13:19:08.919Z",
+        "reason": "the product gallery frame is full-bleed by design: the screenshot or model is the surface, so no inner padding is wanted"
+      }
+    ]
+  }
+}
