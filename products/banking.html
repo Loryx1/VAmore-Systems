@@ -38,6 +38,7 @@
 </header>
 
 
+
 <main id="main">
   <section style="padding-bottom:0">
     <div class="wrap-wide">
@@ -47,21 +48,37 @@
       </a>
 
       <div class="detail-grid" style="margin-top:26px">
-        <div class="gallery">
+        <div class="gallery" tabindex="0" aria-label="Banking media">
           <div class="gallery-main">
-            <model-viewer src="../assets/glb/creditcard.glb" alt="A rotating VAmore bank card"
-                          orientation="90deg 30deg 0deg" rotation-per-second="16deg" auto-rotate-delay="0"
-                          camera-controls disable-zoom interaction-prompt="none" shadow-intensity="1"
-                          field-of-view="22deg" exposure="1.05"></model-viewer>
+            <button type="button" class="gal-nav prev" aria-label="Previous image">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3.5 5.5 8l4.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="slide" data-active>
+              <model-viewer src="../assets/glb/creditcard.glb" alt="A rotating VAmore bank card"
+                            orientation="90deg 30deg 0deg" rotation-per-second="16deg" auto-rotate-delay="0"
+                            camera-controls disable-zoom interaction-prompt="none" shadow-intensity="1"
+                            field-of-view="22deg" exposure="1.05"></model-viewer>
+            </div>
+            <button type="button" class="gal-nav next" aria-label="Next image">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3.5 10.5 8 6 12.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
           </div>
-          <p class="small">Drag the card to turn it. Screenshots of the in-game UI follow once the
-            recording is cut.</p>
+          <p class="small">Drag the card to turn it. In-game screenshots follow once they are cut from
+            a live server.</p>
         </div>
 
         <aside class="buy-card">
           <div>
             <h1>Banking</h1>
-            <div class="show-meta" style="margin:14px 0 0">
+            <div class="rating" style="margin-top:12px">
+              <span class="stars" role="img" aria-label="0 reviews">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3.6 2.6 5.3 5.8.85-4.2 4.1 1 5.75L12 16.9l-5.2 2.7 1-5.75-4.2-4.1 5.8-.85L12 3.6Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3.6 2.6 5.3 5.8.85-4.2 4.1 1 5.75L12 16.9l-5.2 2.7 1-5.75-4.2-4.1 5.8-.85L12 3.6Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3.6 2.6 5.3 5.8.85-4.2 4.1 1 5.75L12 16.9l-5.2 2.7 1-5.75-4.2-4.1 5.8-.85L12 3.6Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3.6 2.6 5.3 5.8.85-4.2 4.1 1 5.75L12 16.9l-5.2 2.7 1-5.75-4.2-4.1 5.8-.85L12 3.6Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3.6 2.6 5.3 5.8.85-4.2 4.1 1 5.75L12 16.9l-5.2 2.7 1-5.75-4.2-4.1 5.8-.85L12 3.6Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+                <span class="count">(0)</span>
+              </span>
               <span class="status"><span class="dot"></span>Available now</span>
             </div>
           </div>
@@ -75,14 +92,6 @@
           <div class="price">&euro;40<small>One-time, per server. VAT handled by Tebex.</small></div>
 
           <button type="button" class="btn btn-primary" data-buy-package="7627622">Buy on Tebex</button>
-
-          <ul class="facts">
-            <li><span class="k">Dependencies</span><span class="v">None required</span></li>
-            <li><span class="k">Optional</span><span class="v">Config Manager <strong>(free)</strong></span></li>
-            <li><span class="k">Licence</span><span class="v">One server</span></li>
-            <li><span class="k">Delivery</span><span class="v">Tebex checkout</span></li>
-            <li><span class="k">Modules</span><span class="v"><strong>6</strong></span></li>
-          </ul>
 
           <details class="panel" open>
             <summary>Description</summary>
@@ -98,19 +107,63 @@
             <div class="panel-body">
               <ul>
                 <li>A FiveM server running ESX, QBCore or Qbox.</li>
-                <li>No other VAmore script is required.</li>
+                <li>No other VAmore product is required.</li>
                 <li>Config Manager is optional and free; without it, settings live in the config file.</li>
               </ul>
             </div>
           </details>
 
+          <div class="buy-block">
+            <span class="label">Documentation</span>
+            <!-- TODO: swap for the real docs URL once the documentation site exists. -->
+            <span class="btn is-disabled">Documentation &middot; soon</span>
+          </div>
+
           <details class="panel">
-            <summary>Support</summary>
+            <summary>File tree</summary>
             <div class="panel-body">
-              <p>A Discord invite and a support address will be published here. Until then, support
-                runs through the contact details on your Tebex receipt.</p>
+              <ul class="tree">
+                <li class="dir">vamore_banking/
+                  <ul>
+                    <li class="file">fxmanifest.lua</li>
+                    <li class="file">config.lua</li>
+                    <li class="dir">client/
+                      <ul><li class="file">main.lua</li><li class="file">atm.lua</li></ul>
+                    </li>
+                    <li class="dir">server/
+                      <ul>
+                        <li class="file">accounts.lua</li>
+                        <li class="file">savings.lua</li>
+                        <li class="file">credit.lua</li>
+                        <li class="file">stocks.lua</li>
+                        <li class="file">crypto.lua</li>
+                        <li class="file">faction.lua</li>
+                        <li class="file">transactions.lua</li>
+                        <li class="file">standing_orders.lua</li>
+                        <li class="file">tax.lua</li>
+                        <li class="file">admin.lua</li>
+                        <li class="file">api.lua</li>
+                        <li class="file">configpanel_integration.lua</li>
+                      </ul>
+                    </li>
+                    <li class="dir">nui/<ul><li class="file">index.html, css/, js/</li></ul></li>
+                    <li class="dir">locales/<ul><li class="file">en.json, de.json</li></ul></li>
+                    <li class="dir">sql/<ul><li class="file">install.sql</li></ul></li>
+                  </ul>
+                </li>
+              </ul>
             </div>
           </details>
+
+          <div class="stat-card">
+            <span class="label">At a glance</span>
+            <div class="stat-grid">
+              <div><span class="fig">6</span><span class="cap">Modules</span></div>
+              <div><span class="fig">3</span><span class="cap">Frameworks</span></div>
+            </div>
+            <p class="stat-note"><span class="dot"></span>Server and player counts appear here once
+              real telemetry exists.</p>
+          </div>
         </aside>
       </div>
     </div>

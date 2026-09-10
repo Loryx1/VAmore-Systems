@@ -70,7 +70,9 @@ Radius `10px` on buttons, `16px` on cards and the purchase column, `20px` on fra
 - **`.schematic`** — the registration diagram: four scripts wired into one panel, the two shipping scripts on live wires. It lives on the Config Manager page, where the claim it illustrates is made.
 - **`.grid-cards` / `.card`** — the catalogue: a cover (model, image or preview plate), then name with its rating, status, one line of copy, framework chips, and a footer that carries the price on the left and View details on the right. Rendered from `RESOURCES` in `script.js`, so home and catalogue can never disagree.
 - **`.stars`** — the rating row. It draws from real reviews only: with none on record every product shows five empty stars and `(0)`, never an invented score.
-- **`.detail-grid` / `.gallery` / `.buy-card`** — the product page: media on the left, a sticky purchase card on the right carrying name, status, chips, price, the action, a `.facts` list and disclosure panels.
+- **`.detail-grid` / `.gallery` / `.buy-card`** — the product page, laid out the way this category expects one: media on the left with arrows and a thumbnail strip, and on the right a purchase column carrying name, rating, status, framework chips, price, the action, disclosure panels, a documentation block, a file tree and an at-a-glance card.
+- **`.stat-card`** — the two-figure card at the foot of the purchase column. It carries only counts we can verify (modules, frameworks); server and player numbers stay absent until real telemetry exists.
+- **`.tree`** — the resource's actual file structure, read from the shipped repository rather than illustrated.
 - **`.panels` / `.panel`** — native `<details>` disclosures for description, requirements, support and the pre-sale questions. Closed by default except the description.
 - **`.specs` / `.lines`** — key/value and name/description rows with tabular figures.
 - **`.close-band`** — the one lifted surface, closing home and catalogue with the two real actions.
@@ -84,5 +86,5 @@ Skip link on every page; `:focus-visible` ring in teal at 3px offset; nav marks 
 ## Content rules
 
 - Two scripts are purchasable (Banking €40, Config Manager free); two are in development (Invoices, Restaurants). The build says exactly that and never dresses an unfinished script as buyable.
-- No invented metrics, testimonials, recordings, player counts or performance figures. The only real media are `assets/admin-panel-demo.mp4`, its extracted poster `assets/img/panel-poster.jpg`, `assets/glb/vamore_logo.glb` (hero), `assets/glb/creditcard.glb` (Banking) and the brand assets.
+- No invented metrics, testimonials, ratings, recordings, player counts or performance figures. Rating rows render empty with a count of zero until real reviews exist, and the stat card names only what can be counted in the repository. The only real media are `assets/admin-panel-demo.mp4`, its extracted poster `assets/img/panel-poster.jpg`, `assets/img/panel-24.jpg` and `assets/img/panel-33.jpg` (frames from that same recording), `assets/glb/vamore_logo.glb` (hero), `assets/glb/creditcard.glb` (Banking) and the brand assets.
 - Links that do not exist yet (Discord, Tebex storefront, docs, changelog, status) render as `.pending` with a `TODO` naming the replacement. Legal pages exist but state plainly that their content is not published yet.

@@ -874,6 +874,7 @@ code, .code {
 .gallery { display: grid; gap: 14px; }
 .gallery-main {
   position: relative;
+  padding: 12px;
   border-radius: var(--r-lg);
   border: 1px solid var(--line-soft);
   background:
@@ -972,3 +973,123 @@ code, .code {
 .panel-body ul { margin: 0; padding-left: 20px; display: grid; gap: 8px; }
 
 .center-text { text-align: center; margin-left: auto; margin-right: auto; }
+
+/* --- gallery -------------------------------------------------------------- */
+
+.gallery-main .slide { position: absolute; inset: 12px; display: grid; place-items: center; opacity: 0; pointer-events: none; }
+.gallery-main .slide[data-active] { opacity: 1; pointer-events: auto; }
+.gallery-main .slide img, .gallery-main .slide video { width: 100%; height: 100%; object-fit: contain; border-radius: 10px; }
+.gallery-main .slide model-viewer { width: 100%; height: 100%; }
+
+.gal-nav {
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  z-index: 3;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: var(--r-btn);
+  background: rgba(6, 10, 16, 0.72);
+  backdrop-filter: blur(6px);
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 200ms var(--ease), border-color 200ms var(--ease), opacity 200ms var(--ease);
+}
+.gal-nav:hover { background: rgba(37, 201, 176, 0.85); border-color: transparent; color: #032019; }
+.gal-nav.prev { left: 14px; }
+.gal-nav.next { right: 14px; }
+.gal-nav[hidden] { display: none; }
+
+.gallery-thumbs { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 4px; }
+.thumb {
+  position: relative;
+  flex: none;
+  width: 104px;
+  aspect-ratio: 16 / 10;
+  border-radius: 8px;
+  border: 1px solid var(--line-soft);
+  overflow: hidden;
+  background: #0b1119;
+  cursor: pointer;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  transition: border-color 220ms var(--ease);
+}
+.thumb img { width: 100%; height: 100%; object-fit: cover; }
+.thumb svg.mark { width: 26px; height: 26px; opacity: 0.5; }
+.thumb .badge {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  width: 18px;
+  height: 18px;
+  display: grid;
+  place-items: center;
+  border-radius: 5px;
+  background: rgba(6, 10, 16, 0.8);
+  color: var(--ink);
+}
+.thumb[aria-current='true'] { border-color: var(--teal); }
+.thumb:hover { border-color: rgba(180, 208, 235, 0.3); }
+
+/* --- purchase column extras ----------------------------------------------- */
+
+.buy-card .rating { display: flex; align-items: center; gap: 10px; }
+
+.buy-block { display: grid; gap: 12px; }
+.buy-block .label {
+  font-family: var(--font-display);
+  font-size: 1.02rem;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+}
+.buy-block .btn { width: 100%; }
+
+.stat-card {
+  border: 1px solid var(--line-soft);
+  border-radius: var(--r-card);
+  background: rgba(17, 25, 37, 0.5);
+  padding: 20px;
+}
+.stat-card .label {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin-bottom: 14px;
+  display: block;
+}
+.stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; text-align: center; }
+.stat-grid .fig {
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+  display: block;
+}
+.stat-grid .cap { font-size: 0.8rem; color: var(--ink-3); }
+.stat-note { margin-top: 14px; font-size: 0.76rem; color: var(--ink-3); display: flex; align-items: center; gap: 7px; }
+.stat-note .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); flex: none; }
+
+/* --- file tree ------------------------------------------------------------ */
+
+.tree {
+  font-family: var(--font-code);
+  font-size: 0.8rem;
+  line-height: 1.75;
+  color: var(--ink-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.tree ul { list-style: none; margin: 0; padding-left: 16px; }
+.tree .dir { color: var(--ink); }
+.tree .file { color: var(--ink-3); }

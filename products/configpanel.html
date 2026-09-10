@@ -46,19 +46,53 @@
       </a>
 
       <div class="detail-grid" style="margin-top:26px">
-        <div class="gallery">
+        <div class="gallery" tabindex="0" aria-label="Config Manager media">
           <div class="gallery-main">
-            <div class="player">
-              <video src="../assets/admin-panel-demo.mp4" poster="../assets/img/panel-poster.jpg"
-                     preload="none" muted loop playsinline
-                     aria-label="Screen recording of the Config Manager panel being used in game"></video>
-              <img class="poster" src="../assets/img/panel-poster.jpg" width="1218" height="718"
-                   alt="The Config Manager panel open on the Banking tab, showing daily limits, invoice settings and ATM locations">
-              <button type="button" class="play" aria-label="Play the Config Manager recording">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M7 4.5 15 10l-8 5.5V4.5Z" fill="currentColor"/></svg>
-              </button>
+            <button type="button" class="gal-nav prev" aria-label="Previous item">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3.5 5.5 8l4.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+
+            <div class="slide" data-active>
+              <div class="player">
+                <video src="../assets/admin-panel-demo.mp4" poster="../assets/img/panel-poster.jpg"
+                       preload="none" muted loop playsinline
+                       aria-label="Screen recording of the Config Manager panel being used in game"></video>
+                <img class="poster" src="../assets/img/panel-poster.jpg" width="1218" height="718"
+                     alt="The Config Manager panel open on the Banking tab, showing daily limits, invoice settings and ATM locations">
+                <button type="button" class="play" aria-label="Play the Config Manager recording">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M7 4.5 15 10l-8 5.5V4.5Z" fill="currentColor"/></svg>
+                </button>
+              </div>
             </div>
+
+            <div class="slide">
+              <img src="../assets/img/panel-33.jpg" width="1218" height="718" loading="lazy"
+                   alt="The module section of the Banking tab, with a switch per module and a save bar">
+            </div>
+
+            <div class="slide">
+              <img src="../assets/img/panel-24.jpg" width="1218" height="718" loading="lazy"
+                   alt="Numeric settings in the Banking tab, each with a slider and a plain-language description">
+            </div>
+
+            <button type="button" class="gal-nav next" aria-label="Next item">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3.5 10.5 8 6 12.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
           </div>
+
+          <div class="gallery-thumbs">
+            <button type="button" class="thumb" aria-current="true" aria-label="Show the recording">
+              <img src="../assets/img/panel-poster.jpg" alt="" loading="lazy">
+              <span class="badge"><svg width="9" height="9" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M7 4.5 15 10l-8 5.5V4.5Z" fill="currentColor"/></svg></span>
+            </button>
+            <button type="button" class="thumb" aria-label="Show the module switches">
+              <img src="../assets/img/panel-33.jpg" alt="" loading="lazy">
+            </button>
+            <button type="button" class="thumb" aria-label="Show the numeric settings">
+              <img src="../assets/img/panel-24.jpg" alt="" loading="lazy">
+            </button>
+          </div>
+
           <p class="small">Recorded in game on a live server. The panel is the whole product; there is
             no separate web dashboard to log into.</p>
         </div>
@@ -66,7 +100,15 @@
         <aside class="buy-card">
           <div>
             <h1>Config Manager</h1>
-            <div class="show-meta" style="margin:14px 0 0">
+            <div class="rating" style="margin-top:12px">
+              <span class="stars" role="img" aria-label="0 reviews">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3.6 2.6 5.3 5.8.85-4.2 4.1 1 5.75L12 16.9l-5.2 2.7 1-5.75-4.2-4.1 5.8-.85L12 3.6Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3.6 2.6 5.3 5.8.85-4.2 4.1 1 5.75L12 16.9l-5.2 2.7 1-5.75-4.2-4.1 5.8-.85L12 3.6Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3.6 2.6 5.3 5.8.85-4.2 4.1 1 5.75L12 16.9l-5.2 2.7 1-5.75-4.2-4.1 5.8-.85L12 3.6Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3.6 2.6 5.3 5.8.85-4.2 4.1 1 5.75L12 16.9l-5.2 2.7 1-5.75-4.2-4.1 5.8-.85L12 3.6Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3.6 2.6 5.3 5.8.85-4.2 4.1 1 5.75L12 16.9l-5.2 2.7 1-5.75-4.2-4.1 5.8-.85L12 3.6Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+                <span class="count">(0)</span>
+              </span>
               <span class="status"><span class="dot"></span>Available now</span>
             </div>
           </div>
@@ -81,14 +123,6 @@
           <div class="price">Free<small>Requires owning at least one other VAmore product.</small></div>
 
           <button type="button" class="btn btn-primary" data-buy-package="7627638">Claim on Tebex</button>
-
-          <ul class="facts">
-            <li><span class="k">Command</span><span class="v"><strong>/vamoreconfig</strong></span></li>
-            <li><span class="k">Access</span><span class="v">ACE permission</span></li>
-            <li><span class="k">Applies</span><span class="v"><strong>Live</strong>, no restart</span></li>
-            <li><span class="k">Integration</span><span class="v">One export call</span></li>
-            <li><span class="k">Price</span><span class="v"><strong>&euro;0</strong></span></li>
-          </ul>
 
           <details class="panel" open>
             <summary>Description</summary>
@@ -110,13 +144,46 @@
             </div>
           </details>
 
+          <div class="buy-block">
+            <span class="label">Documentation</span>
+            <!-- TODO: swap for the real docs URL once the documentation site exists. -->
+            <span class="btn is-disabled">Documentation &middot; soon</span>
+          </div>
+
           <details class="panel">
-            <summary>Support</summary>
+            <summary>File tree</summary>
             <div class="panel-body">
-              <p>A Discord invite and a support address will be published here. Until then, support
-                runs through the contact details on your Tebex receipt.</p>
+              <ul class="tree">
+                <li class="dir">vamore_configpanel/
+                  <ul>
+                    <li class="file">fxmanifest.lua</li>
+                    <li class="file">config.lua</li>
+                    <li class="dir">client/<ul><li class="file">main.lua</li></ul></li>
+                    <li class="dir">server/
+                      <ul>
+                        <li class="file">main.lua</li>
+                        <li class="file">registry.lua</li>
+                        <li class="file">storage.lua</li>
+                        <li class="file">validate.lua</li>
+                      </ul>
+                    </li>
+                    <li class="dir">nui/<ul><li class="file">index.html, css/, js/</li></ul></li>
+                    <li class="dir">sql/<ul><li class="file">install.sql</li></ul></li>
+                  </ul>
+                </li>
+              </ul>
             </div>
           </details>
+
+          <div class="stat-card">
+            <span class="label">At a glance</span>
+            <div class="stat-grid">
+              <div><span class="fig">1</span><span class="cap">Panel, every script</span></div>
+              <div><span class="fig">4</span><span class="cap">Frameworks</span></div>
+            </div>
+            <p class="stat-note"><span class="dot"></span>Server and player counts appear here once
+              real telemetry exists.</p>
+          </div>
         </aside>
       </div>
     </div>

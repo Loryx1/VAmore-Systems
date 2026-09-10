@@ -37,6 +37,7 @@
 </header>
 
 
+
 <main id="main">
   <section style="padding-bottom:0">
     <div class="wrap-wide">
@@ -46,16 +47,18 @@
       </a>
 
       <div class="detail-grid" style="margin-top:26px">
-        <div class="gallery">
+        <div class="gallery" tabindex="0" aria-label="Invoices media">
           <div class="gallery-main">
-            <div class="show-blank">
-              <svg width="72" height="72" viewBox="0 0 128 128" fill="none" aria-hidden="true">
-                <defs><linearGradient id="vamInv" gradientUnits="userSpaceOnUse" x1="14" y1="104" x2="110" y2="20"><stop offset="0%" stop-color="#1450c8"></stop><stop offset="100%" stop-color="#25c9b0"></stop></linearGradient></defs>
-                <path d="M14 24 L27 54" stroke="url(#vamInv)" stroke-width="15"></path>
-                <path d="M30.5 62 L46 98 L78 24 L110 98" stroke="url(#vamInv)" stroke-width="15" stroke-linejoin="miter"></path>
-                <path d="M50 74 H107" stroke="url(#vamInv)" stroke-width="15"></path>
-              </svg>
-              <span>In development &middot; no preview yet</span>
+            <div class="slide" data-active>
+              <div class="show-blank">
+                <svg width="72" height="72" viewBox="0 0 128 128" fill="none" aria-hidden="true">
+                  <defs><linearGradient id="vamInv" gradientUnits="userSpaceOnUse" x1="14" y1="104" x2="110" y2="20"><stop offset="0%" stop-color="#1450c8"></stop><stop offset="100%" stop-color="#25c9b0"></stop></linearGradient></defs>
+                  <path d="M14 24 L27 54" stroke="url(#vamInv)" stroke-width="15"></path>
+                  <path d="M30.5 62 L46 98 L78 24 L110 98" stroke="url(#vamInv)" stroke-width="15" stroke-linejoin="miter"></path>
+                  <path d="M50 74 H107" stroke="url(#vamInv)" stroke-width="15"></path>
+                </svg>
+                <span>In development &middot; no preview yet</span>
+              </div>
             </div>
           </div>
           <p class="small">There is nothing to show yet. This page gets screenshots when the resource
@@ -65,7 +68,15 @@
         <aside class="buy-card">
           <div>
             <h1>Invoices</h1>
-            <div class="show-meta" style="margin:14px 0 0">
+            <div class="rating" style="margin-top:12px">
+              <span class="stars" role="img" aria-label="0 reviews">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3.6 2.6 5.3 5.8.85-4.2 4.1 1 5.75L12 16.9l-5.2 2.7 1-5.75-4.2-4.1 5.8-.85L12 3.6Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3.6 2.6 5.3 5.8.85-4.2 4.1 1 5.75L12 16.9l-5.2 2.7 1-5.75-4.2-4.1 5.8-.85L12 3.6Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3.6 2.6 5.3 5.8.85-4.2 4.1 1 5.75L12 16.9l-5.2 2.7 1-5.75-4.2-4.1 5.8-.85L12 3.6Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3.6 2.6 5.3 5.8.85-4.2 4.1 1 5.75L12 16.9l-5.2 2.7 1-5.75-4.2-4.1 5.8-.85L12 3.6Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3.6 2.6 5.3 5.8.85-4.2 4.1 1 5.75L12 16.9l-5.2 2.7 1-5.75-4.2-4.1 5.8-.85L12 3.6Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+                <span class="count">(0)</span>
+              </span>
               <span class="status is-soon"><span class="dot"></span>In development</span>
             </div>
           </div>
@@ -79,13 +90,6 @@
           <div class="price">&euro;25<small>Estimated, not final. No Tebex package yet.</small></div>
 
           <span class="btn is-disabled">Not purchasable yet</span>
-
-          <ul class="facts">
-            <li><span class="k">State</span><span class="v"><strong>In development</strong></span></li>
-            <li><span class="k">Tebex package</span><span class="v">None yet</span></li>
-            <li><span class="k">Release date</span><span class="v">Not announced</span></li>
-            <li><span class="k">Available today</span><span class="v"><a href="banking.html">Banking</a></span></li>
-          </ul>
 
           <details class="panel" open>
             <summary>Description</summary>
@@ -114,6 +118,21 @@
                 show and no date to promise. This page changes when that changes.</p>
             </div>
           </details>
+
+          <div class="buy-block">
+            <span class="label">Available today</span>
+            <a href="banking.html" class="btn btn-quiet">Banking covers invoicing</a>
+          </div>
+
+          <div class="stat-card">
+            <span class="label">At a glance</span>
+            <div class="stat-grid">
+              <div><span class="fig">0</span><span class="cap">Shipped features</span></div>
+              <div><span class="fig">3</span><span class="cap">Planned frameworks</span></div>
+            </div>
+            <p class="stat-note"><span class="dot"></span>Nothing is promised here until it runs on a
+              server.</p>
+          </div>
         </aside>
       </div>
     </div>

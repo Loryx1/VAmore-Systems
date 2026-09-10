@@ -444,6 +444,47 @@ function initPlayers() {
   });
 }
 
+/* --- product gallery ------------------------------------------------------ */
+// Arrows, thumbnails and keyboard control over whatever media a product has.
+// A product with a single item shows the frame without the chrome.
+
+function initGallery() {
+  document.querySelectorAll('.gallery').forEach((gallery) => {
+    const slides = Array.from(gallery.querySelectorAll('.slide'));
+    const thumbs = Array.from(gallery.querySelectorAll('.thumb'));
+    const prev = gallery.querySelector('.gal-nav.prev');
+    const next = gallery.querySelector('.gal-nav.next');
+    if (slides.length < 2) {
+      if (prev) prev.hidden = true;
+      if (next) next.hidden = true;
+      return;
+    }
+
+    let index = slides.findIndex((s) => s.hasAttribute('data-active'));
+    if (index < 0) index = 0;
+
+    const show = (i) => {
+      index = (i + slides.length) % slides.length;
+      slides.forEach((slide, n) => {
+        slide.toggleAttribute('data-active', n === index);
+        const video = slide.querySelector('video');
+        if (video && n !== index) video.pause();
+      });
+      thumbs.forEach((thumb, n) => thumb.setAttribute('aria-current', String(n === index)));
+    };
+
+    show(index);
+    if (prev) prev.addEventListener('click', () => show(index - 1));
+    if (next) next.addEventListener('click', () => show(index + 1));
+    thumbs.forEach((thumb, n) => thumb.addEventListener('click', () => show(n)));
+
+    gallery.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowLeft') { show(index - 1); event.preventDefault(); }
+      if (event.key === 'ArrowRight') { show(index + 1); event.preventDefault(); }
+    });
+  });
+}
+
 /* --- object parallax ------------------------------------------------------ */
 // The showcase objects drift a little slower than the page, so scrolling has
 // depth instead of sliding as one flat sheet.
@@ -523,6 +564,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initTypewriter();
   initModels();
   initGlyphs();
+  initGallery();
   initReveal();
   initPlayers();
   initParallax();
