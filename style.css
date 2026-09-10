@@ -37,6 +37,10 @@
   --r-lg: 20px;
 
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Depth: a close contact shadow plus a wider, softer fall. */
+  --shadow-sm: 0 1px 1px rgba(0, 0, 0, 0.45), 0 3px 8px -4px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.45), 0 14px 30px -16px rgba(0, 0, 0, 0.75);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -208,6 +212,7 @@ code, .code {
   text-decoration: none;
   cursor: pointer;
   overflow: hidden;
+  box-shadow: var(--shadow-sm);
   transition: background 200ms var(--ease), border-color 200ms var(--ease),
               color 200ms var(--ease), translate 220ms var(--ease),
               box-shadow 260ms var(--ease);
@@ -237,10 +242,11 @@ code, .code {
   to { translate: 130% 0; }
 }
 .btn-primary:hover {
-  background: linear-gradient(180deg, #ffffff 0%, #f2f6fa 100%);
+  /* Pressing toward the page: the surface darkens while the light spreads. */
+  background: linear-gradient(180deg, #eef3f9 0%, #d4dee9 100%);
   color: #05070c;
-  /* The action lights up: a tinted lift, not a flat halo. */
-  box-shadow: 0 12px 30px -10px rgba(37, 201, 176, 0.5), 0 4px 14px -6px rgba(255, 255, 255, 0.4);
+  box-shadow: var(--shadow-md), 0 10px 28px -8px rgba(255, 255, 255, 0.45),
+              0 2px 12px -4px rgba(255, 255, 255, 0.35);
 }
 
 .btn-quiet { background: transparent; border-color: var(--line); color: var(--ink); }
@@ -389,6 +395,8 @@ code, .code {
   padding: 9px 15px;
   border: 1px solid var(--line-soft);
   border-radius: 9px;
+  background: #10161f;
+  box-shadow: var(--shadow-sm);
   font-size: 0.86rem;
   color: var(--ink-2);
   white-space: nowrap;
@@ -545,6 +553,7 @@ code, .code {
   position: relative;
   border-radius: var(--r-lg);
   background: linear-gradient(168deg, var(--bg-panel) 0%, #070b11 100%);
+  box-shadow: var(--shadow-md);
   padding: 44px 28px;
   text-align: center;
   overflow: hidden;
@@ -829,6 +838,7 @@ code, .code {
   border-radius: var(--r-card);
   background: linear-gradient(168deg, rgba(17, 25, 37, 0.55) 0%, rgba(7, 11, 17, 0.55) 100%);
   overflow: hidden;
+  box-shadow: var(--shadow-md);
   transition: border-color 300ms var(--ease), transform 300ms var(--ease);
 }
 .card:hover { border-color: rgba(180, 208, 235, 0.22); }
@@ -885,6 +895,8 @@ code, .code {
   padding: 7px 12px;
   border: 1px solid var(--line-soft);
   border-radius: 7px;
+  background: #10161f;
+  box-shadow: var(--shadow-sm);
   font-size: 0.82rem;
   letter-spacing: 0.01em;
   color: var(--ink-3);
@@ -903,6 +915,7 @@ code, .code {
   border-radius: var(--r-lg);
   background: #070b11;
   overflow: hidden;
+  box-shadow: var(--shadow-md);
   aspect-ratio: 16 / 9;
   display: grid;
   place-items: center;
@@ -1023,6 +1036,7 @@ code, .code {
   position: relative;
   flex: none;
   width: 150px;
+  box-shadow: var(--shadow-sm);
   aspect-ratio: 16 / 9;
   border-radius: 8px;
   border: 1px solid var(--line-soft);
@@ -1070,6 +1084,7 @@ code, .code {
   border-radius: var(--r-card);
   background: rgba(17, 25, 37, 0.5);
   padding: 20px;
+  box-shadow: var(--shadow-md);
 }
 .stat-card .label {
   font-family: var(--font-display);

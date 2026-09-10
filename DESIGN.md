@@ -45,6 +45,9 @@ Under `prefers-reduced-motion` the page lands on the finished state: no shader, 
 | `--ok` | `#25c9b0` | available now, focus ring, the glow under the primary action |
 | `--link` | `#6aa8ff` | inline links |
 | `--ease` | `cubic-bezier(.16,1,.3,1)` | every transition |
+| `--shadow-sm` / `--shadow-md` | contact + fall | depth on buttons, tags, chips, thumbs / on cards, media, bands |
+
+Every raised element carries a shadow: a close contact shadow plus a wider fall, so buttons, tags, chips, thumbnails, cards, media frames and bands sit above the ground rather than on it.
 
 Radius `10px` on buttons, `16px` on cards and the purchase column, `20px` on framed media and preview plates, `6px` on chips. Nothing is a pill except the scroll cue. Frames `1120px` / `1280px`. Section rhythm 116px mobile, 176px desktop; showcase acts sit 104-200px apart.
 
@@ -60,8 +63,8 @@ Radius `10px` on buttons, `16px` on cards and the purchase column, `20px` on fra
 
 - **`.nav`** — sticky, blurred, with `.nav-progress`: a 1px scroll-progress line in the brand axis. It carries Products plus `.nav-soon` entries (Discord, YouTube) that are visibly not clickable yet, and no product-specific call to action: the catalogue is broader than any one script.
 - **`.hero` / `.aurora` / `.stage`** — the first viewport: shader field, typing headline, one filled action, the rotating `vamore_logo.glb`, and a `.scroll-cue`: a rounded pill with a translucent brand gradient and a light that sweeps down it.
-- **`.trust` / `.tag`** — four factual signals under the hero as rounded-rectangle tags (frameworks, one-time purchase, in-game configuration, live apply): hairline pill, teal dot, no icons and no boxes.
-- **`.btn`** — `.btn-primary` is white with a dark label: it carries buying and View details, rises 2px on hover, throws a teal-tinted glow beneath itself and lets a metal glare cross it. `.btn-quiet` is the outlined secondary; `.btn.is-disabled` is the never-clickable state used for unreleased products. A button labelled "Buy" always buys.
+- **`.trust` / `.tag` / `.chip`** — small labels on their own lifted surface: a step lighter than the ground, a hairline, a contact shadow and a teal dot on the trust row. Used for the four signals under the hero and for framework chips.
+- **`.btn`** — `.btn-primary` is white with a dark label: it carries buying and View details, rises 2px on hover, darkens slightly as it lifts, throws a white glow around itself and lets a metal glare cross it. `.btn-quiet` is the outlined secondary; `.btn.is-disabled` is the never-clickable state used for unreleased products. A button labelled "Buy" always buys.
 - **`.act`** — a product act: copy on one side, the real artifact on the other. `.flip` reverses it, and the home page alternates sides down the showcase.
 - **`.is-object`** — how a 3D model or a preview plate is presented: no panel behind it, a brand-light bloom that breathes on an 11s cycle, a soft contact shadow beneath, a 7.5s float, and a small scroll parallax so the object drifts slower than the page.
 - **`.show-blank`** — the preview plate for anything without a shipped visual: a dashed frame, the brand mark and an honest line. Config Manager uses it too until its model exists; the real recording stays on its detail page.
