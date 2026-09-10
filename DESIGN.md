@@ -16,7 +16,7 @@ First load of the home page is roughly **370 KB** of local assets across 7 reque
 - Near-black navy (`#05070c`) with a slow vertical falloff. Sections separate by air and one hairline, never by boxes.
 - The brand axis (blue → cyan → teal) is a gradient used as light: the hero field, the scroll-progress line in the nav and the scroll cue's pill. Section edges are a plain hairline — no gradient stripes. Flat teal carries the primary action. Nothing else is saturated.
 - Status is a dot plus neutral text: filled teal for available, hollow ring for in development. No badges, no second hue.
-- No cards as page structure, no eyebrow labels, no gradient text, no glow shadows, no stock or emoji icons.
+- Cards carry the catalogue and the purchase column, and nowhere else: the home page stays a showcase of acts. No eyebrow labels, no gradient text, no glow shadows, no stock or emoji icons.
 
 ## Motion
 
@@ -68,7 +68,9 @@ Radius `999px` on buttons, `24px` on framed media and preview plates. Frames `11
 - **`.player`** — poster image, real `<video>` behind it, an explicit play control, and lazy loading. Playback starts when the block is 40% on screen.
 - **`.features` / `.feature`** — the module grid: hairline-separated cells with a self-drawing glyph, a heading and two lines. Not cards; no shadows, no rounded floating boxes.
 - **`.schematic`** — the registration diagram: four scripts wired into one panel, the two shipping scripts on live wires. It lives on the Config Manager page, where the claim it illustrates is made.
-- **`.catalog` / `.item`** — the lineup, rendered from `RESOURCES` in `script.js` so home and catalogue can never disagree. Hover slides the row text and lights a brand-axis edge.
+- **`.grid-cards` / `.card`** — the catalogue: one rounded card per product with a cover (model, image or preview plate), name, price, status, one line of copy, framework chips and a View details action. Rendered from `RESOURCES` in `script.js`, so home and catalogue can never disagree.
+- **`.detail-grid` / `.gallery` / `.buy-card`** — the product page: media on the left, a sticky purchase card on the right carrying name, status, chips, price, the action, a `.facts` list and disclosure panels.
+- **`.panels` / `.panel`** — native `<details>` disclosures for description, requirements, support and the pre-sale questions. Closed by default except the description.
 - **`.specs` / `.lines`** — key/value and name/description rows with tabular figures.
 - **`.close-band`** — the one lifted surface, closing home and catalogue with the two real actions.
 - **`.prose` / `.notice`** — the legal pages, in the same system, with the placeholder notice marked rather than dressed up.

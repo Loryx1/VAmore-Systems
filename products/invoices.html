@@ -36,28 +36,85 @@
   </div>
 </header>
 
+
 <main id="main">
   <section style="padding-bottom:0">
     <div class="wrap-wide">
       <a href="../products.html" class="back">
         <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3.5 5.5 8l4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        All scripts
+        All products
       </a>
 
-      <div class="detail-head">
-        <div class="detail-title">
-          <h1>Invoices</h1>
-          <span class="status is-soon"><span class="dot"></span>In development</span>
+      <div class="detail-grid" style="margin-top:26px">
+        <div class="gallery">
+          <div class="gallery-main">
+            <div class="show-blank">
+              <svg width="72" height="72" viewBox="0 0 128 128" fill="none" aria-hidden="true">
+                <defs><linearGradient id="vamInv" gradientUnits="userSpaceOnUse" x1="14" y1="104" x2="110" y2="20"><stop offset="0%" stop-color="#1450c8"></stop><stop offset="100%" stop-color="#25c9b0"></stop></linearGradient></defs>
+                <path d="M14 24 L27 54" stroke="url(#vamInv)" stroke-width="15"></path>
+                <path d="M30.5 62 L46 98 L78 24 L110 98" stroke="url(#vamInv)" stroke-width="15" stroke-linejoin="miter"></path>
+                <path d="M50 74 H107" stroke="url(#vamInv)" stroke-width="15"></path>
+              </svg>
+              <span>In development &middot; no preview yet</span>
+            </div>
+          </div>
+          <p class="small">There is nothing to show yet. This page gets screenshots when the resource
+            has a working interface, not before.</p>
         </div>
-        <p class="lede">Standalone billing for servers that want invoicing without the full Banking
-          economy: issue an invoice, get paid, chase what is open. It is being split out of Banking as
-          its own resource and it is not finished.</p>
 
-        <div class="detail-buy">
-          <span class="price">&euro;25</span>
-          <span class="note">Estimated price, not final. No Tebex package yet and no release date announced.</span>
+        <aside class="buy-card">
+          <div>
+            <h1>Invoices</h1>
+            <div class="show-meta" style="margin:14px 0 0">
+              <span class="status is-soon"><span class="dot"></span>In development</span>
+            </div>
+          </div>
+
+          <div class="chips">
+            <span class="chip">ESX</span>
+            <span class="chip">QBCore</span>
+            <span class="chip">Qbox</span>
+          </div>
+
+          <div class="price">&euro;25<small>Estimated, not final. No Tebex package yet.</small></div>
+
           <span class="btn is-disabled">Not purchasable yet</span>
-        </div>
+
+          <ul class="facts">
+            <li><span class="k">State</span><span class="v"><strong>In development</strong></span></li>
+            <li><span class="k">Tebex package</span><span class="v">None yet</span></li>
+            <li><span class="k">Release date</span><span class="v">Not announced</span></li>
+            <li><span class="k">Available today</span><span class="v"><a href="banking.html">Banking</a></span></li>
+          </ul>
+
+          <details class="panel" open>
+            <summary>Description</summary>
+            <div class="panel-body">
+              <p>Standalone billing for servers that want invoicing without the full Banking economy:
+                issue an invoice, get paid, chase what is open. It is being split out of Banking as
+                its own resource and it is not finished.</p>
+            </div>
+          </details>
+
+          <details class="panel">
+            <summary>What is decided</summary>
+            <div class="panel-body">
+              <ul>
+                <li>It ships as its own resource, not as a Banking add-on.</li>
+                <li>Its settings register into Config Manager like every other VAmore product.</li>
+                <li>ESX, QBCore and Qbox in one build.</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="panel">
+            <summary>What is not decided</summary>
+            <div class="panel-body">
+              <p>The feature list, the final price and the release date. There are no screenshots to
+                show and no date to promise. This page changes when that changes.</p>
+            </div>
+          </details>
+        </aside>
       </div>
     </div>
   </section>
@@ -66,25 +123,22 @@
     <div class="wrap-wide">
       <div class="act flip">
         <div class="act-copy">
-          <h2>What is planned.</h2>
+          <h2>Banking already invoices today.</h2>
           <p>Invoices takes the billing part of Banking and ships it on its own, so a server that only
             needs mechanics billing customers does not have to run accounts, markets and payroll to get
-            it. Like every VAmore script, its settings will register into Config Manager.</p>
-          <p>Nothing beyond that is decided. There is no feature list to promise, no screenshots to
-            show, and no date. This page changes when that changes.</p>
+            it. If you need invoicing now, Banking is the resource that has it.</p>
           <div class="btn-row">
             <a href="banking.html" class="btn btn-primary">See Banking &mdash; &euro;40</a>
-            <a href="../products.html" class="btn btn-quiet">All scripts</a>
+            <a href="../products.html" class="btn btn-quiet">All products</a>
           </div>
         </div>
         <div>
           <ul class="specs">
-            <li><span class="k">State</span><span class="v"><strong>In development</strong></span></li>
+            <li><span class="k">Invoicing today</span><span class="v">Inside <a href="banking.html">Banking</a></span></li>
+            <li><span class="k">Standalone version</span><span class="v"><strong>In development</strong></span></li>
             <li><span class="k">Estimated price</span><span class="v">&euro;25, not final</span></li>
-            <li><span class="k">Tebex package</span><span class="v">None yet</span></li>
-            <li><span class="k">Release date</span><span class="v">Not announced</span></li>
             <li><span class="k">Planned frameworks</span><span class="v">ESX &middot; QBCore &middot; Qbox</span></li>
-            <li><span class="k">Available today</span><span class="v"><a href="banking.html">Banking</a> covers invoicing</span></li>
+            <li><span class="k">Config surface</span><span class="v">Config Manager</span></li>
           </ul>
         </div>
       </div>
@@ -107,11 +161,11 @@
         <p>FiveM server scripts for ESX, QBCore and Qbox, configured from one in-game panel.</p>
       </div>
       <div class="foot-col">
-        <span class="title">Scripts</span>
+        <span class="title">Products</span>
         <a href="../products/banking.html">Banking</a>
         <a href="../products/configpanel.html">Config Manager</a>
         <a href="../products/invoices.html">Invoices</a>
-        <a href="../products.html">All scripts</a>
+        <a href="../products.html">All products</a>
       </div>
       <div class="foot-col">
         <span class="title">Resources</span>

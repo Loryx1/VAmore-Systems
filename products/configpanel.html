@@ -36,44 +36,91 @@
   </div>
 </header>
 
+
 <main id="main">
   <section style="padding-bottom:0">
     <div class="wrap-wide">
       <a href="../products.html" class="back">
         <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3.5 5.5 8l4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        All scripts
+        All products
       </a>
 
-      <div class="detail-head">
-        <div class="detail-title">
-          <h1>Config Manager</h1>
-          <span class="status"><span class="dot"></span>Available now</span>
-        </div>
-        <p class="lede">One in-game panel to configure every VAmore script on your server. Any script
-          registers its settings with a single export call; Config Manager builds the interface, the
-          storage and the live updates around it.</p>
-
-        <div class="detail-buy">
-          <span class="price">Free</span>
-          <span class="note">Requires owning at least one other VAmore script. ESX, QBCore, Qbox and standalone.</span>
-          <button type="button" class="btn btn-primary" data-buy-package="7627638">Claim on Tebex</button>
-        </div>
-
-        <div class="detail-media reveal">
-          <div class="player">
-            <video src="../assets/admin-panel-demo.mp4" poster="../assets/img/panel-poster.jpg"
-                   preload="none" muted loop playsinline
-                   aria-label="Screen recording of the Config Manager panel being used in game"></video>
-            <img class="poster" src="../assets/img/panel-poster.jpg" alt="The Config Manager panel open on the Banking tab, showing daily limits, invoice settings and ATM locations" width="1218" height="718">
-            <button type="button" class="play" aria-label="Play the Config Manager recording">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M7 4.5 15 10l-8 5.5V4.5Z" fill="currentColor"/></svg>
-            </button>
+      <div class="detail-grid" style="margin-top:26px">
+        <div class="gallery">
+          <div class="gallery-main">
+            <div class="player">
+              <video src="../assets/admin-panel-demo.mp4" poster="../assets/img/panel-poster.jpg"
+                     preload="none" muted loop playsinline
+                     aria-label="Screen recording of the Config Manager panel being used in game"></video>
+              <img class="poster" src="../assets/img/panel-poster.jpg" width="1218" height="718"
+                   alt="The Config Manager panel open on the Banking tab, showing daily limits, invoice settings and ATM locations">
+              <button type="button" class="play" aria-label="Play the Config Manager recording">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M7 4.5 15 10l-8 5.5V4.5Z" fill="currentColor"/></svg>
+              </button>
+            </div>
           </div>
+          <p class="small">Recorded in game on a live server. The panel is the whole product; there is
+            no separate web dashboard to log into.</p>
         </div>
+
+        <aside class="buy-card">
+          <div>
+            <h1>Config Manager</h1>
+            <div class="show-meta" style="margin:14px 0 0">
+              <span class="status"><span class="dot"></span>Available now</span>
+            </div>
+          </div>
+
+          <div class="chips">
+            <span class="chip">ESX</span>
+            <span class="chip">QBCore</span>
+            <span class="chip">Qbox</span>
+            <span class="chip">Standalone</span>
+          </div>
+
+          <div class="price">Free<small>Requires owning at least one other VAmore product.</small></div>
+
+          <button type="button" class="btn btn-primary" data-buy-package="7627638">Claim on Tebex</button>
+
+          <ul class="facts">
+            <li><span class="k">Command</span><span class="v"><strong>/vamoreconfig</strong></span></li>
+            <li><span class="k">Access</span><span class="v">ACE permission</span></li>
+            <li><span class="k">Applies</span><span class="v"><strong>Live</strong>, no restart</span></li>
+            <li><span class="k">Integration</span><span class="v">One export call</span></li>
+            <li><span class="k">Price</span><span class="v"><strong>&euro;0</strong></span></li>
+          </ul>
+
+          <details class="panel" open>
+            <summary>Description</summary>
+            <div class="panel-body">
+              <p>One in-game panel to configure every VAmore product on your server. Any script
+                registers its settings with a single export call; Config Manager builds the interface,
+                the storage and the live updates around it.</p>
+            </div>
+          </details>
+
+          <details class="panel">
+            <summary>Requirements</summary>
+            <div class="panel-body">
+              <ul>
+                <li>A FiveM server running ESX, QBCore, Qbox or standalone.</li>
+                <li>At least one other VAmore product, so the panel has something to configure.</li>
+                <li>An ACE permission for whoever should be allowed to open it.</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="panel">
+            <summary>Support</summary>
+            <div class="panel-body">
+              <p>A Discord invite and a support address will be published here. Until then, support
+                runs through the contact details on your Tebex receipt.</p>
+            </div>
+          </details>
+        </aside>
       </div>
     </div>
   </section>
-
   <section>
     <div class="wrap-wide">
       <div class="head">
@@ -205,11 +252,11 @@
         <p>FiveM server scripts for ESX, QBCore and Qbox, configured from one in-game panel.</p>
       </div>
       <div class="foot-col">
-        <span class="title">Scripts</span>
+        <span class="title">Products</span>
         <a href="../products/banking.html">Banking</a>
         <a href="../products/configpanel.html">Config Manager</a>
         <a href="../products/invoices.html">Invoices</a>
-        <a href="../products.html">All scripts</a>
+        <a href="../products.html">All products</a>
       </div>
       <div class="foot-col">
         <span class="title">Resources</span>

@@ -8,6 +8,8 @@ const RESOURCES = [
     price: '€40',
     status: 'available',
     line: 'IBAN accounts, savings and credit, live markets, faction payroll, fraud dashboard.',
+    frameworks: ['ESX', 'QBCore', 'Qbox'],
+    cover: { type: 'model', src: 'assets/glb/creditcard.glb', alt: 'A rotating VAmore bank card' },
     detailUrl: 'products/banking.html',
   },
   {
@@ -15,6 +17,8 @@ const RESOURCES = [
     price: 'Free',
     status: 'available',
     line: 'One in-game panel with a tab per script. Settings apply live, no config.lua editing.',
+    frameworks: ['ESX', 'QBCore', 'Qbox', 'Standalone'],
+    cover: { type: 'blank' },
     detailUrl: 'products/configpanel.html',
   },
   {
@@ -22,13 +26,17 @@ const RESOURCES = [
     price: '€25',
     status: 'development',
     line: 'Standalone billing, split out of Banking for servers that do not need the full economy.',
+    frameworks: ['ESX', 'QBCore', 'Qbox'],
+    cover: { type: 'blank' },
     detailUrl: 'products/invoices.html',
   },
   {
     name: 'Restaurants',
-    price: 'Price to be announced',
+    price: 'To be announced',
     status: 'development',
     line: 'Recipes, prep stations, staff roles, supplier stock and an in-game owner terminal.',
+    frameworks: ['ESX', 'QBCore', 'Qbox'],
+    cover: { type: 'blank' },
   },
 ];
 
@@ -79,39 +87,62 @@ document.addEventListener('click', (event) => {
   buyOnTebex(btn.dataset.buyPackage, btn);
 });
 
-/* --- catalogue ------------------------------------------------------------ */
+/* --- product cards -------------------------------------------------------- */
 
-const arrowSvg =
-  '<svg class="arrow" width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">' +
-  '<path d="M4 10h11M11 5.5 15.5 10 11 14.5" stroke="currentColor" stroke-width="1.5" ' +
-  'stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const markSvg = (id) =>
+  `<svg width="72" height="72" viewBox="0 0 128 128" fill="none" aria-hidden="true">
+     <defs><linearGradient id="${id}" gradientUnits="userSpaceOnUse" x1="14" y1="104" x2="110" y2="20">
+       <stop offset="0%" stop-color="#1450c8"></stop><stop offset="100%" stop-color="#25c9b0"></stop>
+     </linearGradient></defs>
+     <path d="M14 24 L27 54" stroke="url(#${id})" stroke-width="15"></path>
+     <path d="M30.5 62 L46 98 L78 24 L110 98" stroke="url(#${id})" stroke-width="15" stroke-linejoin="miter"></path>
+     <path d="M50 74 H107" stroke="url(#${id})" stroke-width="15"></path>
+   </svg>`;
 
-function itemMarkup(r, base) {
+function coverMarkup(r, base, index) {
+  if (r.cover && r.cover.type === 'model') {
+    return `<model-viewer src="${base}${r.cover.src}" alt="${r.cover.alt}"
+              orientation="90deg 30deg 0deg" rotation-per-second="16deg" auto-rotate-delay="0"
+              disable-zoom interaction-prompt="none" shadow-intensity="1"
+              field-of-view="24deg" exposure="1.05"></model-viewer>`;
+  }
+  if (r.cover && r.cover.type === 'image') {
+    return `<img src="${base}${r.cover.src}" alt="${r.cover.alt}" loading="lazy">`;
+  }
+  return `${markSvg(`cardMark${index}`)}<span class="cover-note">Preview coming soon</span>`;
+}
+
+function cardMarkup(r, base, index) {
   const available = r.status === 'available';
   const status = available
     ? '<span class="status"><span class="dot"></span>Available now</span>'
     : '<span class="status is-soon"><span class="dot"></span>In development</span>';
-  const inner = `
-    <div class="item-title">
-      <h3>${r.name}</h3>
-      ${status}
-    </div>
-    <p class="item-desc">${r.line}</p>
-    <div class="item-side">
-      <span class="item-price${available ? '' : ' is-soon'}">${r.price}</span>
-      ${r.detailUrl ? arrowSvg : ''}
-    </div>`;
+  const chips = (r.frameworks || []).map((f) => `<span class="chip">${f}</span>`).join('');
+  const action = r.detailUrl
+    ? `<a class="btn btn-quiet" href="${base}${r.detailUrl}">View details</a>`
+    : '<span class="btn is-disabled">Details coming soon</span>';
 
-  return r.detailUrl
-    ? `<a class="item" href="${base}${r.detailUrl}">${inner}</a>`
-    : `<div class="item">${inner}</div>`;
+  return `
+    <article class="card">
+      <div class="card-cover">${coverMarkup(r, base, index)}</div>
+      <div class="card-body">
+        <div class="card-title">
+          <h3>${r.name}</h3>
+          <span class="card-price${available ? '' : ' is-soon'}">${r.price}</span>
+        </div>
+        ${status}
+        <p>${r.line}</p>
+        <div class="chips">${chips}</div>
+        ${action}
+      </div>
+    </article>`;
 }
 
-function renderCatalog() {
-  const wrap = document.getElementById('catalog');
+function renderCards() {
+  const wrap = document.getElementById('product-cards');
   if (!wrap) return;
   const base = wrap.dataset.base || '';
-  wrap.innerHTML = RESOURCES.map((r) => itemMarkup(r, base)).join('');
+  wrap.innerHTML = RESOURCES.map((r, i) => cardMarkup(r, base, i)).join('');
 }
 
 /* --- hero aurora ---------------------------------------------------------- */
@@ -461,7 +492,7 @@ function initYear() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  renderCatalog();
+  renderCards();
   initAurora();
   initTypewriter();
   initModels();

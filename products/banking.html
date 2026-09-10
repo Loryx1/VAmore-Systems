@@ -37,35 +37,81 @@
   </div>
 </header>
 
+
 <main id="main">
   <section style="padding-bottom:0">
     <div class="wrap-wide">
       <a href="../products.html" class="back">
         <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3.5 5.5 8l4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        All scripts
+        All products
       </a>
 
-      <div class="detail-head">
-        <div class="detail-title">
-          <h1>Banking</h1>
-          <span class="status"><span class="dot"></span>Available now</span>
+      <div class="detail-grid" style="margin-top:26px">
+        <div class="gallery">
+          <div class="gallery-main">
+            <model-viewer src="../assets/glb/creditcard.glb" alt="A rotating VAmore bank card"
+                          orientation="90deg 30deg 0deg" rotation-per-second="16deg" auto-rotate-delay="0"
+                          camera-controls disable-zoom interaction-prompt="none" shadow-intensity="1"
+                          field-of-view="22deg" exposure="1.05"></model-viewer>
+          </div>
+          <p class="small">Drag the card to turn it. Screenshots of the in-game UI follow once the
+            recording is cut.</p>
         </div>
-        <p class="lede">A complete, standalone banking and economy resource: accounts and transfers,
-          savings and credit, live stock and crypto markets, faction payroll, and a fraud-detection
-          dashboard. One resource, no framework-specific forks.</p>
 
-        <div class="detail-buy">
-          <span class="price">&euro;40</span>
-          <span class="note">One-time, per server. ESX, QBCore and Qbox. Configurable through Config Manager.</span>
+        <aside class="buy-card">
+          <div>
+            <h1>Banking</h1>
+            <div class="show-meta" style="margin:14px 0 0">
+              <span class="status"><span class="dot"></span>Available now</span>
+            </div>
+          </div>
+
+          <div class="chips">
+            <span class="chip">ESX</span>
+            <span class="chip">QBCore</span>
+            <span class="chip">Qbox</span>
+          </div>
+
+          <div class="price">&euro;40<small>One-time, per server. VAT handled by Tebex.</small></div>
+
           <button type="button" class="btn btn-primary" data-buy-package="7627622">Buy on Tebex</button>
-        </div>
 
-        <div class="detail-media is-object reveal">
-          <model-viewer src="../assets/glb/creditcard.glb" alt="A rotating VAmore bank card"
-                        orientation="90deg 30deg 0deg" rotation-per-second="16deg" auto-rotate-delay="0"
-                        camera-controls disable-zoom interaction-prompt="none" shadow-intensity="1"
-                        field-of-view="20deg" exposure="1.05"></model-viewer>
-        </div>
+          <ul class="facts">
+            <li><span class="k">Dependencies</span><span class="v">None required</span></li>
+            <li><span class="k">Optional</span><span class="v">Config Manager <strong>(free)</strong></span></li>
+            <li><span class="k">Licence</span><span class="v">One server</span></li>
+            <li><span class="k">Delivery</span><span class="v">Tebex checkout</span></li>
+            <li><span class="k">Modules</span><span class="v"><strong>6</strong></span></li>
+          </ul>
+
+          <details class="panel" open>
+            <summary>Description</summary>
+            <div class="panel-body">
+              <p>A complete, standalone banking and economy resource: accounts and transfers, savings
+                and credit, live stock and crypto markets, faction payroll, and a fraud-detection
+                dashboard. One resource, no framework-specific forks.</p>
+            </div>
+          </details>
+
+          <details class="panel">
+            <summary>Requirements</summary>
+            <div class="panel-body">
+              <ul>
+                <li>A FiveM server running ESX, QBCore or Qbox.</li>
+                <li>No other VAmore script is required.</li>
+                <li>Config Manager is optional and free; without it, settings live in the config file.</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="panel">
+            <summary>Support</summary>
+            <div class="panel-body">
+              <p>A Discord invite and a support address will be published here. Until then, support
+                runs through the contact details on your Tebex receipt.</p>
+            </div>
+          </details>
+        </aside>
       </div>
     </div>
   </section>
@@ -146,26 +192,43 @@
 
   <section class="rule">
     <div class="wrap-wide">
-      <div class="act flip">
-        <div class="act-copy">
-          <h2>Before you buy.</h2>
-          <p>Banking runs on its own. Config Manager is free and optional: install it and every Banking
-            setting moves into an in-game panel instead of a file you have to edit and reload.</p>
-          <div class="btn-row">
-            <button type="button" class="btn btn-primary" data-buy-package="7627622">Buy on Tebex &mdash; &euro;40</button>
-            <a href="configpanel.html" class="btn btn-quiet">Get Config Manager</a>
+      <div class="head">
+        <h2>Questions before you buy.</h2>
+      </div>
+      <div class="panels">
+        <details class="panel">
+          <summary>Do I need Config Manager to run Banking?</summary>
+          <div class="panel-body">
+            <p>No. Banking runs on its own. Config Manager is free and optional: install it and every
+              Banking setting moves into an in-game panel instead of a file you edit and reload.</p>
           </div>
-        </div>
-        <div>
-          <ul class="specs">
-            <li><span class="k">Frameworks</span><span class="v"><strong>ESX &middot; QBCore &middot; Qbox</strong>, one build</span></li>
-            <li><span class="k">Dependencies</span><span class="v">None required</span></li>
-            <li><span class="k">Optional</span><span class="v">Config Manager <strong>(free)</strong></span></li>
-            <li><span class="k">Licence</span><span class="v">One-time purchase, per server</span></li>
-            <li><span class="k">Delivery</span><span class="v">Tebex checkout</span></li>
-            <li><span class="k">State</span><span class="v"><strong>Available now</strong></span></li>
-          </ul>
-        </div>
+        </details>
+        <details class="panel">
+          <summary>Does it work with my framework?</summary>
+          <div class="panel-body">
+            <p>ESX, QBCore and Qbox are covered by the same build. There is no separate fork to pick
+              at checkout and no framework-specific version to maintain.</p>
+          </div>
+        </details>
+        <details class="panel">
+          <summary>What does the licence cover?</summary>
+          <div class="panel-body">
+            <p>One purchase covers one server, one time. There is no subscription and no per-player
+              cost. Refunds follow the policy shown at Tebex checkout.</p>
+          </div>
+        </details>
+        <details class="panel">
+          <summary>Can I switch modules off?</summary>
+          <div class="panel-body">
+            <p>Yes. Markets, faction accounts and the fraud dashboard can each be disabled, and the
+              limits behind them are settings rather than code edits.</p>
+          </div>
+        </details>
+      </div>
+
+      <div class="btn-row" style="margin-top:40px">
+        <button type="button" class="btn btn-primary" data-buy-package="7627622">Buy on Tebex &mdash; &euro;40</button>
+        <a href="configpanel.html" class="btn btn-quiet">Get Config Manager</a>
       </div>
     </div>
   </section>
@@ -186,11 +249,11 @@
         <p>FiveM server scripts for ESX, QBCore and Qbox, configured from one in-game panel.</p>
       </div>
       <div class="foot-col">
-        <span class="title">Scripts</span>
+        <span class="title">Products</span>
         <a href="../products/banking.html">Banking</a>
         <a href="../products/configpanel.html">Config Manager</a>
         <a href="../products/invoices.html">Invoices</a>
-        <a href="../products.html">All scripts</a>
+        <a href="../products.html">All products</a>
       </div>
       <div class="foot-col">
         <span class="title">Resources</span>
