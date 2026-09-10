@@ -14,7 +14,7 @@ First load of the home page is roughly **370 KB** of local assets across 7 reque
 ## World
 
 - Near-black navy (`#05070c`) with a slow vertical falloff. Sections separate by air and one hairline, never by boxes.
-- The brand axis (blue → cyan → teal) is a gradient used as light: the hero field, the scroll-progress line, the short rule that opens each section. Flat teal carries the primary action. Nothing else is saturated.
+- The brand axis (blue → cyan → teal) is a gradient used as light: the hero field, the scroll-progress line in the nav and the scroll cue's pill. Section edges are a plain hairline — no gradient stripes. Flat teal carries the primary action. Nothing else is saturated.
 - Status is a dot plus neutral text: filled teal for available, hollow ring for in development. No badges, no second hue.
 - No cards as page structure, no eyebrow labels, no gradient text, no glow shadows, no stock or emoji icons.
 
@@ -50,16 +50,17 @@ Radius `999px` on buttons, `24px` on framed media and preview plates. Frames `11
 
 ## Type
 
-- **Schibsted Grotesk**, weight 400 for display: `h1` to 5.6rem in the hero, 4rem elsewhere, tracking `-0.035em`. Body 17px/1.6, prose capped at 68ch.
+- **Bricolage Grotesque** carries display: `h1` at 700 up to 5.4rem in the hero, `h2` at 600, tracking `-0.045em` / `-0.04em`. It gives the headline character the text face deliberately lacks.
+- **Schibsted Grotesk** carries text: 17px/1.6, prose capped at 68ch. Showcase copy runs at 1rem in `--ink-3` so the object and the name lead, not the paragraph.
 - **Martian Mono** for the wordmark lockup only.
 - **Azeret Mono** inside `code` only — real commands and file names (`/vamoreconfig`, `config.lua`).
 - Compared figures carry `tabular-nums`.
 
 ## Components
 
-- **`.nav`** — sticky, blurred, with `.nav-progress`: a 1px scroll-progress line in the brand axis.
-- **`.hero` / `.aurora` / `.stage`** — the first viewport: shader field, typing headline, one filled action, the rotating `vamore_logo.glb`, and a `.scroll-cue` that names the next move.
-- **`.trust`** — four factual signals under the hero (frameworks, one-time purchase, in-game configuration, live apply), each with a drawn icon.
+- **`.nav`** — sticky, blurred, with `.nav-progress`: a 1px scroll-progress line in the brand axis. It carries Products plus `.nav-soon` entries (Discord, YouTube) that are visibly not clickable yet, and no product-specific call to action: the catalogue is broader than any one script.
+- **`.hero` / `.aurora` / `.stage`** — the first viewport: shader field, typing headline, one filled action, the rotating `vamore_logo.glb`, and a `.scroll-cue`: a rounded pill with a translucent brand gradient and a light that sweeps down it.
+- **`.trust` / `.tag`** — four factual signals under the hero as rounded tags (frameworks, one-time purchase, in-game configuration, live apply): hairline pill, teal dot, no icons and no boxes.
 - **`.act`** — a product act: copy on one side, the real artifact on the other. `.flip` reverses it, and the home page alternates sides down the showcase.
 - **`.is-object`** — how a 3D model or a preview plate is presented: no panel behind it, a brand-light bloom that breathes on an 11s cycle, a soft contact shadow beneath, a 7.5s float, and a small scroll parallax so the object drifts slower than the page.
 - **`.show-blank`** — the preview plate for anything without a shipped visual: a dashed frame, the brand mark and an honest line. Config Manager uses it too until its model exists; the real recording stays on its detail page.
