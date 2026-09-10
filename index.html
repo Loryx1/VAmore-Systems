@@ -10,6 +10,17 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Azeret+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Martian+Mono:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<!-- The entrance starts hidden, before the first paint, so the first screen
+     never shows itself at full opacity and then fades in from nothing.
+     The timer releases the page even if script.js never arrives. -->
+<script>
+  (function () {
+    var root = document.documentElement;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    root.classList.add('js-entrance');
+    window.setTimeout(function () { root.classList.remove('js-entrance'); }, 3000);
+  })();
+</script>
 <meta property="og:title" content="VAmore Systems — FiveM scripts that share one config panel">
 <meta property="og:description" content="Banking, Config Manager and more for ESX, QBCore and Qbox. One in-game panel instead of config.lua.">
 <meta property="og:image" content="https://vamore.shop/assets/vamore-icon-tile-gradient.png">

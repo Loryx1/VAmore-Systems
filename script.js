@@ -448,6 +448,8 @@ function initPlayers() {
 // The first screen rises into place on load, one element after the next. It
 // also buys the models and images a moment to decode before they are seen.
 
+const RISE_MS = 1200; // keep in step with .rise.is-up in style.css
+
 const ENTRANCE_SELECTORS = [
   '.hero h1',
   '.hero .hero-sub',
@@ -463,7 +465,14 @@ const ENTRANCE_SELECTORS = [
 ];
 
 function initEntrance() {
-  if (reduceMotion()) return;
+  // The page head already hid these before the first paint; releasing that flag
+  // is this function's job, whatever else happens below.
+  const release = () => document.documentElement.classList.remove('js-entrance');
+
+  if (reduceMotion()) {
+    release();
+    return;
+  }
 
   const seen = new Set();
   const targets = [];
@@ -476,14 +485,19 @@ function initEntrance() {
     });
   });
 
-  if (!targets.length) return;
+  if (!targets.length) {
+    release();
+    return;
+  }
 
   // Document order, so the stagger follows the eye rather than the selector list.
   targets.sort((a, b) => (a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1));
 
+  let last = 0;
   targets.forEach((el, i) => {
+    last = Math.min(160 + i * 110, 1000);
     el.classList.add('rise');
-    el.style.setProperty("--rise-delay", `${Math.min(140 + i * 90, 900)}ms`);
+    el.style.setProperty("--rise-delay", `${last}ms`);
   });
 
   requestAnimationFrame(() => {
@@ -491,7 +505,18 @@ function initEntrance() {
   });
 
   // Nothing may stay invisible if a frame never arrives.
-  window.setTimeout(() => targets.forEach((el) => el.classList.add('is-up')), 1800);
+  window.setTimeout(() => targets.forEach((el) => el.classList.add('is-up')), 2200);
+
+  // Once everyone has arrived, drop the class so nothing holds a compositor
+  // layer for the rest of the visit.
+  window.setTimeout(() => {
+    release();
+    targets.forEach((el) => {
+      el.classList.remove('rise');
+      el.classList.remove('is-up');
+      el.style.removeProperty("--rise-delay");
+    });
+  }, 2200 + last + RISE_MS);
 }
 
 /* --- product gallery ------------------------------------------------------ */

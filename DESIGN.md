@@ -26,7 +26,7 @@ One authored moment plus two quiet supports.
 2. **Reveal.** Media and feature blocks arrive once with opacity, a 20px rise and a 6px blur clearing, on an exponential ease-out. A 3s timer guarantees nothing stays hidden if the observer never fires.
 3. **Glyphs.** Each feature icon draws its strokes once, staggered by 110ms, when its block arrives.
 4. **Objects.** Models and preview plates float on a 7.5s cycle over a breathing bloom, drift with a small scroll parallax, and lean in on hover. Models are display objects, not toys: no camera controls, so a click cannot drag the card out of frame.
-5. **Entrance.** On load the first screen rises into place: each element lifts 20px and fades, staggered 90ms apart behind a 140ms delay, which also buys the models and images a moment to decode. A 1.8s timer guarantees nothing stays hidden.
+5. **Entrance.** On load the first screen rises into place: each element lifts 24px and fades over 1.2s on `--ease-inout`, so the motion eases in and out instead of snapping away from the start. The steps are 110ms apart behind a 160ms delay, capped at 1s, which also buys the models and images a moment to decode. An inline flag in each page head puts that first screen into its hidden state before the first paint, so nothing shows itself at full opacity and then fades in from nothing; its own 3s timer releases the page even if `script.js` never arrives. A 2.2s timer guarantees nothing stays hidden, and the classes are dropped once everyone has arrived so no element keeps a compositor layer.
 
 Under `prefers-reduced-motion` the page lands on the finished state: no shader, no rotation, no reveal, no entrance, no typing, and the recording holds its poster frame with controls exposed.
 
@@ -45,7 +45,8 @@ Under `prefers-reduced-motion` the page lands on the finished state: no shader, 
 | `--brand-axis` | gradient of the three | hero field, progress line, section rules |
 | `--ok` | `#25c9b0` | available now, focus ring, the glow under the primary action |
 | `--link` | `#6aa8ff` | inline links |
-| `--ease` | `cubic-bezier(.16,1,.3,1)` | every transition |
+| `--ease` | `cubic-bezier(.16,1,.3,1)` | hover and state transitions |
+| `--ease-inout` | `cubic-bezier(.37,0,.63,1)` | the load entrance, in and out |
 | `--shadow-sm` / `--shadow-md` | contact + fall | depth on buttons, tags, chips, thumbs / on cards, media, bands |
 
 Every raised element carries a shadow: a close contact shadow plus a wider fall, so buttons, tags, chips, thumbnails, cards, media frames and bands sit above the ground rather than on it.
