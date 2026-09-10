@@ -25,9 +25,10 @@ One authored moment plus two quiet supports.
 1. **Hero.** The wordmark types itself, the line follows, then the 3D card takes up its rotation. Behind it a WebGL curtain field drifts (custom shader, ~60 lines, no library): domain-warped fbm noise in the brand axis, drawn at half resolution, CSS-blurred, faded in over 1.4s. It stops when the hero leaves the viewport or the tab is hidden, and never starts under reduced motion.
 2. **Reveal.** Media and feature blocks arrive once with opacity, a 20px rise and a 6px blur clearing, on an exponential ease-out. A 3s timer guarantees nothing stays hidden if the observer never fires.
 3. **Glyphs.** Each feature icon draws its strokes once, staggered by 110ms, when its block arrives.
-4. **Objects.** Models and preview plates float on a 7.5s cycle over a breathing bloom, drift with a small scroll parallax, and lean in on hover.
+4. **Objects.** Models and preview plates float on a 7.5s cycle over a breathing bloom, drift with a small scroll parallax, and lean in on hover. Models are display objects, not toys: no camera controls, so a click cannot drag the card out of frame.
+5. **Entrance.** On load the first screen rises into place: each element lifts 20px and fades, staggered 90ms apart behind a 140ms delay, which also buys the models and images a moment to decode. A 1.8s timer guarantees nothing stays hidden.
 
-Under `prefers-reduced-motion` the page lands on the finished state: no shader, no rotation, no reveal, no typing, and the recording holds its poster frame with controls exposed.
+Under `prefers-reduced-motion` the page lands on the finished state: no shader, no rotation, no reveal, no entrance, no typing, and the recording holds its poster frame with controls exposed.
 
 ## Tokens (`style.css` `:root`)
 

@@ -444,6 +444,56 @@ function initPlayers() {
   });
 }
 
+/* --- entrance ------------------------------------------------------------- */
+// The first screen rises into place on load, one element after the next. It
+// also buys the models and images a moment to decode before they are seen.
+
+const ENTRANCE_SELECTORS = [
+  '.hero h1',
+  '.hero .hero-sub',
+  '.hero .btn-row',
+  '.stage',
+  '.scroll-cue',
+  '.trust .tag',
+  'main > section:first-of-type .head',
+  '.detail-top .back',
+  '.detail-top .gallery',
+  '.detail-top .buy-card',
+  '#product-cards .card',
+];
+
+function initEntrance() {
+  if (reduceMotion()) return;
+
+  const seen = new Set();
+  const targets = [];
+
+  ENTRANCE_SELECTORS.forEach((selector) => {
+    document.querySelectorAll(selector).forEach((el) => {
+      if (seen.has(el) || el.closest('.reveal')) return;
+      seen.add(el);
+      targets.push(el);
+    });
+  });
+
+  if (!targets.length) return;
+
+  // Document order, so the stagger follows the eye rather than the selector list.
+  targets.sort((a, b) => (a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1));
+
+  targets.forEach((el, i) => {
+    el.classList.add('rise');
+    el.style.setProperty("--rise-delay", `${Math.min(140 + i * 90, 900)}ms`);
+  });
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => targets.forEach((el) => el.classList.add('is-up')));
+  });
+
+  // Nothing may stay invisible if a frame never arrives.
+  window.setTimeout(() => targets.forEach((el) => el.classList.add('is-up')), 1800);
+}
+
 /* --- product gallery ------------------------------------------------------ */
 // Arrows, thumbnails and keyboard control over whatever media a product has.
 // A product with a single item shows the frame without the chrome.
@@ -560,6 +610,7 @@ function initYear() {
 
 document.addEventListener('DOMContentLoaded', () => {
   renderCards();
+  initEntrance();
   initAurora();
   initTypewriter();
   initModels();
