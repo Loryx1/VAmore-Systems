@@ -142,7 +142,7 @@ function cardMarkup(r, base, index) {
     : '<span class="status is-soon"><span class="dot"></span>In development</span>';
   const chips = (r.frameworks || []).map((f) => `<span class="chip">${f}</span>`).join('');
   const action = r.detailUrl
-    ? `<a class="btn btn-quiet" href="${base}${r.detailUrl}">View details${arrowSvg}</a>`
+    ? `<a class="btn btn-primary" href="${base}${r.detailUrl}">View details${arrowSvg}</a>`
     : '<span class="btn is-disabled">Details soon</span>';
 
   return `

@@ -209,12 +209,16 @@ code, .code {
   cursor: pointer;
   overflow: hidden;
   transition: background 200ms var(--ease), border-color 200ms var(--ease),
-              color 200ms var(--ease), translate 220ms var(--ease);
+              color 200ms var(--ease), translate 220ms var(--ease),
+              box-shadow 260ms var(--ease);
 }
 .btn:hover { background: rgba(180, 208, 235, 0.13); color: var(--ink); translate: 0 -2px; }
 .btn:active { translate: 0 0; }
 
-.btn-primary { background: var(--teal); color: #032019; }
+.btn-primary {
+  background: linear-gradient(180deg, #ffffff 0%, #e6edf5 100%);
+  color: #05070c;
+}
 /* A metal glare crosses the filled button on hover. */
 .btn-primary::after {
   content: '';
@@ -222,7 +226,7 @@ code, .code {
   inset: -20% -40%;
   background: linear-gradient(100deg,
     transparent 38%,
-    rgba(255, 255, 255, 0.72) 50%,
+    rgba(255, 255, 255, 0.95) 50%,
     transparent 62%);
   translate: -130% 0;
   pointer-events: none;
@@ -232,7 +236,12 @@ code, .code {
   from { translate: -130% 0; }
   to { translate: 130% 0; }
 }
-.btn-primary:hover { background: #45dfc6; color: #032019; }
+.btn-primary:hover {
+  background: linear-gradient(180deg, #ffffff 0%, #f2f6fa 100%);
+  color: #05070c;
+  /* The action lights up: a tinted lift, not a flat halo. */
+  box-shadow: 0 12px 30px -10px rgba(37, 201, 176, 0.5), 0 4px 14px -6px rgba(255, 255, 255, 0.4);
+}
 
 .btn-quiet { background: transparent; border-color: var(--line); color: var(--ink); }
 .btn-quiet:hover { background: rgba(180, 208, 235, 0.06); border-color: rgba(180, 208, 235, 0.24); }

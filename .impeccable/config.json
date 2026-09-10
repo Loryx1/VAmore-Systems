@@ -11,6 +11,24 @@
         ],
         "createdAt": "2026-09-10T13:19:08.919Z",
         "reason": "the product gallery frame is full-bleed by design: the screenshot or model is the surface, so no inner padding is wanted"
+      },
+      {
+        "rule": "dark-glow",
+        "value": "*",
+        "files": [
+          "style.css"
+        ],
+        "createdAt": "2026-09-10T20:23:05.168Z",
+        "reason": "user asked for a glow on the primary action; it is a tinted offset lift under the white button, deliberate and scoped to .btn-primary:hover"
+      },
+      {
+        "rule": "dark-glow",
+        "value": "*",
+        "files": [
+          "**/*.html"
+        ],
+        "createdAt": "2026-09-10T20:23:31.654Z",
+        "reason": "same rule, same cause: the glow lives in style.css on .btn-primary:hover and is reported against every page that loads it"
       }
     ]
   }

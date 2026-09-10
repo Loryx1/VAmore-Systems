@@ -14,7 +14,7 @@ First load of the home page is roughly **370 KB** of local assets across 7 reque
 ## World
 
 - Near-black navy (`#05070c`) with a slow vertical falloff. Sections separate by air and one hairline, never by boxes.
-- The brand axis (blue → cyan → teal) is a gradient used as light: the hero field, the scroll-progress line in the nav and the scroll cue's pill. Section edges are a plain hairline — no gradient stripes. Flat teal carries the primary action. Nothing else is saturated.
+- The brand axis (blue → cyan → teal) is a gradient used as light: the hero field, the scroll-progress line in the nav and the scroll cue's pill. Section edges are a plain hairline — no gradient stripes. The primary action is white: on this ground it is the highest-contrast surface on the page, and teal stays a signal rather than a button colour. Nothing else is saturated.
 - Status is a dot plus neutral text: filled teal for available, hollow ring for in development. No badges, no second hue.
 - Cards carry the catalogue and the purchase column, and nowhere else: the home page stays a showcase of acts. No eyebrow labels, no gradient text, no glow shadows, no stock or emoji icons.
 
@@ -42,7 +42,7 @@ Under `prefers-reduced-motion` the page lands on the finished state: no shader, 
 | `--ink-3` | `#8598ac` | labels, notes, pending items |
 | `--blue` `--cyan` `--teal` | `#1450c8` `#17a2c9` `#25c9b0` | the brand axis |
 | `--brand-axis` | gradient of the three | hero field, progress line, section rules |
-| `--ok` | `#25c9b0` | primary action, available now |
+| `--ok` | `#25c9b0` | available now, focus ring, the glow under the primary action |
 | `--link` | `#6aa8ff` | inline links |
 | `--ease` | `cubic-bezier(.16,1,.3,1)` | every transition |
 
@@ -61,6 +61,7 @@ Radius `10px` on buttons, `16px` on cards and the purchase column, `20px` on fra
 - **`.nav`** — sticky, blurred, with `.nav-progress`: a 1px scroll-progress line in the brand axis. It carries Products plus `.nav-soon` entries (Discord, YouTube) that are visibly not clickable yet, and no product-specific call to action: the catalogue is broader than any one script.
 - **`.hero` / `.aurora` / `.stage`** — the first viewport: shader field, typing headline, one filled action, the rotating `vamore_logo.glb`, and a `.scroll-cue`: a rounded pill with a translucent brand gradient and a light that sweeps down it.
 - **`.trust` / `.tag`** — four factual signals under the hero as rounded-rectangle tags (frameworks, one-time purchase, in-game configuration, live apply): hairline pill, teal dot, no icons and no boxes.
+- **`.btn`** — `.btn-primary` is white with a dark label: it carries buying and View details, rises 2px on hover, throws a teal-tinted glow beneath itself and lets a metal glare cross it. `.btn-quiet` is the outlined secondary; `.btn.is-disabled` is the never-clickable state used for unreleased products. A button labelled "Buy" always buys.
 - **`.act`** — a product act: copy on one side, the real artifact on the other. `.flip` reverses it, and the home page alternates sides down the showcase.
 - **`.is-object`** — how a 3D model or a preview plate is presented: no panel behind it, a brand-light bloom that breathes on an 11s cycle, a soft contact shadow beneath, a 7.5s float, and a small scroll parallax so the object drifts slower than the page.
 - **`.show-blank`** — the preview plate for anything without a shipped visual: a dashed frame, the brand mark and an honest line. Config Manager uses it too until its model exists; the real recording stays on its detail page.
