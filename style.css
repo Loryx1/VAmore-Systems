@@ -300,7 +300,7 @@ code, .code {
   z-index: 1;
   margin: clamp(4px, 2vw, 20px) auto 0;
   width: min(880px, 100%);
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 9;
 }
 .stage model-viewer { width: 100%; height: 100%; --poster-color: transparent; background: transparent; }
 @media (max-width: 640px) { .stage { aspect-ratio: 5 / 4; } }
@@ -811,7 +811,7 @@ code, .code {
 
 .card-cover {
   position: relative;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 9;
   display: grid;
   place-items: center;
   background:
@@ -856,10 +856,10 @@ code, .code {
 
 .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2px; }
 .chip {
-  padding: 5px 9px;
+  padding: 7px 12px;
   border: 1px solid var(--line-soft);
-  border-radius: 6px;
-  font-size: 0.74rem;
+  border-radius: 7px;
+  font-size: 0.82rem;
   letter-spacing: 0.01em;
   color: var(--ink-3);
   white-space: nowrap;
@@ -869,7 +869,7 @@ code, .code {
 /* --- detail layout -------------------------------------------------------- */
 
 .detail-grid { display: grid; gap: clamp(28px, 4vw, 56px); align-items: start; }
-@media (min-width: 960px) { .detail-grid { grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.65fr); } }
+@media (min-width: 960px) { .detail-grid { grid-template-columns: minmax(0, 1.62fr) minmax(0, 0.72fr); } }
 
 .gallery { display: grid; gap: 14px; }
 .gallery-main {
@@ -877,7 +877,7 @@ code, .code {
   border-radius: var(--r-lg);
   background: #070b11;
   overflow: hidden;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 9;
   display: grid;
   place-items: center;
 }
@@ -885,14 +885,13 @@ code, .code {
 .gallery-main .player, .gallery-main .player video, .gallery-main .player img, .gallery-main img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 .gallery-main .show-blank { border: 0; background: none; min-height: 0; }
 
-.gallery-thumbs { display: flex; gap: 10px; flex-wrap: wrap; }
 .thumb {
   width: 92px;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 9;
   border-radius: 10px;
   border: 1px solid var(--line-soft);
   overflow: hidden;
@@ -905,20 +904,13 @@ code, .code {
 .thumb[aria-current='true'] { border-color: var(--teal); }
 .thumb:hover { border-color: rgba(180, 208, 235, 0.28); }
 
-.buy-card {
-  border: 1px solid var(--line-soft);
-  border-radius: var(--r-card);
-  background: linear-gradient(168deg, rgba(17, 25, 37, 0.6) 0%, rgba(7, 11, 17, 0.6) 100%);
-  padding: 26px 24px;
-  display: grid;
-  gap: 18px;
-}
+.buy-card { display: grid; gap: 22px; }
 @media (min-width: 960px) { .buy-card { position: sticky; top: 92px; } }
 
-.buy-card h1 { font-size: clamp(2rem, 3.2vw, 2.7rem); }
-.buy-card .price { font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 700; letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
-.buy-card .price small { display: block; font-size: 0.8rem; font-weight: 400; letter-spacing: 0; color: var(--ink-3); margin-top: 6px; }
-.buy-card .btn { width: 100%; }
+.buy-card h1 { font-size: clamp(2.4rem, 4vw, 3.6rem); letter-spacing: -0.045em; }
+.buy-card .price { font-family: var(--font-display); font-size: clamp(2.2rem, 3.4vw, 3rem); font-weight: 700; letter-spacing: -0.045em; font-variant-numeric: tabular-nums; }
+.buy-card .price small { display: block; font-family: var(--font-text); font-size: 0.88rem; font-weight: 400; letter-spacing: 0; color: var(--ink-3); margin-top: 10px; }
+.buy-card > .btn { width: 100%; padding: 17px 24px; font-size: 16px; }
 
 .facts { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; font-size: 0.9rem; }
 .facts li {
@@ -942,13 +934,13 @@ code, .code {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 20px 2px;
+  padding: 22px 2px;
   cursor: pointer;
   list-style: none;
   font-family: var(--font-display);
-  font-size: 1.06rem;
+  font-size: 1.14rem;
   font-weight: 600;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.03em;
   color: var(--ink);
 }
 .panel > summary::-webkit-details-marker { display: none; }
@@ -974,7 +966,7 @@ code, .code {
 
 .gallery-main .slide { position: absolute; inset: 0; display: grid; place-items: center; opacity: 0; pointer-events: none; }
 .gallery-main .slide[data-active] { opacity: 1; pointer-events: auto; }
-.gallery-main .slide img, .gallery-main .slide video { width: 100%; height: 100%; object-fit: cover; }
+.gallery-main .slide img, .gallery-main .slide video { width: 100%; height: 100%; object-fit: contain; }
 .gallery-main .slide model-viewer { width: 100%; height: 100%; }
 
 .gal-nav {
@@ -999,12 +991,13 @@ code, .code {
 .gal-nav.next { right: 14px; }
 .gal-nav[hidden] { display: none; }
 
-.gallery-thumbs { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 4px; }
+.gallery-thumbs { display: flex; flex-wrap: nowrap; gap: 10px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
+.gallery-thumbs::-webkit-scrollbar { display: none; }
 .thumb {
   position: relative;
   flex: none;
-  width: 104px;
-  aspect-ratio: 16 / 10;
+  width: 150px;
+  aspect-ratio: 16 / 9;
   border-radius: 8px;
   border: 1px solid var(--line-soft);
   overflow: hidden;
@@ -1016,7 +1009,7 @@ code, .code {
   transition: border-color 220ms var(--ease);
 }
 .thumb img { width: 100%; height: 100%; object-fit: cover; }
-.thumb svg.mark { width: 26px; height: 26px; opacity: 0.5; }
+.thumb svg.mark { width: 30px; height: 30px; opacity: 0.5; }
 .thumb .badge {
   position: absolute;
   right: 6px;
@@ -1106,4 +1099,20 @@ code, .code {
 .slide-empty svg { opacity: 0.3; }
 .slide-empty span { font-size: 0.84rem; color: var(--ink-3); }
 .thumb.is-empty { display: grid; place-items: center; background: #080d14; }
-.thumb.is-empty svg { width: 22px; height: 22px; opacity: 0.34; }
+.thumb.is-empty svg { width: 26px; height: 26px; opacity: 0.34; }
+
+/* The product page opens on its media, so it starts higher than a prose page. */
+.detail-top { padding-top: 72px; padding-bottom: 0; }
+@media (min-width: 900px) { .detail-top { padding-top: 104px; } }
+
+/* The recording is letterboxed inside the frame rather than cropped: the panel
+   is the product, and clipping its save bar would hide the point. */
+.gallery-main .player { position: relative; width: 100%; height: 100%; }
+.gallery-main .player video,
+.gallery-main .player .poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
