@@ -46,7 +46,7 @@ Under `prefers-reduced-motion` the page lands on the finished state: no shader, 
 | `--link` | `#6aa8ff` | inline links |
 | `--ease` | `cubic-bezier(.16,1,.3,1)` | every transition |
 
-Radius `999px` on buttons, `24px` on framed media and preview plates. Frames `1120px` / `1280px`. Section rhythm 116px mobile, 176px desktop; showcase acts sit 104-200px apart.
+Radius `10px` on buttons, `16px` on cards and the purchase column, `20px` on framed media and preview plates, `6px` on chips. Nothing is a pill except the scroll cue. Frames `1120px` / `1280px`. Section rhythm 116px mobile, 176px desktop; showcase acts sit 104-200px apart.
 
 ## Type
 
@@ -60,7 +60,7 @@ Radius `999px` on buttons, `24px` on framed media and preview plates. Frames `11
 
 - **`.nav`** — sticky, blurred, with `.nav-progress`: a 1px scroll-progress line in the brand axis. It carries Products plus `.nav-soon` entries (Discord, YouTube) that are visibly not clickable yet, and no product-specific call to action: the catalogue is broader than any one script.
 - **`.hero` / `.aurora` / `.stage`** — the first viewport: shader field, typing headline, one filled action, the rotating `vamore_logo.glb`, and a `.scroll-cue`: a rounded pill with a translucent brand gradient and a light that sweeps down it.
-- **`.trust` / `.tag`** — four factual signals under the hero as rounded tags (frameworks, one-time purchase, in-game configuration, live apply): hairline pill, teal dot, no icons and no boxes.
+- **`.trust` / `.tag`** — four factual signals under the hero as rounded-rectangle tags (frameworks, one-time purchase, in-game configuration, live apply): hairline pill, teal dot, no icons and no boxes.
 - **`.act`** — a product act: copy on one side, the real artifact on the other. `.flip` reverses it, and the home page alternates sides down the showcase.
 - **`.is-object`** — how a 3D model or a preview plate is presented: no panel behind it, a brand-light bloom that breathes on an 11s cycle, a soft contact shadow beneath, a 7.5s float, and a small scroll parallax so the object drifts slower than the page.
 - **`.show-blank`** — the preview plate for anything without a shipped visual: a dashed frame, the brand mark and an honest line. Config Manager uses it too until its model exists; the real recording stays on its detail page.
@@ -68,7 +68,8 @@ Radius `999px` on buttons, `24px` on framed media and preview plates. Frames `11
 - **`.player`** — poster image, real `<video>` behind it, an explicit play control, and lazy loading. Playback starts when the block is 40% on screen.
 - **`.features` / `.feature`** — the module grid: hairline-separated cells with a self-drawing glyph, a heading and two lines. Not cards; no shadows, no rounded floating boxes.
 - **`.schematic`** — the registration diagram: four scripts wired into one panel, the two shipping scripts on live wires. It lives on the Config Manager page, where the claim it illustrates is made.
-- **`.grid-cards` / `.card`** — the catalogue: one rounded card per product with a cover (model, image or preview plate), name, price, status, one line of copy, framework chips and a View details action. Rendered from `RESOURCES` in `script.js`, so home and catalogue can never disagree.
+- **`.grid-cards` / `.card`** — the catalogue: a cover (model, image or preview plate), then name with its rating, status, one line of copy, framework chips, and a footer that carries the price on the left and View details on the right. Rendered from `RESOURCES` in `script.js`, so home and catalogue can never disagree.
+- **`.stars`** — the rating row. It draws from real reviews only: with none on record every product shows five empty stars and `(0)`, never an invented score.
 - **`.detail-grid` / `.gallery` / `.buy-card`** — the product page: media on the left, a sticky purchase card on the right carrying name, status, chips, price, the action, a `.facts` list and disclosure panels.
 - **`.panels` / `.panel`** — native `<details>` disclosures for description, requirements, support and the pre-sale questions. Closed by default except the description.
 - **`.specs` / `.lines`** — key/value and name/description rows with tabular figures.

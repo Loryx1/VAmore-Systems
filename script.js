@@ -112,6 +112,29 @@ function coverMarkup(r, base, index) {
   return `${markSvg(`cardMark${index}`)}<span class="cover-note">Preview coming soon</span>`;
 }
 
+// Ratings are drawn from real reviews only. Nothing has been reviewed yet, so
+// every product shows an empty five-star row and a count of zero. The day
+// reviews exist, `reviews` carries the average and the total.
+function starsMarkup(reviews) {
+  const total = reviews ? reviews.count : 0;
+  const score = reviews ? reviews.average : 0;
+  const star = (i) => {
+    const filled = score >= i;
+    return `<svg width="13" height="13" viewBox="0 0 24 24" fill="${filled ? 'currentColor' : 'none'}" aria-hidden="true">
+      <path d="m12 3.6 2.6 5.3 5.8.85-4.2 4.1 1 5.75L12 16.9l-5.2 2.7 1-5.75-4.2-4.1 5.8-.85L12 3.6Z"
+            stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>`;
+  };
+  const label = total === 1 ? '1 review' : `${total} reviews`;
+  return `<span class="stars" role="img" aria-label="${label}">
+    ${[1, 2, 3, 4, 5].map(star).join('')}<span class="count">(${total})</span>
+  </span>`;
+}
+
+const arrowSvg =
+  '<svg width="15" height="15" viewBox="0 0 20 20" fill="none" aria-hidden="true">' +
+  '<path d="M4 10h11M11 5.5 15.5 10 11 14.5" stroke="currentColor" stroke-width="1.6" ' +
+  'stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
 function cardMarkup(r, base, index) {
   const available = r.status === 'available';
   const status = available
@@ -119,8 +142,8 @@ function cardMarkup(r, base, index) {
     : '<span class="status is-soon"><span class="dot"></span>In development</span>';
   const chips = (r.frameworks || []).map((f) => `<span class="chip">${f}</span>`).join('');
   const action = r.detailUrl
-    ? `<a class="btn btn-quiet" href="${base}${r.detailUrl}">View details</a>`
-    : '<span class="btn is-disabled">Details coming soon</span>';
+    ? `<a class="btn btn-quiet" href="${base}${r.detailUrl}">View details${arrowSvg}</a>`
+    : '<span class="btn is-disabled">Details soon</span>';
 
   return `
     <article class="card">
@@ -128,12 +151,15 @@ function cardMarkup(r, base, index) {
       <div class="card-body">
         <div class="card-title">
           <h3>${r.name}</h3>
-          <span class="card-price${available ? '' : ' is-soon'}">${r.price}</span>
+          ${starsMarkup(r.reviews)}
         </div>
         ${status}
         <p>${r.line}</p>
         <div class="chips">${chips}</div>
-        ${action}
+        <div class="card-foot">
+          <span class="card-price${available ? '' : ' is-soon'}">${r.price}</span>
+          ${action}
+        </div>
       </div>
     </article>`;
 }
