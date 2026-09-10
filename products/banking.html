@@ -68,7 +68,9 @@
             <div class="slide" data-active>
               <model-viewer src="../assets/glb/creditcard.glb" alt="A rotating VAmore bank card"
                             orientation="90deg 30deg 0deg" rotation-per-second="16deg" auto-rotate-delay="0"
-                            disable-zoom disable-pan disable-tap interaction-prompt="none" shadow-intensity="1"
+                            camera-controls touch-action="pan-y" disable-zoom disable-pan disable-tap
+                            min-camera-orbit="auto 55deg auto" max-camera-orbit="auto 95deg auto"
+                            interaction-prompt="none" shadow-intensity="1"
                             field-of-view="17deg" exposure="1.05"></model-viewer>
             </div>
 
@@ -121,7 +123,7 @@
             </button>
           </div>
 
-          <p class="small">The card turns on its own. Four screenshot slots are wired and waiting for the
+          <p class="small">Drag the card to turn it yourself. Four screenshot slots are wired and waiting for the
             captures from a live server.</p>
         </div>
 
